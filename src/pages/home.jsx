@@ -1,16 +1,20 @@
-import SEO from '../components/SEO';
+import React from 'react';
+import Layout from '../components/Layout';
 
 const Home = () => {
   return (
-    <div>
-      <SEO
-        title="Home"
-        description="Welcome to Product Owner in Test. The home of software product explorers"
-        keywords={['Product Owner in Test', 'Quality Assistant', 'Software testing education', 'software testing certifications']}
-      />
-      <h1 className="text-2xl font-bold">Home Page</h1>
-      <p>This is srilu's page</p>
-    </div>
+    <Layout
+      title="Home"
+      description="Welcome to your personalized learning portal."
+      keywords={['lms', 'courses', 'dashboard']}
+    >
+      <div className="text-center mt-8">
+        <h2 className="text-3xl font-bold text-blue-600">Welcome to My LMS</h2>
+        <p className="text-gray-700 mt-4">
+          Explore courses, track progress, and grow your skills.
+        </p>
+      </div>
+    </Layout>
   );
 };
 
