@@ -1,12 +1,127 @@
-# React + Vite
+# 🧠 My LMS App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight, modular Learning Management System (LMS) with blogging and CRM features.  
+Built with React + Vite, using traditional CSS for full design control.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📦 Tech Stack
 
-## Expanding the ESLint configuration
+- **React** (v19)
+- **Vite** (build tool)
+- **Traditional CSS**
+- **React Router DOM**
+- **GitHub Pages** for hosting
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+### 1. **Clone the repository**
+
+```bash
+git clone https://github.com/SriluBalla/my-lms-app.git
+cd my-lms-app
+```
+
+### 2. **Install dependencies**
+
+> Ensure you're using **Node 20 or later**
+
+```bash
+npm install --legacy-peer-deps
+```
+
+### 3. **Start the development server**
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:5173/my-lms-app/` in your browser.
+
+---
+
+## 🌐 Deployed Version
+
+View the live site:  
+📎 [https://sriluballa.github.io/my-lms-app/](https://sriluballa.github.io/my-lms-app/)
+
+---
+
+## 🧩 Project Structure
+
+```
+my-lms-app/
+│
+├── public/                     # Static assets (favicon, images)
+│   └── images/
+│       └── global/
+│       └── 404/
+│
+├── src/
+│   ├── assets/                 # Logos, icons, other visual assets (optional)
+│   ├── components/             # Reusable UI components (Header, Footer, etc.)
+│   ├── pages/                  # Top-level views (Index, Courses, Blog, 404)
+│   ├── styles/                 # Global + component CSS files
+│   ├── App.jsx                 # Main app entry with routing
+│   └── main.jsx                # Vite + React entry
+│
+├── .github/workflows/         # GitHub Actions for deployment
+├── index.html
+├── package.json
+└── README.md
+```
+
+---
+
+## 🔗 Key Features
+
+- Responsive layout using custom CSS
+- SEO-ready meta structure
+- Modular pages and components
+- GitHub Pages-friendly routing and 404 fallback
+-- Randomized 404 images for fun & user engagement
+
+---
+
+## 🛠 Dependencies
+
+| Package              | Purpose                         |
+|----------------------|---------------------------------|
+| `react`              | UI framework                    |
+| `react-dom`          | React rendering engine          |
+| `react-router-dom`   | SPA routing                     |
+| `vite`               | Lightning-fast build tool       |
+| `gh-pages`           | Deploys the `dist/` to GitHub   |
+
+---
+
+## 💡 Contribution Guide
+
+- Keep component names **PascalCased**
+- Use **semantic HTML** and clean markup
+- Place all page-level components inside `src/pages/`
+- Add global styles or overrides to `src/styles/`
+- All images should go in `public/images/[section]/`
+
+---
+
+## 📸 Screenshots
+
+> _(Optional: Add a few screenshots here of the homepage, 404 page, or LMS view)_
+
+---
+
+## 👩‍💻 Maintainer
+
+Built with care by [Sridevi “Srilu” Balla](https://github.com/SriluBalla)  
+🇺🇸 *Proud American in a Saree. Loves America and Sarees*
+
+---
+
+## 📜 License
+
+MIT – Free to use, customize, and contribute
