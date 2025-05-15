@@ -1,3 +1,9 @@
+![Build](https://github.com/SriluBalla/my-lms-app/actions/workflows/deploy.yml/badge.svg)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![Deployed](https://img.shields.io/badge/GitHub-Pages-brightgreen)
+
+[![Live Site](https://img.shields.io/badge/View%20Live-🟢%20my--lms--app-blue?logo=github)](https://sriluballa.github.io/my-lms-app/)
+
 # 🧠 My LMS App
 
 A lightweight, modular Learning Management System (LMS) with blogging and CRM features.  
@@ -111,7 +117,15 @@ my-lms-app/
 
 ## 📸 Screenshots
 
-> _(Optional: Add a few screenshots here of the homepage, 404 page, or LMS view)_
+### 🏠 Homepage
+<img src="./public/images/screenshots/home.png" alt="Homepage" width="600" />
+
+### 🔍 404 Page
+<img src="./public/images/screenshots/404.png" alt="404 Page" width="600" />
+
+### 📚 Courses Page
+<img src="./public/images/screenshots/courses.png" alt="Courses Page" width="600" />
+
 
 ---
 
