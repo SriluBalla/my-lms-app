@@ -17,9 +17,7 @@ const NotFound = () => {
       title="404 | Product Owner in TEST"
       description="Welcome to your personalized learning portal."
       keywords={['lms', 'courses', 'dashboard']}
-    >
-
-    
+    >    
     <div className="not-found">
       <img
         src={randomImage}

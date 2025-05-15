@@ -12,9 +12,10 @@ const routes = [
         element: <QAtoPot />,
     },
     {
-        path: '/not-found',
+        path: '/*',
         element: <NotFound /> , 
     }
 ];
 
 export default routes;
+
