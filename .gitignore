@@ -25,3 +25,7 @@ dist-ssr
 
 git init
 echo "node_modules\n.env\n.env.local\ndist" > .gitignore
+
+#Files
+src/pages/temp.jsx
+

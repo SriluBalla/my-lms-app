@@ -1,0 +1,38 @@
+/*======================
+        COLUMNS
+======================*/
+
+    .comparison-item h3,
+    .comparison-item h4,
+    .comparison-item p {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .comparison-columns {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .qa-column,
+    .pot-column {
+      width: 50%;             
+      /* max-width: 500px;        */
+      background: #f9f9f9;
+      padding: 1rem;
+      border-left: 5px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    /* Style differences for clarity */
+    .qa-column {
+      border-color: #781e07;
+    }
+    
+    .pot-column {
+      border-color: #067909;
+    }
+    

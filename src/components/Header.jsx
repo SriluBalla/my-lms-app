@@ -20,7 +20,7 @@ const Header = () => {
 
       <nav className={`nav-menu ${menuOpen ? 'active' : ''}`}>
         <NavLink
-          to="/"
+          to="/qa-to-pot"
           className={({ isActive }) => `nav__link ${isActive ? 'active' : ''}`}
           end
         >

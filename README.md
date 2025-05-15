@@ -4,7 +4,7 @@
 
 [![Live Site](https://img.shields.io/badge/View%20Live-🟢%20my--lms--app-blue?logo=github)](https://sriluballa.github.io/my-lms-app/)
 
-# 🧠 My LMS App
+# 🧠 Product Owner in Test
 
 A lightweight, modular Learning Management System (LMS) with blogging and CRM features.  
 Built with React + Vite, using traditional CSS for full design control.
@@ -118,13 +118,13 @@ my-lms-app/
 ## 📸 Screenshots
 
 ### 🏠 Homepage
-<img src="./public/images/screenshots/home.png" alt="Homepage" width="600" />
+<img src="./public/images/read-me/home.png" alt="Homepage" width="600" />
 
 ### 🔍 404 Page
-<img src="./public/images/screenshots/404.png" alt="404 Page" width="600" />
+<img src="./public/images/read-me/404.png" alt="404 Page" width="600" />
 
 ### 📚 Courses Page
-<img src="./public/images/screenshots/courses.png" alt="Courses Page" width="600" />
+<img src="./public/images/read-me/courses.png" alt="Courses Page" width="600" />
 
 
 ---
