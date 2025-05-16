@@ -23,7 +23,7 @@
     padding: 0 20px;
   }
 
-  .footer_link {
+  .footer_link, .footer__container {
     color: #040327;
     display: flex;
     font-size: 1rem;

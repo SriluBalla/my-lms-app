@@ -57,9 +57,10 @@ const Why = () => {
         <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/qcBefore.png"
+            src={`${import.meta.env.BASE_URL}images/why/qcBefore.png`}
             alt="Quality Control in manufacturing"
           />
+
           <em className="image-caption">Quality control in manufacturing.</em>
         </figure>
       </section>
@@ -74,18 +75,18 @@ const Why = () => {
       {/* QA Challenges  */}
 
       <section className="heroTwo">
-        <div className="hero-image">
+        <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/automation.png"
+            src={`${import.meta.env.BASE_URL}images/why/automation.png`}
             alt="Automation is a tool that does what you tell it to do"
           />
 
           <em className="image-caption">
             Automation is a tool that does what you tell it to do
           </em>
-        </div>
-        <figure className="hero-text">
+        </figure>
+        <div className="hero-text">
           <h3>Overreliance on Automation</h3>
           <p>
             Automation is a tool that does what a human tells it to do. It
@@ -95,7 +96,7 @@ const Why = () => {
             value of exploratory testing, contextual analysis, and nuanced user
             empathy that only humans provide.
           </p>
-        </figure>
+        </div>
       </section>
 
       <section className="heroOne">
@@ -112,8 +113,8 @@ const Why = () => {
         <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/tc_confusion.png"
-            alt="Cant understand test cases"
+            src={`${import.meta.env.BASE_URL}images/why/tc_confusion.png`}
+            alt="Cant understand test N"
           />
 
           <em className="image-caption">
@@ -126,7 +127,7 @@ const Why = () => {
         <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/redGreen.png"
+            src={`${import.meta.env.BASE_URL}images/why/redGreen.png`}
             alt="Cant understand test cases"
           />
 
@@ -168,7 +169,7 @@ const Why = () => {
         <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/finalStep.png"
+            src={`${import.meta.env.BASE_URL}images/why/finalStep.png`}
             alt="Final Step"
           />
 
@@ -182,7 +183,7 @@ const Why = () => {
         <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/chimera.png"
+            src={`${import.meta.env.BASE_URL}images/why/chimera.png`}
             alt="Chimera"
           />
 
@@ -222,7 +223,7 @@ const Why = () => {
         <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/testBefore.png"
+            src={`${import.meta.env.BASE_URL}images/why/testBefore.png`}
             alt="Cant understand test cases"
           />
 
@@ -237,7 +238,7 @@ const Why = () => {
         <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/scapegoat.png"
+            src={`${import.meta.env.BASE_URL}images/why/scapegoat.png`}
             alt="Scapegoat Illustration - QA gets blamed"
           />
 
@@ -275,24 +276,23 @@ const Why = () => {
         <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/bomb.png"
+            src={`${import.meta.env.BASE_URL}images/why/bomb.png`}
             alt="Cant understand test cases"
           />
-
           <em className="image-caption">No one listens to the QA</em>
         </figure>
       </section>
 
       <section className="heroTwo">
-        <div className="hero-image">
+        <figure className="hero-image">
           <img
             className="why-image"
-            src="images/why/blameQA.png"
+            src={`${import.meta.env.BASE_URL}images/why/blameQA.png`}
             alt="Cant understand test cases"
           />
 
           <em className="image-caption">The blame game</em>
-        </div>
+        </figure>
         <div className="hero-text">
           <h3>The Impact</h3>
           <p>

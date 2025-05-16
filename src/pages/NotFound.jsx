@@ -4,9 +4,9 @@ import '../styles/NotFound.css';
 
 const NotFound = () => {
   const images = [
-    './images/404/CS_pot.png',
-    './images/404/CS_wfi.png',
-    './images/404/CS_wfi2.png',
+    `${import.meta.env.BASE_URL}images/404/CS_pot.png`,
+    `${import.meta.env.BASE_URL}images/404/CS_wfi.png`,
+    `${import.meta.env.BASE_URL}images/404/CS_wfi2.png`,
   ];
 
   const randomImage = images[Math.floor(Math.random() * images.length)];
@@ -21,7 +21,7 @@ const NotFound = () => {
     <div className="not-found">
       <img
         src={randomImage}
-        alt="Page Not Found"
+        alt="Page Coming soon"
         className="not-found__image"
       />
       <h1>Page coming soon</h1>
