@@ -9,9 +9,9 @@ const Header = () => {
     <header className="header">
       <div className="navbar__container">
 
-        <a href="/" className="logo">
+        <Link to="/" className="logo">
           <img src="./images/global/Logo.png" alt="Product Owner in Test Logo" />
-        </a>
+        </Link>
       
          <Link to="/" id="navbar__logo">Product Owner in Test™</Link>
 
