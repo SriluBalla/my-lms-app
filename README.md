@@ -11,7 +11,7 @@ Built with React + Vite, using traditional CSS for full design control.
 
 ---
 
-# ✅ Frequently Used Git & Deploy Commands
+## ✅ Frequently Used Git & Deploy Commands
 
 | Purpose                   | Command                          | Notes                                          |
 | ------------------------- | -------------------------------- | ---------------------------------------------- |

@@ -2,6 +2,7 @@ import Home from '../pages/Index.jsx';
 import NotFound from '../pages/NotFound.jsx'; 
 import QAtoPot from '../pages/QAtoPot.jsx';
 import Why from '../pages/Why.jsx';
+import Register from '../pages/Register.jsx';
 
 const routes = [
     {
@@ -13,12 +14,16 @@ const routes = [
         element: <QAtoPot />,
     },
     {
-        path: '/why/*',
-        element: <Why />,
+        path: '/register',
+        element: <Register />,
     },
     {
         path: '/*',
         element: <NotFound /> , 
+    },
+     {
+        path: '/why/*',
+        element: <Why />,
     }
 ];
 

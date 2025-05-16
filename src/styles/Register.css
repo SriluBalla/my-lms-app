@@ -1,0 +1,76 @@
+
+.custom-country-input {
+padding: 2rem;
+}
+
+.register-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.register-form {
+  background: #e3f3fa;
+  border-left: 4px solid #1872ad;
+  border-radius: 8px;
+  flex: 1;
+  float: right;
+  padding: 2rem;
+  width: 50%;
+}
+
+.register-info {
+  background: #7ecbeb;
+  border-left: 4px solid #18607e;
+  border-radius: 8px;
+  font-size: 1rem;
+  flex: 1;
+  float: left;
+  padding: 2rem;
+  width: 50%;
+}
+
+.register-info h2 {
+  color: #011d29;
+  margin-bottom: 0.5rem;
+}
+
+.register-info ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.register-info li {
+  margin-bottom: 0.5rem;
+}
+
+select {
+  padding: 8px;
+  width: auto%;
+  border-radius: 4px;
+}
+
+.dob-group {
+  margin-bottom: 1rem;
+}
+
+.dob-row {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Mobile stuff */
+@media screen and (max-width: 768px) {
+  .register-page {
+    flex-direction: column;
+  }
+
+  .register-form,
+  .register-info {
+    max-width: 100%;
+  }
+}
+
+
