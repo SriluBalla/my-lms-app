@@ -11,6 +11,21 @@ Built with React + Vite, using traditional CSS for full design control.
 
 ---
 
+# ✅ Frequently Used Git & Deploy Commands
+
+| Purpose                   | Command                          | Notes                                          |
+| ------------------------- | -------------------------------- | ---------------------------------------------- |
+| Stage all changes         | `git add .`                      | Adds everything you've changed to staging      |
+| Commit staged changes     | `git commit -m "your message"`   | Use a clear message like `"Add Register page"` |
+| Push to GitHub            | `git push origin main`           | Pushes code to the `main` branch               |
+| Build for deployment      | `npm run build`                  | Compiles your app into a `dist/` folder        |
+| Deploy to GitHub Pages    | `npm run deploy`                 | Deploys the `dist/` folder to GitHub Pages     |
+| Start local dev server    | `npm run dev`                    | Opens `localhost:5173` for previewing changes  |
+| Install a new package     | `npm install package-name`       | Like `npm install @supabase/supabase-js`       |
+| Clean install (if errors) | `npm install --legacy-peer-deps` | Bypass version conflicts during install        |
+
+---
+
 ## 📦 Tech Stack
 
 - **React** (v19)
