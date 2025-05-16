@@ -6,9 +6,9 @@ const Footer = () => {
     <footer className="footer">
 
         <div className='footer-menu'>
-             <a href="about.html" className="footer_link">About</a>
-              <a href="contact.html" className="footer_link">Contact</a>
-            <a href="privacy.html" className="footer_link">Privacy</a>
+             <Link to="about.html" className="footer_link">About</Link>
+              <Link to="contact.html" className="footer_link">Contact</Link>
+            <Link to="privacy.html" className="footer_link">Privacy</Link>
         </div>
 
       <div className="footer__container">
