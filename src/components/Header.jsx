@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import '../styles/Header.css';
 
 const Header = () => {
@@ -8,10 +8,12 @@ const Header = () => {
   return (
     <header className="header">
       <div className="navbar__container">
+
         <a href="/" className="logo">
           <img src="./images/global/Logo.png" alt="Product Owner in Test Logo" />
         </a>
-        <a href="/" id="navbar__logo">Product Owner in Test™</a>
+      
+         <Link to="/" id="navbar__logo">Product Owner in Test™</Link>
 
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
           ☰
