@@ -1,4 +1,5 @@
 import Layout from '../components/Layout';
+import "../styles/main.css";
 
 const Home = () => {
   return (
@@ -7,9 +8,8 @@ const Home = () => {
       description="Welcome to your personalized learning portal."
       keywords={['lms', 'courses', 'dashboard']}
     >
-      
+
       <section className="hero">
-        <link rel="stylesheet" href="css/main.css" />   
             <div className="hero-content">
                 <h2>Welcome to the World of Product Owner in Test™</h2>
                 <p>Empowering people and teams to use Software exploration to comprehend software products end to end through training, certification, mentoring, consulting, and ongoing community experiences.</p>
@@ -19,9 +19,15 @@ const Home = () => {
                     </div>
             </div>
     
-            <div className="hero-image">
-                <img src="images/home/happypots.gif" alt="Curious Testers"/>
-            </div>
+    <figure className="hero-image">
+          <img
+            className="why-image"
+            src={`${import.meta.env.BASE_URL}images/home/happypots.gif`}
+            alt="Curious Testers"
+          />
+          <em className="image-caption">Product Owners in Test</em>
+        </figure>
+
         </section>
 
     </Layout>
