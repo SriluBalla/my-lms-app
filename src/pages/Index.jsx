@@ -8,12 +8,23 @@ const Home = () => {
       description="Welcome to your personalized learning portal."
       keywords={['lms', 'courses', 'dashboard']}
     >
-      <div className="text-center mt-8">
-        <h2 className="text-3xl font-bold text-blue-600">Welcome to My LMS</h2>
-        <p className="text-gray-700 mt-4">
-          Explore courses, track progress, and grow your skills.
-        </p>
-      </div>
+      
+      <section class="hero">
+        <link rel="stylesheet" href="css/main.css" />   
+            <div class="hero-content">
+                <h2>Welcome to the World of Product Owner in Test™</h2>
+                <p>Empowering people and teams to use Software exploration to comprehend software products end to end through training, certification, mentoring, consulting, and ongoing community experiences.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="button">Explore Now</a>
+                        <a href="#" class="button">Watch Video</a>
+                    </div>
+            </div>
+    
+            <div class="hero-image">
+                <img src="images/home/happypots.gif" alt="Curious Testers"/>
+            </div>
+        </section>
+
     </Layout>
   );
 };
