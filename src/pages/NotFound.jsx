@@ -14,7 +14,7 @@ const NotFound = () => {
   return (
 
      <Layout
-      title="404"
+      title="Coming Soon"
       description="Welcome to your personalized learning portal."
       keywords={['Product Owner in Test', 'Quality Assutance', 'Software Testing']}
     >    
