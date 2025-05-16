@@ -4,9 +4,9 @@ import '../styles/NotFound.css';
 
 const NotFound = () => {
   const images = [
-    './images/404/404-1.png',
-    './images/404/404-2.png',
-    './images/404/404-3.png',
+    './images/404/CS_pot.png',
+    './images/404/CS_wfi.png',
+    './images/404/CS_wfi2.png',
   ];
 
   const randomImage = images[Math.floor(Math.random() * images.length)];
@@ -16,7 +16,7 @@ const NotFound = () => {
      <Layout
       title="404"
       description="Welcome to your personalized learning portal."
-      keywords={['lms', 'courses', 'dashboard']}
+      keywords={['Product Owner in Test', 'Quality Assutance', 'Software Testing']}
     >    
     <div className="not-found">
       <img
@@ -24,8 +24,7 @@ const NotFound = () => {
         alt="Page Not Found"
         className="not-found__image"
       />
-      <h1>404 - Page Not Found</h1>
-      <p>The page you're looking for doesn’t exist.</p>
+      <h1>Page coming soon</h1>
     <a href="index./" className="button">Return to Home</a>
 
     </div>

@@ -4,7 +4,8 @@
     }
     .not-found h1 {
       font-size: 4rem;
-      color: #8f0730;
+      color: linear-gradient(to top, #3091db, #2eeccd);
+
     }
     .not-found p {
       font-size: 1.2rem;
