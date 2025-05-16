@@ -1,0 +1,29 @@
+.img-small {
+  width: 100px;
+  height: auto;
+  margin-left: 1rem;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  position: sticky;
+}
+
+.why-image {
+  width: 500px;
+  height: auto;
+  overflow: hidden;
+}
+
+.image-caption {
+  display: block;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+img:hover {
+  /* -webkit-transform:scale(1.5);  */
+  /* transform:scale(1.5); */
+}
