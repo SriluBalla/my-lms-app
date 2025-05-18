@@ -3,6 +3,7 @@ import NotFound from '../pages/NotFound.jsx';
 import QAtoPot from '../pages/QAtoPot.jsx';
 import Why from '../pages/Why.jsx';
 import Register from '../pages/Register.jsx';
+import Red_Acknowledment from '../pages/Red_Ack.jsx';
 
 const routes = [
     {
@@ -14,6 +15,9 @@ const routes = [
         element: <QAtoPot />,
     },
     {
+        path: '/register1',
+        element: <Red_Acknowledment />,
+    },{
         path: '/register',
         element: <Register />,
     },

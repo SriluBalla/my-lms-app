@@ -47,6 +47,12 @@ const Register = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const isValidPassword = (password) => {
+  const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return pattern.test(password);
+};
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -65,7 +71,9 @@ const Register = () => {
   };
 
   return (
-    <Layout title="Register" description="Create your account">
+    <Layout title="Register" 
+    description="Create your account">
+    
       <section className="register-page">
         {/* Left: Info Panel */}
         <div className="register-info">
@@ -95,7 +103,7 @@ const Register = () => {
               like to celebrate you.
             </li>
             <li>
-              <strong>🌎 Country of Residence</strong>
+              <strong>🌎 Country of Residence</strong> for time zone
             </li>
           </ul>
 
