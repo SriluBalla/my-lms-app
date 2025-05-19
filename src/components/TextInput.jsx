@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/forms/TextInput.css"; // optional for styling
+import "../styles/TextInput.css";
 
 const TextInput = ({
   label,
@@ -13,7 +13,7 @@ const TextInput = ({
   error,
 }) => {
   return (
-    <div className="form-field">
+    <div className="text-field">
       <label htmlFor={name}>
         {label} {required && <span className="required">*</span>}
       </label>
@@ -25,6 +25,7 @@ const TextInput = ({
         onChange={onChange}
         required={required}
         placeholder={placeholder}
+        // minLength={minLength}
         maxLength={maxLength}
         className={error ? "input-error" : ""}
       />

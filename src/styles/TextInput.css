@@ -1,8 +1,8 @@
-.form-field, .form-group {
+.text-field, .form-group {
   margin-bottom: 1rem;
 }
 
-.form-field label, .form-group label {
+.text-field label, .form-group label {
   display: block;
   font-weight: 500;
   margin-bottom: 0.3rem;
@@ -13,8 +13,8 @@
   margin-left: 0.25rem;
 }
 
-.form-field input, .form-group input {
-  width: 70%;
+.text-field input, .form-group input {
+  width: 80%;
   padding: 8px;
   font-size: 1rem;
   border: 1px solid #073c53;

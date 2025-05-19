@@ -48,11 +48,11 @@ const Header = () => {
           POT
         </NavLink>
 
-        <button className="nav-button" onClick={() => navigate('/login')}>
+        <button className="nav-button" onClick={() => navigate("/login")}>
           Sign In
         </button>
 
-        <button className="nav-button" onClick={() => navigate('/register')}>
+        <button className="nav-button" onClick={() => navigate("/register1")}>
           Register
         </button>
       </nav>

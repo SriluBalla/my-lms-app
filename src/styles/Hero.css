@@ -50,6 +50,41 @@
   gap: 25px;
 }
 
+.body__left {
+  background: #7ecbeb;
+  border-left: 4px solid #18607e;
+  float: left;
+}
+
+.body__right {
+  background: #e3f3fa;
+  border-left: 4px solid #1872ad;
+  float: right;
+}
+
+.body__center {
+  background: #7fe7bf;
+  border-left: 4px solid #0f8156;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 2rem;
+  position: relative;
+  margin: 0 auto;
+  width: auto;
+}
+
+.body__left, .body__right {
+  border-radius: 8px;
+  font-size: 1rem;
+  flex: 1;
+  padding: 2rem;
+  width: 50%;
+}
+
+.body__left h4, .body__right h4 {
+  color: #011d29;
+}
+
 .heroTwo {
   background: #7ecbeb;
   display: flex;
