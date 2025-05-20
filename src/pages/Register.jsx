@@ -5,7 +5,7 @@ import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import ConfirmMessage from "../components/ConfirmMsg";
 import { supabase } from "../supabaseDB";
-import "../styles/Main.css";
+import "../styles/main.css";
 
 const Register = () => {
   const navigate = useNavigate();
