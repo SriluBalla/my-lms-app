@@ -71,7 +71,10 @@ const Register = () => {
     } = await supabase.auth.getUser();
 
     if (userError || !user) {
-      setMessage({ type: "error", text: userError?.message || "User not found" });
+      setMessage({
+        type: "error",
+        text: userError?.message || "User not found",
+      });
       return;
     }
 
@@ -146,17 +149,28 @@ const Register = () => {
             />
 
             <div className="center-btn">
-              <button type="button" className="button">
-                Cancel
+              <button
+                type="button"
+                className="button"
+                id="btn-clear"
+                onClick={() =>
+                  setFormData({ email: "", password: "", confirmPassword: "" })
+                }
+              >
+                Clear
               </button>
-              <button type="submit" className="button">
+
+              <button 
+              type="submit" 
+              className="button"
+              id="btn-Register">
                 Register
               </button>
             </div>
+
           </form>
 
           <ConfirmMessage type={message?.type} text={message?.text} />
-
         </div>
       </section>
     </Layout>
