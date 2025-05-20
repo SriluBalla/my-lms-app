@@ -1,11 +1,13 @@
-.text-field, .form-group {
+.text-field,
+.form-group {
   margin-bottom: 1rem;
-}
-
-.text-field label, .form-group label {
-  display: block;
   font-weight: 500;
   margin-bottom: 0.3rem;
+}
+
+.text-field label,
+.form-group label {
+  display: block;
 }
 
 .required {
@@ -13,8 +15,9 @@
   margin-left: 0.25rem;
 }
 
-.text-field input, .form-group input {
-  width: 80%;
+.text-field input,
+.form-group input {
+  width: 90%;
   padding: 8px;
   font-size: 1rem;
   border: 1px solid #073c53;
@@ -30,5 +33,3 @@
   font-size: 0.85rem;
   margin-top: 0.25rem;
 }
-
-

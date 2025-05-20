@@ -8,6 +8,16 @@ const Profile = () => {
 
   const handleCountryChange = (e) => {
     setSelectedCountry(e.target.value);
+      const [selectedCountry, setSelectedCountry] = useState("");
+
+      const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+
   };
 
   return (
