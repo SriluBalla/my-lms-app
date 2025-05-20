@@ -5,19 +5,18 @@ import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import ConfirmMessage from "../components/ConfirmMsg";
 import { supabase } from "../supabaseDB";
-import "../styles/Register.css";
+import "../styles/Main.css";
 
 const Register = () => {
   const navigate = useNavigate();
+const [formErrors, setFormErrors] = useState({});
+  const [message, setMessage] = useState(null);
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
-
-  const [formErrors, setFormErrors] = useState({});
-  const [message, setMessage] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -113,6 +112,7 @@ const Register = () => {
     <Layout title="Register" description="Create your account">
       <section className="register-page">
         <div className="body__center">
+
           <h2>Create Account</h2>
           <form onSubmit={handleSubmit}>
             <TextInput

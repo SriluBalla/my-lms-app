@@ -5,12 +5,36 @@
 header {
   align-items: center;
   background: #b7eff7;
+  border-color: #0a8bb7;
+  border-radius: 5px;
   display: flex;
   height: 80px;
   justify-content: space-between;
-  position: static;
+  position: relative;
   top: 0;
   width: 100%;
+  z-index: 100;
+}
+
+.nav {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.navbar__container {
+  align-items: center;
+  display: flex;ß
+  float: left;
+  gap: 0.75rem;
+}
+
+.nav-menu {
+  align-items: center;
+  display: flex;
+  gap: 1.5rem;
 }
 
 .logo {
@@ -27,6 +51,7 @@ header {
 .logo img {
   height: 50px;
   margin-right: 20px;
+  padding: 8px 16px;
   width: auto;
 }
 
@@ -36,15 +61,7 @@ header {
   transform: scale(1.3);
 }
 
-.navbar__container {
-  align-items: center;
-  display: flex;ß
-  flex-wrap: nowrap;
-  float: left;
-  gap: 0.75rem;
-}
-
-#navbar__logo {
+#logoText {
   background: linear-gradient(to top, #3091db, #1e9f8a);
   background-clip: text;
   -webkit-background-clip: text;
@@ -55,27 +72,19 @@ header {
   text-decoration: none;
 }
 
-#navbar__logo:hover {
+#logoText:hover {
   background: none;
   color: #040327;
 }
 
-.nav {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-left: auto;
-}
-
-.nav__link {
+.nav__link, .profile-link {
   color: #040327;
   font-size: 1rem;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
-.nav__link:hover {
+.nav__link:hover, .profile-link:hover {
   background: #0a8bb7;
   border-radius: 5px;
   color: white;
@@ -98,6 +107,43 @@ header {
   color: white;
 }
 
+.profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-icon {
+  height: 50px;
+  margin-right: 20px;
+  width: auto;
+  cursor: pointer;
+}
+
+.profile-menu {
+  align-items: center;
+  background: #b7eff7;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 200px;
+  opacity: 1;
+  padding: 1rem;
+  position: absolute;
+  right: 0%;
+  transition: all 0.3s ease-in-out; 
+}
+
+.profile-menu button:hover {
+  background: #0a8bb7;
+  color: white;
+}
+
+.profile-icon {
+  height: 50px;
+  margin-right: 20px;
+  width: auto;
+}
+
 .menu-toggle {
   background: none;
   border: none;
@@ -107,43 +153,38 @@ header {
   font-size: 2rem;
 }
 
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-/* Mobile Styles*/
+/* ------- MOBILE STYLES  -------*/
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
-    margin-bottom: 10px;
+    cursor: pointer;
+    height: 50px;
+     margin-right: 20px;
     padding: 10px;
     text-align: center;
+    width: auto;  
   }
 
-  .logo img {
+   .logo img {
     display: none;
   }
 
-  .nav-menu {
+   .nav-menu {
     align-items: self-end;
-    background: linear-gradient(to top, #3091db, #2eeccd);
+    background: #b7eff7;
     display: block;
     flex-direction: column;
-    gap: 1rem;
     right: 0;
     opacity: 0;
     padding: 1rem;
     pointer-events: none;
     position: absolute;
     transition: all 0.3s ease-in-out;
-    top: 100%;
-    width: 40%;
-    z-index: -1;
-  }
+    width: 30%;
+   }
 
-  .nav-menu.active {
+   .nav-menu.active {
+    display: flex;
     opacity: 1;
     pointer-events: auto;
     top: 100%;
@@ -152,19 +193,11 @@ header {
 
   .nav-button {
     display: inline-block;
-    text-align: left;
-    width: 100%;
-  }
-
-  .nav__link {
-    font-weight: bold;
-    display: block;
-    padding: 1rem;
     text-align: center;
-    width: 100%;
+    width: 50%;
   }
 
-  /* Optional: if you're using hamburger bars inside .menu-toggle */
+   /* Optional: if you're using hamburger bars inside .menu-toggle */
   .menu-toggle.active .bar:nth-child(2) {
     opacity: 0;
   }
@@ -176,4 +209,5 @@ header {
   .menu-toggle.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
+
 }
