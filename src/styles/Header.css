@@ -73,23 +73,28 @@ header {
 }
 
 #logoText:hover {
-  background: none;
-  color: #040327;
+  background: #0a8bb7;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  padding: 6px 10px;
 }
 
-.nav__link, .profile-link {
+.nav__link,
+.profile-link {
   color: #040327;
   font-size: 1.1rem;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
-.nav__link:hover, .profile-link:hover {
+.nav__link:hover,
+.profile-link:hover {
   background: #0a8bb7;
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  padding: 4px 8px;
+  padding: 6px 10px;
 }
 
 .nav-button {
@@ -130,7 +135,7 @@ header {
   padding: 1rem;
   position: absolute;
   right: 0%;
-  transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out;
 }
 
 .profile-menu button:hover {
@@ -159,17 +164,17 @@ header {
     display: block;
     cursor: pointer;
     height: 50px;
-     margin-right: 20px;
+    margin-right: 20px;
     padding: 10px;
     text-align: center;
-    width: auto;  
+    width: auto;
   }
 
-   .logo img {
+  .logo img {
     display: none;
   }
 
-   .nav-menu {
+  .nav-menu {
     align-items: self-end;
     background: #b7eff7;
     display: block;
@@ -181,9 +186,9 @@ header {
     position: absolute;
     transition: all 0.3s ease-in-out;
     width: 30%;
-   }
+  }
 
-   .nav-menu.active {
+  .nav-menu.active {
     display: flex;
     opacity: 1;
     pointer-events: auto;
@@ -197,7 +202,7 @@ header {
     width: 50%;
   }
 
-   /* Optional: if you're using hamburger bars inside .menu-toggle */
+  /* Optional: if you're using hamburger bars inside .menu-toggle */
   .menu-toggle.active .bar:nth-child(2) {
     opacity: 0;
   }
@@ -209,5 +214,4 @@ header {
   .menu-toggle.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
-
 }
