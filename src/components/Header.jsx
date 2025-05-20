@@ -83,13 +83,13 @@ const Header = () => {
         </button>
       </div>
       <nav ref={menuRef} className={`nav-menu ${menuOpen ? "active" : ""}`}>
-        <NavLink id="qaToPot" to="/qa-to-pot">
+        <NavLink id="qaToPot" className="nav__link" to="/qa-to-pot">
           QA to POT
         </NavLink>
-        <NavLink id="why" to="/why">
+        <NavLink id="why" className="nav__link" to="/why">
           Why
         </NavLink>
-        <NavLink id="pot" to="/pot">
+        <NavLink id="pot" className="nav__link" to="/pot">
           POT
         </NavLink>
       {/* </nav> */}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout";
 import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";

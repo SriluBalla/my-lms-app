@@ -6,6 +6,21 @@ console.log('Supabase is ready:', supabase);
 
 
 function App() {
+
+  useEffect(() => {
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    if (session) {
+      setUser(session.user);
+    }
+  });
+
+  const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    setUser(session?.user ?? null);
+  });
+
+  return () => listener.subscription.unsubscribe();
+}, []);
+
   return (
     <Router basename="/my-lms-app">
       <Routes>
