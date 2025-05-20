@@ -6,6 +6,7 @@ const PasswordInput = ({
   name,
   value,
   onChange,
+  placeholder,
   showRules = true,
   error,
 }) => {
@@ -21,8 +22,9 @@ const PasswordInput = ({
         value={value}
         onChange={onChange}
         required
+        minLength={8}
         maxLength={50}
-        placeholder="Enter password"
+        placeholder={placeholder}
         autoComplete={name === "password" ? "new-password" : "off"}
       />
       <button

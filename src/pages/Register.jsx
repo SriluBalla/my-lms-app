@@ -9,7 +9,7 @@ import "../styles/main.css";
 
 const Register = () => {
   const navigate = useNavigate();
-const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({});
   const [message, setMessage] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -112,7 +112,6 @@ const [formErrors, setFormErrors] = useState({});
     <Layout title="Register" description="Create your account">
       <section className="register-page">
         <div className="body__center">
-
           <h2>Create Account</h2>
           <form onSubmit={handleSubmit}>
             <TextInput
@@ -133,6 +132,7 @@ const [formErrors, setFormErrors] = useState({});
               id="password"
               label="Password"
               name="password"
+              placeholder="8 to 50, UPPER lower !@#$ 7889"
               value={formData.password}
               onChange={handleChange}
               showRules={false}
@@ -143,6 +143,7 @@ const [formErrors, setFormErrors] = useState({});
               id="confirmPassword"
               label="Confirm Password"
               name="confirmPassword"
+              placeholder="Match the password"
               value={formData.confirmPassword}
               onChange={handleChange}
               error={formErrors.confirmPassword}
@@ -160,14 +161,10 @@ const [formErrors, setFormErrors] = useState({});
                 Clear
               </button>
 
-              <button 
-              type="submit" 
-              className="button"
-              id="btn-Register">
+              <button type="submit" className="button" id="btn-Register">
                 Register
               </button>
             </div>
-
           </form>
 
           <ConfirmMessage type={message?.type} text={message?.text} />

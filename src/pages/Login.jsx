@@ -40,8 +40,10 @@ const Login = () => {
     description="Log into your account">
       <section className="register-page">
         <div className="body__center">
+            
           <h2>Login</h2>
           <form onSubmit={handleLogin}>
+
             <TextInput
               id="email"
               label="Email"
