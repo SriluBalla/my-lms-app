@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import ConfirmMessage from "../components/ConfirmMsg";
-import "../styles/Main.css";
+import "../styles/main.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
