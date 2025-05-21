@@ -50,50 +50,50 @@ const Register = () => {
   };
 
   const handleRegister = async (e) => {
-    e.preventDefault();
-    if (loading) return;
+  e.preventDefault();
+  if (loading) return;
 
-    if (!validateForm()) return;
+  if (!validateForm()) return;
 
-    setLoading(true);
-    setMessage({ type: "", text: "" });
+  setLoading(true);
+  setMessage({ type: "", text: "" });
 
-    const normalizedEmail = formData.email.trim().toLowerCase();
+  const normalizedEmail = formData.email.trim().toLowerCase();
 
-    const { data, error } = await supabase.auth.signUp({
-      email: normalizedEmail,
-      password: formData.password,
-      options: {
-        emailRedirectTo: "https://sriluballa.github.io/my-lms-app/",
-      },
-    });
+  const { data, error } = await supabase.auth.signUp({
+    email: normalizedEmail,
+    password: formData.password,
+    options: {
+      emailRedirectTo: "https://sriluballa.github.io/my-lms-app/",
+    },
+  });
 
-    if (error) {
-      setMessage({ type: "error", text: error.message });
-    } else {
-      setMessage({
-        type: "success",
-        text: "Check your email to confirm registration.",
-      });
-    }
+  if (error) {
+    const msg =
+      error.message === "User already registered"
+        ? "This email is already registered. Please log in instead."
+        : error.message;
 
-    if (error) {
-      const msg =
-        error.message === "User already registered"
-          ? "This email is already registered. Please log in instead."
-          : error.message;
-
-      setMessage({ type: "error", text: msg });
-      setLoading(false);
-      return;
-    }
+    setMessage({ type: "error", text: msg });
 
     if (error.message === "User already registered") {
       setTimeout(() => navigate("/login"), 1500);
     }
 
     setLoading(false);
-  };
+    return;
+  }
+
+  // Success
+  setMessage({
+    type: "success",
+    text: "Check your email to confirm registration.",
+  });
+
+  setLoading(false);
+};
+
+//// HTML for the PAGE
 
   return (
     <Layout title="Register" description="Create your account">
