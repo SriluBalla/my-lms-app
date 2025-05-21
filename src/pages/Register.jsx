@@ -11,6 +11,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
   const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -48,108 +49,40 @@ const Register = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    if (loading) return;
+
     if (!validateForm()) return;
 
-    const { email, password } = formData;
-
-    const { error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    setLoading(true);
+    setMessage({ type: "", text: "" });
 
     const normalizedEmail = formData.email.trim().toLowerCase();
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: normalizedEmail,
       password: formData.password,
+      options: {
+        emailRedirectTo: "https://sriluballa.github.io/my-lms-app/",
+      },
     });
 
-    if (signUpError) {
-      setMessage({ type: "error", text: signUpError.message });
-      return;
+    if (error) {
+      setMessage({ type: "error", text: error.message });
+    } else {
+      setMessage({ type: "success", text: "Check your email to confirm registration." });
     }
 
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
-
-    if (userError || !user) {
-      setMessage({
-        type: "error",
-        text: userError?.message || "User not found",
-      });
-      return;
-    }
-
-    const { error: profileError } = await supabase.from("profiles").upsert({
-      id: user.id,
-      email: user.email,
-      first_name: null,
-      last_name: null,
-      preferred_name: null,
-      gender: null,
-      birth_day: null,
-      birth_month: null,
-      country: null,
-      profile_image_url: null,
-      years_experience: null,
-      self_intro: null,
-      linkedin: null,
-      github: null,
-    });
-
-    if (profileError) {
-      setMessage({ type: "error", text: profileError.message });
-      return;
-    }
-
-    setMessage({
-      type: "success",
-      text: "Check your email to confirm your account!",
-    });
-
-    // Redirect to profile page
-    navigate("/profile");
+    setLoading(false);
   };
-
-const [loading, setLoading] = useState(false);
-
-const handleRegister = async (e) => {
-  e.preventDefault();
-  if (loading) return;
-
-  setLoading(true);
-  setMessage({ type: "", text: "" });
-
-  const { data, error } = await supabase.auth.signUp({
-  email: formData.email.toLowerCase(),
-  password: formData.password,
-  options: {
-    emailRedirectTo: 'https://sriluballa.github.io/my-lms-app/',
-  },
-});
-
-  if (error) {
-    setMessage({ type: "error", text: error.message });
-  } else {
-    setMessage({ type: "success", text: "Check your email to confirm registration." });
-  }
-
-  setLoading(false);
-};
-
-
-  // HTML starts NOW
 
   return (
     <Layout title="Register" description="Create your account">
       <section className="register-page">
         <div className="body__center">
           <h2>Create Account</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleRegister}>
             <TextInput
               id="email"
               label="Email"
