@@ -71,7 +71,21 @@ const Register = () => {
     if (error) {
       setMessage({ type: "error", text: error.message });
     } else {
-      setMessage({ type: "success", text: "Check your email to confirm registration." });
+      setMessage({
+        type: "success",
+        text: "Check your email to confirm registration.",
+      });
+    }
+
+    if (error) {
+      const msg =
+        error.message === "User already registered"
+          ? "This email is already registered. Please log in instead."
+          : error.message;
+
+      setMessage({ type: "error", text: msg });
+      setLoading(false);
+      return;
     }
 
     setLoading(false);
@@ -130,7 +144,12 @@ const Register = () => {
                 Clear
               </button>
 
-              <button type="submit" className="button" id="btn-Register" disabled={loading}>
+              <button
+                type="submit"
+                className="button"
+                id="btn-Register"
+                disabled={loading}
+              >
                 {loading ? "Registering..." : "Register"}
               </button>
             </div>
