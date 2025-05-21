@@ -22,10 +22,13 @@ const Login = () => {
     e.preventDefault();
     setMessage({ type: "", text: "" });
 
+    const normalizedEmail = formData.email.trim().toLowerCase();
+
     const { error } = await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
+      email: normalizedEmail,
+  password: formData.password,
     });
+
 
     if (error) {
       setMessage({ type: "error", text: error.message });
@@ -34,13 +37,15 @@ const Login = () => {
       setTimeout(() => navigate("/profile"), 1500); // redirect after success
     }
   };
+  
 
+//   HTML starts now
   return (
     <Layout title="Login" 
     description="Log into your account">
       <section className="register-page">
         <div className="body__center">
-            
+
           <h2>Login</h2>
           <form onSubmit={handleLogin}>
 

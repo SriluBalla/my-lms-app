@@ -59,6 +59,13 @@ const Register = () => {
       password,
     });
 
+    const normalizedEmail = formData.email.trim().toLowerCase();
+
+    const { error } = await supabase.auth.signUp({
+      email: normalizedEmail,
+      password: formData.password,
+    });
+
     if (signUpError) {
       setMessage({ type: "error", text: signUpError.message });
       return;
@@ -107,6 +114,35 @@ const Register = () => {
     // Redirect to profile page
     navigate("/profile");
   };
+
+const [loading, setLoading] = useState(false);
+
+const handleRegister = async (e) => {
+  e.preventDefault();
+  if (loading) return;
+
+  setLoading(true);
+  setMessage({ type: "", text: "" });
+
+  const { data, error } = await supabase.auth.signUp({
+  email: formData.email.toLowerCase(),
+  password: formData.password,
+  options: {
+    emailRedirectTo: 'https://sriluballa.github.io/my-lms-app/',
+  },
+});
+
+  if (error) {
+    setMessage({ type: "error", text: error.message });
+  } else {
+    setMessage({ type: "success", text: "Check your email to confirm registration." });
+  }
+
+  setLoading(false);
+};
+
+
+  // HTML starts NOW
 
   return (
     <Layout title="Register" description="Create your account">
@@ -161,8 +197,8 @@ const Register = () => {
                 Clear
               </button>
 
-              <button type="submit" className="button" id="btn-Register">
-                Register
+              <button type="submit" className="button" id="btn-Register" disabled={loading}>
+                {loading ? "Registering..." : "Register"}
               </button>
             </div>
           </form>
