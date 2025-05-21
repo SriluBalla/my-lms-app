@@ -88,6 +88,10 @@ const Register = () => {
       return;
     }
 
+    if (error.message === "User already registered") {
+      setTimeout(() => navigate("/login"), 1500);
+    }
+
     setLoading(false);
   };
 
