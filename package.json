@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://sriluballa.github.io/my-lms-app",
+  "homepage": "https://sriluballa.github.io/my-lms-app/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
