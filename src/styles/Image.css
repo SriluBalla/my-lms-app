@@ -23,3 +23,11 @@ img:hover {
   /* -webkit-transform:scale(1.5);  */
   /* transform:scale(1.5); */
 }
+
+
+/* PHOTOs */
+.profile-image-preview img {
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  margin-top: 1rem;
+}

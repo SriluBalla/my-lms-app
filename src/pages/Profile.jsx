@@ -52,60 +52,58 @@ const Profile = () => {
 
   // SAVE data entered in the Profile
   const handleSaveProfile = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const {
-      firstName,
-      lastName,
-      preferredName,
-      birthMonth,
-      birthDay,
-      country,
-      customCountry,
-    } = formData;
+  const {
+    firstName,
+    lastName,
+    preferredName,
+    birthMonth,
+    birthDay,
+    country,
+    customCountry,
+  } = formData;
 
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-    if (userError || !user) {
-      alert("User not authenticated");
-      return;
-    }
+  if (userError || !user) {
+    alert("User not authenticated");
+    return;
+  }
 
-    // ERROR Messages and reasons
-    const { error } = await supabase.from("profiles").upsert([
-      {
-        id: user.id,
-        email: user.email,
-        first_name: firstName,
-        last_name: lastName,
-        preferred_name: preferredName,
-        birth_month: birthMonth,
-        birth_day: birthDay,
-        country: country === "Other" ? customCountry : country,
-      },
-    ]);
+  const finalPreferredName = preferredName?.trim() || firstName;
 
+  const { error } = await supabase.from("profiles").upsert([
+    {
+      id: user.id,
+      email: user.email,
+      first_name: firstName,
+      last_name: lastName,
+      preferred_name: finalPreferredName,
+      birth_month: birthMonth,
+      birth_day: birthDay,
+      country: country === "Other" ? customCountry : country,
+    },
+  ]);
+
+  if (error) {
+    console.error("Error saving profile:", error);
+    alert("Something went wrong saving your profile.");
+  } else {
+    alert("Profile saved successfully!");
     setSavedProfile({
       email: user.email,
       first_name: firstName,
       last_name: lastName,
-      preferred_name: preferredName,
+      preferred_name: finalPreferredName,
       birth_month: birthMonth,
       birth_day: birthDay,
       country: country === "Other" ? customCountry : country,
     });
+  }
+};
 
-    if (error) {
-      console.error("Error saving profile:", error);
-      alert("Something went wrong saving your profile.");
-    } else {
-      alert("Profile saved successfully!");
-    }
-  };
-
+//////// SHOW first name as Preferred name if it is Null.
   const [savedProfile, setSavedProfile] = useState(null);
 
   useEffect(() => {
@@ -164,17 +162,13 @@ const Profile = () => {
             <div className="saved-profile-column">
               
               <p>
-                 Name:<strong> {savedProfile.first_name}  {savedProfile.last_name} </strong>
+                 <strong> {savedProfile.first_name}  {savedProfile.last_name}, ( {savedProfile.preferred_name} ) </strong>
               </p>
               <p>
-                Preferred Name:<strong> {savedProfile.preferred_name}</strong>
+                🎁 🎂 <strong> {savedProfile.birth_month}{" "} {savedProfile.birth_day} </strong> 🙌 🥳
               </p>
               <p>
-                Birthday:<strong> {savedProfile.birth_month}{" "} </strong>
-                {savedProfile.birth_day}
-              </p>
-              <p>
-                Country of Residence:<strong> {savedProfile.country}</strong>
+                🌎   <strong> {savedProfile.country}</strong>
               </p>
             </div>
           )}
