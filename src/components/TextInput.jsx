@@ -1,37 +1,35 @@
+// components/TextInput.jsx
 import React from "react";
 import "../styles/TextInput.css";
 
 const TextInput = ({
-  label,
+  id,
   name,
-  type = "text",
+  label,
+  placeholder,
   value,
   onChange,
   required = false,
-  placeholder = "",
+  minLength,
   maxLength,
-  error,
-}) => {
-  return (
-    <div className="text-field">
-      <label htmlFor={name}>
-        {label} {required && <span className="required">*</span>}
-      </label>
-      <input
-        type={type}
-        name={name}
-        id={name}
-        value={value}
-        onChange={onChange}
-        required={required}
-        placeholder={placeholder}
-        // minLength={minLength}
-        maxLength={maxLength}
-        className={error ? "input-error" : ""}
-      />
-      {error && <p className="error-message">{error}</p>}
-    </div>
-  );
-};
+}) => (
+  <div className="form-group">
+    <label htmlFor={id}>
+      {label}
+      {required && <span className="required"> *</span>}
+    </label>
+    <input
+      type="text"
+      id={id}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      required={required}
+      minLength={minLength}
+      maxLength={maxLength}
+    />
+  </div>
+);
 
 export default TextInput;

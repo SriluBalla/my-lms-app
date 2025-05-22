@@ -3,6 +3,14 @@
   color: #040327;
 }
 
+.body__outline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+}
+
 .about-cta {
   background: #e3f3fa;
   display: flex;
@@ -124,4 +132,12 @@
 p {
   margin-bottom: 30px;
   gap: 25px;
+}
+
+
+/* Mobile stuff */
+@media screen and (max-width: 768px) {
+  .body__outline {
+    flex-direction: column;
+  }
 }

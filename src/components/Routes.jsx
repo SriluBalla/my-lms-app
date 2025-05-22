@@ -4,6 +4,7 @@ import QAtoPot from '../pages/QAtoPot.jsx';
 import Why from '../pages/Why.jsx';
 import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
+import Profile from '../pages/Profile.jsx';
 import Red_Acknowledment from '../pages/Red_Ack.jsx';
 
 const routes = [
@@ -26,6 +27,10 @@ const routes = [
     {
         path: '/register',
         element: <Register />,
+    },
+    {
+        path: '/profile',
+        element: <Profile />,
     },
     {
         path: '/*',

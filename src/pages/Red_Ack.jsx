@@ -1,13 +1,13 @@
 import Layout from "../components/Layout";
 import { useNavigate } from "react-router-dom";
-import "../styles/Register.css";
+import "../styles/main.css";
 
 const Red_Acknowledment = () => {
   const navigate = useNavigate();
 
   return (
     <Layout title="Register" description="Create your account page 1">
-      <div className="register-page">
+      <div className="body__outline">
         <section className="hero__head">
           <h2>Welcome to Registration</h2>
           <p>

@@ -98,7 +98,7 @@ const Register = () => {
 
   return (
     <Layout title="Register" description="Create your account">
-      <section className="register-page">
+      <section className="body__outline">
         <div className="body__center">
           <h2>Create Account</h2>
           <form onSubmit={handleRegister}>

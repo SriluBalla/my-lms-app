@@ -43,7 +43,7 @@ const Login = () => {
   return (
     <Layout title="Login" 
     description="Log into your account">
-      <section className="register-page">
+      <section className="body__outline">
         <div className="body__center">
 
           <h2>Login</h2>
@@ -65,6 +65,7 @@ const Login = () => {
               id="password"
               label="Password"
               name="password"
+              placeholder="Registered password as is"
               value={formData.password}
               onChange={handleChange}
               showRules={false}

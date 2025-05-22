@@ -1,8 +1,9 @@
 .text-field,
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-weight: 500;
   margin-bottom: 0.3rem;
+  
 }
 
 .text-field label,
@@ -32,4 +33,54 @@
   color: red;
   font-size: 0.85rem;
   margin-top: 0.25rem;
+}
+
+
+.custom-country-input {
+padding: 2rem;
+}
+
+.error-msg {
+    color: red;
+}
+
+select {
+  padding: 8px;
+  width: auto%;
+  border-radius: 4px;
+}
+
+.dob-group {
+  margin-bottom: 1rem;
+}
+
+.dob-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.password-rules {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.password-rules li.valid {
+  color: rgb(3, 43, 3);
+  text-decoration: underline;
+}
+
+.password-rules li.invalid {
+  color: rgb(13, 1, 1);
+  font-weight: bold;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #007bff;
+  cursor: pointer;
+  margin-left: 8px;
 }

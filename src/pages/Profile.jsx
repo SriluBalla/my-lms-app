@@ -1,78 +1,234 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import { supabase } from "../supabaseDB";
 import TextInput from "../components/TextInput";
-import "../styles/Register.css";
+import "../styles/main.css";
 
 const Profile = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    preferredName: "",
+    birthMonth: "",
+    birthDay: "",
+    country: "",
+    customCountry: "",
+  });
 
-  const handleCountryChange = (e) => {
-    setSelectedCountry(e.target.value);
-      const [selectedCountry, setSelectedCountry] = useState("");
+  // Email field shows the email registered with but not editable
+  const [email, setEmail] = useState("");
 
-      const handleChange = (e) => {
+  useEffect(() => {
+    const fetchEmail = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+
+      if (user && !error) {
+        setEmail(user.email);
+      }
+    };
+
+    fetchEmail();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
-
+  const handleCountryChange = (e) => {
+    const { value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      country: value,
+      customCountry: "", // Clear customCountry if not "Other"
+    }));
   };
 
+  // SAVE data entered in the Profile
+  const handleSaveProfile = async (e) => {
+    e.preventDefault();
+
+    const {
+      firstName,
+      lastName,
+      preferredName,
+      birthMonth,
+      birthDay,
+      country,
+      customCountry,
+    } = formData;
+
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      alert("User not authenticated");
+      return;
+    }
+
+    // ERROR Messages and reasons
+    const { error } = await supabase.from("profiles").upsert([
+      {
+        id: user.id,
+        email: user.email,
+        first_name: firstName,
+        last_name: lastName,
+        preferred_name: preferredName,
+        birth_month: birthMonth,
+        birth_day: birthDay,
+        country: country === "Other" ? customCountry : country,
+      },
+    ]);
+
+    setSavedProfile({
+      email: user.email,
+      first_name: firstName,
+      last_name: lastName,
+      preferred_name: preferredName,
+      birth_month: birthMonth,
+      birth_day: birthDay,
+      country: country === "Other" ? customCountry : country,
+    });
+
+    if (error) {
+      console.error("Error saving profile:", error);
+      alert("Something went wrong saving your profile.");
+    } else {
+      alert("Profile saved successfully!");
+    }
+  };
+
+  const [savedProfile, setSavedProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (user && !userError) {
+        setEmail(user.email);
+
+        const { data: profileData, error: profileError } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+
+        if (!profileError) {
+          setSavedProfile(profileData);
+
+          // Optional: pre-fill formData with saved data
+          setFormData((prev) => ({
+            ...prev,
+            firstName: profileData.first_name || "",
+            lastName: profileData.last_name || "",
+            preferredName: profileData.preferred_name || "",
+            birthMonth: profileData.birth_month || "",
+            birthDay: profileData.birth_day || "",
+            country: profileData.country || "",
+            customCountry: profileData.custom_country || "",
+          }));
+        }
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
   return (
-    <Layout title="Register" 
-    description="Create your account">
-    
-      <section className="register-page">
-        <div className="body__center">
-          <h2>Create Account</h2>
-          <form onSubmit={handleSubmit}>
-            <h4>To Get to Know you</h4>
-            <div className="form-group">
-              <label htmlFor="firstName">
-                First Name <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                placeholder="e.g., Sridevi"
-                required
-                minLength={1}
-                maxLength={50}
-              />
+    <Layout title="Profile" description="Your Profile">
+      <div className="body__outline">
+        <section className="hero__head">
+          <h2>Welcome to Your Profile</h2>
+          <p>
+            {" "}
+            <strong>
+              Tell your story to the Product Owner in Test community by sharing
+              the information you want to be recognized by.
+            </strong>
+          </p>
+        </section>
+        <section className="body__left">
+          <h2>Your Public Profile</h2>
+          {savedProfile && (
+            <div className="saved-profile-column">
+              
+              <p>
+                 Name:<strong> {savedProfile.first_name}  {savedProfile.last_name} </strong>
+              </p>
+              <p>
+                Preferred Name:<strong> {savedProfile.preferred_name}</strong>
+              </p>
+              <p>
+                Birthday:<strong> {savedProfile.birth_month}{" "} </strong>
+                {savedProfile.birth_day}
+              </p>
+              <p>
+                Country of Residence:<strong> {savedProfile.country}</strong>
+              </p>
             </div>
+          )}
+        </section>
+        <section className="body__right">
+          <h2>Your Profile</h2>
+
+          <form>
             <div className="form-group">
-              <label htmlFor="lastName">
-                Last Name <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                placeholder="e.g., Balla"
-                required
-                minLength={1}
-                maxLength={50}
-              />
+              <label>Email</label>
+              <p className="readonly-email">{email}</p>
             </div>
-            <div className="form-group">
-              <label htmlFor="preferredName">Preferred Name</label>
-              <input
-                type="text"
-                id="preferredName"
-                name="preferredName"
-                placeholder="e.g., Srilu"
-                maxLength={50}
-              />
-            </div>
+
+            <TextInput
+              id="firstName"
+              name="firstName"
+              label="First Name"
+              placeholder="e.g., Sridevi"
+              value={formData.firstName}
+              onChange={handleChange}
+              minLength={1}
+              maxLength={50}
+            />
+
+            <TextInput
+              id="lastName"
+              name="lastName"
+              label="Last Name"
+              placeholder="e.g., Balla"
+              value={formData.lastName}
+              onChange={handleChange}
+              minLength={1}
+              maxLength={50}
+            />
+
+            <TextInput
+              id="preferredName"
+              name="preferredName"
+              label="Preferred Name"
+              placeholder="e.g., Srilu"
+              value={formData.preferredName}
+              onChange={handleChange}
+              maxLength={50}
+            />
+
             <div className="form-group dob-group">
-              <label htmlFor="dob">
-                Birth Month & Day <span className="required">*</span>
-              </label>
+              <label htmlFor="dob">Birth Month & Day</label>
               <div className="dob-row">
-                <select name="birthMonth" required>
+                <select
+                  id="birthMonth"
+                  name="birthMonth"
+                  value={formData.birthMonth}
+                  onChange={handleChange}
+                >
                   <option value="">Month</option>
                   {[
                     "January",
@@ -94,7 +250,12 @@ const Profile = () => {
                   ))}
                 </select>
 
-                <select name="birthDay" required>
+                <select
+                  id="birthDay"
+                  name="birthDay"
+                  value={formData.birthDay}
+                  onChange={handleChange}
+                >
                   <option value="">Day</option>
                   {[...Array(31)].map((_, i) => (
                     <option key={i + 1} value={i + 1}>
@@ -102,16 +263,16 @@ const Profile = () => {
                     </option>
                   ))}
                 </select>
+                <label></label>
               </div>
             </div>
+
             <div className="form-group">
-              <label htmlFor="country">
-                Country of Residence <span className="required">*</span>
-              </label>
+              <label htmlFor="country">Country of Residence</label>
               <select
                 id="country"
                 name="country"
-                required
+                value={formData.country}
                 onChange={handleCountryChange}
               >
                 <option value="">-- Select Country --</option>
@@ -125,26 +286,29 @@ const Profile = () => {
                 <option value="Other">Other</option>
               </select>
 
-              {selectedCountry === "Other" && (
-                <div className="form-group">
-                  <label htmlFor="otherCountry">Type your Country</label>
-                  <input
-                    type="text"
-                    id="customCountry"
-                    name="customCountry"
-                    placeholder="eg., Wakanda"
-                    className="custom-country-input"
-                    onChange={handleCountryChange}
-                    required
-                    minLength={1}
-                    maxLength={50}
-                  />
-                </div>
+              {formData.country === "Other" && (
+                <TextInput
+                  id="customCountry"
+                  name="customCountry"
+                  label="Type your Country"
+                  placeholder="e.g., Wakanda"
+                  value={formData.customCountry}
+                  onChange={handleChange}
+                  minLength={1}
+                  maxLength={50}
+                />
               )}
+              <button
+                type="submit"
+                className="save-button"
+                onClick={handleSaveProfile}
+              >
+                Save Profile
+              </button>
             </div>
-            </form>
-        </div>
-      </section>
+          </form>
+        </section>
+      </div>
     </Layout>
   );
 };

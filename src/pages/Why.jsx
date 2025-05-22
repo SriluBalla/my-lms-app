@@ -58,7 +58,7 @@ const Why = () => {
           <img
             className="why-image"
             src={`${import.meta.env.BASE_URL}images/why/qcBefore.png`}
-            alt="Quality Control in manufacturing"
+            alt="Quality Control in manufacturing and other sectors"
           />
 
           <em className="image-caption">Quality control in manufacturing.</em>

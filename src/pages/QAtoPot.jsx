@@ -8,7 +8,7 @@ const QAtoPOT = () => {
       description="Learn the differences between traditional Quality Assurance to becoming a Product Owner in Test"
       keywords={['Quality Assurance', 'Product Owner in Test', 'Quality Control']}>
 
-
+<section className="body__outline">
 <section className="hero__head">
   <h2>Quality Assurance vs.Product Owner in Test™: What’s the Difference?</h2>
   <p>
@@ -278,7 +278,7 @@ const QAtoPOT = () => {
       </div>
     </div>
 </section>
-
+</section>
     </Layout>
   );
 };
