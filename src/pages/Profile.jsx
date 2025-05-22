@@ -178,8 +178,7 @@ const Profile = () => {
 
           <form>
             <div className="form-group">
-              <label>Email</label>
-              <p className="readonly-email">{email}</p>
+              <p className="readonly-email">Email: <b>{email} </b> </p>
             </div>
 
             <TextInput
