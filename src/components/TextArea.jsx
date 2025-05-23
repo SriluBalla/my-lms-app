@@ -12,10 +12,10 @@ const TextAreaInput = ({
   error,
 }) => {
   return (
-    <div className="text-area">
+    <div>
       <label htmlFor={id}>{label}</label>
       <textarea
-        id={id}
+        id="text-area"
         name={name}
         placeholder={placeholder}
         value={value || ""}
@@ -24,9 +24,9 @@ const TextAreaInput = ({
         rows={rows}
         className={error ? "error" : ""}
       />
-      <p className="char-count">
+      <em>
         {(value?.length || 0)}/{maxLength} characters
-      </p>
+      </em>
       {error && <p className="error-msg">{error}</p>}
     </div>
   );

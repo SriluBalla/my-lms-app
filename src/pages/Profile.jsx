@@ -6,6 +6,8 @@ import TextAreaInput from "../components/TextArea";
 import NumberInput from "../components/NumberInput";
 import SuccessPopup from "../components/SuccessPopup";
 import SelectInput from "../components/SelectInput";
+import SavedProfileCard from "../components/ProfileSummary";
+
 import "../styles/main.css";
 
 const Profile = () => {
@@ -294,74 +296,7 @@ const Profile = () => {
 
         {savedProfile && (
           <section className="body__left">
-            <div className="profile-image-preview">
-              <img
-                src={
-                  savedProfile.profile_img_url
-                    ? savedProfile.profile_img_url
-                    : "/images/global/Profile-placeholder.png"
-                }
-                alt="Profile"
-                title="Photo upload feature is coming soon. Stay tuned!"
-                width={120}
-                height={120}
-                style={{
-                  borderRadius: "25%",
-                  border: "2px solid #ccc",
-                  marginTop: "1rem",
-                }}
-              />
-            </div>
-
-            <h2>{savedProfile.preferred_name}</h2>
-            <p>
-              <strong>
-                {savedProfile.first_name} {savedProfile.last_name}, 🌎{" "}
-                {savedProfile.country}
-              </strong>
-            </p>
-            <p>
-              🎁 🎂{" "}
-              <strong>
-                {savedProfile.birth_month} {savedProfile.birth_day}
-              </strong>{" "}
-              🙌 🥳
-            </p>
-            {savedProfile?.linkedin && (
-              <p>
-                <a
-                  href={savedProfile.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {savedProfile.linkedin}
-                </a>
-              </p>
-            )}
-
-            {savedProfile?.github && (
-              <p>
-                <a
-                  href={savedProfile.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {savedProfile.github}
-                </a>
-              </p>
-            )}
-
-            {savedProfile?.blog && (
-              <p>
-                <a
-                  href={savedProfile.blog}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {savedProfile.blog}
-                </a>
-              </p>
-            )}
+            <SavedProfileCard profile={savedProfile} />
           </section>
         )}
 
@@ -402,77 +337,67 @@ const Profile = () => {
               )}
             </div> */}
 
-            <p>
-              <TextInput
-                id="firstName"
-                name="firstName"
-                label="First Name"
-                placeholder="e.g., Sridevi"
-                value={formData.firstName}
-                onChange={handleChange}
-                maxLength={100}
-              />
-            </p>
+            <TextInput
+              id="firstName"
+              name="firstName"
+              label="First Name"
+              placeholder="e.g., Sridevi"
+              value={formData.firstName}
+              onChange={handleChange}
+              maxLength={100}
+            />
 
-            <p>
-              <TextInput
-                id="lastName"
-                name="lastName"
-                label="Last Name"
-                placeholder="e.g., Balla"
-                value={formData.lastName}
-                onChange={handleChange}
-                maxLength={50}
-              />
-            </p>
+            <TextInput
+              id="lastName"
+              name="lastName"
+              label="Last Name"
+              placeholder="e.g., Balla"
+              value={formData.lastName}
+              onChange={handleChange}
+              maxLength={50}
+            />
 
-            <p>
-              <TextInput
-                id="preferredName"
-                name="preferredName"
-                label="Preferred Name"
-                placeholder="e.g., Srilu"
-                value={formData.preferredName}
-                onChange={handleChange}
-                maxLength={50}
-              />
-            </p>
+            <TextInput
+              id="preferredName"
+              name="preferredName"
+              label="Preferred Name"
+              placeholder="e.g., Srilu"
+              value={formData.preferredName}
+              onChange={handleChange}
+              maxLength={50}
+            />
 
-            <p>
-              <NumberInput
-                id="yearsExperience"
-                name="yearsExperience"
-                label="No. of years in IT (as Dev, QA, SDET, DevOps, etc.)"
-                placeholder="e.g., 5"
-                value={formData.yearsExperience}
-                onChange={handleChange}
-                min={0}
-                max={60}
-                step={1}
-                error={errors.yearsExperience}
-              />
-            </p>
+            <NumberInput
+              id="yearsExperience"
+              name="yearsExperience"
+              label="No. of years in IT "
+              placeholder="e.g., 5"
+              value={formData.yearsExperience}
+              onChange={handleChange}
+              min={0}
+              max={60}
+              step={1}
+              error={errors.yearsExperience}
+            />
+            <em>(as Dev, QA, SDET, DevOps, etc.)</em>
 
-            <p>
-              <TextAreaInput
-                id="selfIntro"
-                name="selfIntro"
-                label="Self Introduction"
-                placeholder="Write a short introduction about yourself..."
-                value={formData.selfIntro}
-                onChange={handleChange}
-                maxLength={1000}
-                rows={6}
-                error={errors.selfIntro}
-              />
-            </p>
+            <TextAreaInput
+              id="selfIntro"
+              name="selfIntro"
+              label="Self Introduction"
+              placeholder="Write a short introduction about yourself..."
+              value={formData.selfIntro}
+              onChange={handleChange}
+              maxLength={2000}
+              rows={12}
+              error={errors.selfIntro}
+            />
 
-            <p>
-              <div>
+            <label>Date of Birth and Month</label>
+            <span className="ddl-group">
               <SelectInput
                 id="birthMonth"
                 name="birthMonth"
-                label="Birth Month and Date"
                 value={formData.birthMonth}
                 onChange={handleChange}
                 options={[
@@ -495,7 +420,6 @@ const Profile = () => {
               <select
                 id="birthDay"
                 name="birthDay"
-                label="Birth Day"
                 value={formData.birthDay}
                 onChange={handleChange}
               >
@@ -506,87 +430,81 @@ const Profile = () => {
                   </option>
                 ))}
               </select>
-              </div>
-            </p>
+            </span>
 
-            <p>
-              <SelectInput
-                id="country"
-                name="country"
-                label="Country of Residence"
-                value={formData.country}
-                onChange={handleCountryChange}
-                options={[
-                  "USA",
-                  "Canada",
-                  "India",
-                  "Europe",
-                  "China",
-                  "Japan",
-                  "Africa",
-                  "Other",
-                ]}
-                placeholder="-- Select Country --"
-                error={errors.country}
+            <SelectInput
+              id="country"
+              name="country"
+              label="Country of Residence"
+              value={formData.country}
+              onChange={handleCountryChange}
+              options={[
+                "USA",
+                "Canada",
+                "India",
+                "Europe",
+                "China",
+                "Japan",
+                "Africa",
+                "Other",
+              ]}
+              placeholder="-- Select Country --"
+              error={errors.country}
+            />
+
+            <div className="text-field">
+              <label htmlFor="linkedin">LinkedIn Profile</label>
+              <input
+                type="url"
+                id="linkedin"
+                name="linkedin"
+                placeholder="https://www.linkedin.com/in/your-name"
+                value={formData.linkedin || ""}
+                onChange={handleChange}
+                maxLength={100}
+                title="Only valid LinkedIn URLs are allowed"
+                required={false}
+                className={errors.linkedin ? "error" : ""}
               />
-            </p>
+              {errors.linkedin && (
+                <p className="error-msg">{errors.linkedin}</p>
+              )}
+            </div>
 
-            <p>
-              <div className="text-field">
-                <label htmlFor="linkedin">LinkedIn Profile</label>
-                <input
-                  type="url"
-                  id="linkedin"
-                  name="linkedin"
-                  placeholder="https://www.linkedin.com/in/your-name"
-                  value={formData.linkedin || ""}
-                  onChange={handleChange}
-                  maxLength={100}
-                  title="Only valid LinkedIn URLs are allowed"
-                  required={false}
-                  className={errors.linkedin ? "error" : ""}
-                />
-                {errors.linkedin && (
-                  <p className="error-msg">{errors.linkedin}</p>
-                )}
-              </div>
+            <div className="text-field">
+              <label htmlFor="github">Github Profile</label>
+              <input
+                type="url"
+                id="github"
+                name="github"
+                placeholder="https://github.com/your-name"
+                value={formData.github || ""}
+                onChange={handleChange}
+                maxLength={100}
+                title="Only valid Github URLs are allowed"
+                required={false}
+                className={errors.github ? "error" : ""}
+              />
+              {errors.github && <p className="error-msg">{errors.github}</p>}
+            </div>
 
-              <div className="text-field">
-                <label htmlFor="github">Github Profile</label>
-                <input
-                  type="url"
-                  id="github"
-                  name="github"
-                  placeholder="https://github.com/your-name"
-                  value={formData.github || ""}
-                  onChange={handleChange}
-                  maxLength={100}
-                  title="Only valid Github URLs are allowed"
-                  required={false}
-                  className={errors.github ? "error" : ""}
-                />
-                {errors.github && (
-                  <p className="error-msg">{errors.github}</p>
-                )}
-              </div>
+            <div className="text-field">
+              <label htmlFor="blog">Blog</label>
+              <input
+                type="url"
+                id="blog"
+                name="blog"
+                placeholder="https://mylegitblog.com"
+                value={formData.blog || ""}
+                onChange={handleChange}
+                maxLength={100}
+                title="Only valid Github URLs are allowed"
+                required={false}
+                className={errors.blog ? "error" : ""}
+              />
+              {errors.blog && <p className="error-msg">{errors.blog}</p>}
+            </div>
 
-              <div className="text-field">
-                <label htmlFor="blog">Blog</label>
-                <input
-                  type="url"
-                  id="blog"
-                  name="blog"
-                  placeholder="https://mylegitblog.com"
-                  value={formData.blog || ""}
-                  onChange={handleChange}
-                  maxLength={100}
-                  title="Only valid Github URLs are allowed"
-                  required={false}
-                  className={errors.blog ? "error" : ""}
-                />
-                {errors.blog && <p className="error-msg">{errors.blog}</p>}
-              </div>
-            </p>
             <button
               type="submit"
               className="save-button"

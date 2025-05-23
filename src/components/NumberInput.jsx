@@ -13,11 +13,11 @@ const NumberInput = ({
   error,
 }) => {
   return (
-    <div className="num-field">
+    <div className="num-label">
       <label htmlFor={id}>{label}</label>
       <input
         type="number"
-        id={id}
+        id="numField"
         name={name}
         placeholder={placeholder}
         value={value || ""}

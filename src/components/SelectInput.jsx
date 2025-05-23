@@ -12,7 +12,7 @@ const SelectInput = ({
   required = false,
 }) => {
   return (
-    <div className="select-ddl">
+    <div className="ddl-select">
       <label htmlFor={id}>{label}</label>
       <select
         id={id}

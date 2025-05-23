@@ -1,6 +1,5 @@
 // components/SuccessPopup.jsx
 import React, { useEffect } from "react";
-import "../styles/Popup.css"; // Create this CSS file for styling
 
 const SuccessPopup = ({ message, onClose }) => {
   useEffect(() => {

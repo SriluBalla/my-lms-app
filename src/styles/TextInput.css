@@ -1,60 +1,77 @@
-input
-{
-  width: 90%;
-  padding: 8px;
-  font-size: 1.1rem;
-  border: 1px solid #073c53;
+/* confirm-message
+success-popup
+select-ddl
+password-field
+email-field
+*/
+
+*{
   border-radius: 5px;
 }
-
-.input-error {
-  border-color: red;
-  border: 1px solid red;
-  background: #fff5f5;
+.custom-country-input {
+  padding: 2rem;
 }
 
-label
- {
-  display: block;
-  font-size: 1.1rem;
-    font-weight: bold;
-
+.ddl-select {
+  
 }
 
-.required {
-  color: red;
-  margin-left: 0.25rem;
+.ddl-group {
+  display: flex;
+  gap: 2rem;
+}
+em {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 4px;
 }
 
 .error-msg {
   color: red;
-  font-size: 0.85rem;
+  font-size: 1rem;
   margin-top: 0.25rem;
 }
 
-.custom-country-input {
-padding: 2rem;
+.group-links{
+
 }
 
-select {
+input {
+  width: 90%;
   padding: 8px;
-  width: auto%;
-  border-radius: 4px;
+  font-size: 1.1rem;
+  border: 1px solid #073c53;
 }
 
-.dob-group {
-  margin-bottom: 1rem;
+label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
-.dob-row {
-  display: flex;
-  gap: 1rem;
+.bullet-no {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.bullet-no li {
+  margin-bottom: 0.5rem;
+}
+
+
+#numField{
+  width: 30%;
+  margin-bottom: 5px;
 }
 
 .password-rules {
   list-style: none;
   padding: 0;
-  margin: 1rem 0;
+  margin-left: 20px;
   font-size: 0.9rem;
 }
 
@@ -68,6 +85,28 @@ select {
   font-weight: bold;
 }
 
+.required {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+select {
+  font-size: 1.1rem;
+  height: auto;
+  padding: 8px;
+}
+
+#text-area{
+  width: 90%;
+  padding: 8px;
+  font-size: 1.1rem;
+  border: 1px solid #073c53;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .toggle-password {
   background: none;
   border: none;
@@ -77,11 +116,13 @@ select {
   margin-left: 8px;
 }
 
-.char-count {
-  font-size: 0.85rem;
-  color: #666;
-  text-align: right;
-  margin-top: 4px;
+.toggle-intro-btn {
+  background: none;
+  border: none;
+  color: #04416b;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  margin-left: 4px;
 }
-
-
