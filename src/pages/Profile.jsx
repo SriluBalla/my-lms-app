@@ -26,6 +26,7 @@ const Profile = () => {
     selfIntro: "",
   });
 
+  const [hasLoadedProfile, setHasLoadedProfile] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -84,6 +85,7 @@ const Profile = () => {
       linkedin,
       github,
       blog,
+      selfIntro,
     } = formData;
 
     const {
@@ -92,50 +94,40 @@ const Profile = () => {
     } = await supabase.auth.getUser();
 
     if (userError || !user) {
-      setErrors({
-        type: "error",
-        text: "User not authenticated",
-      });
-
+      setErrors({ type: "error", text: "User not authenticated" });
       return;
     }
 
-    ////// Linkedin Error message
+    // 🔍 Validation
     const newErrors = {};
 
-    const linkedinUrl = formData.linkedin?.trim();
-    if (
-      linkedinUrl &&
-      !/^https?:\/\/(www\.)?linkedin\.com\/.+/.test(linkedinUrl)
-    ) {
-      newErrors.linkedin =
-        "Please enter a valid LinkedIn URL (e.g., https://linkedin.com/in/yourname)";
-    }
+    if (!firstName) newErrors.firstName = "Please provide your first name.";
+    if (!lastName) newErrors.lastName = "Please provide your last name.";
 
-    const githubUrl = formData.github?.trim();
     if (
-      githubUrl &&
-      !/^https?:\/\/(www\.)?github\.com\/[A-Za-z0-9_-]+\/?$/.test(githubUrl)
-    ) {
-      newErrors.github =
-        "Please enter a valid GitHub URL (e.g., https://github.com/your-username)";
-    }
+      linkedin?.trim() &&
+      !/^https?:\/\/(www\.)?linkedin\.com\/.+/.test(linkedin)
+    )
+      newErrors.linkedin = "Please enter a valid LinkedIn URL.";
 
-    const blogUrl = formData.blog?.trim();
-    if (blogUrl) {
+    if (
+      github?.trim() &&
+      !/^https?:\/\/(www\.)?github\.com\/[A-Za-z0-9_-]+\/?$/.test(github)
+    )
+      newErrors.github = "Please enter a valid GitHub URL.";
+
+    if (blog?.trim()) {
       try {
-        new URL(blogUrl);
+        new URL(blog);
       } catch {
         newErrors.blog = "Please enter a valid blog URL.";
       }
     }
 
-    const yearsExp = String(formData.yearsExperience || "").trim();
-    if (yearsExp && (isNaN(yearsExp) || yearsExp < 0 || yearsExp > 60)) {
+    const yearsExp = String(yearsExperience || "").trim();
+    if (yearsExp && (isNaN(yearsExp) || yearsExp < 0 || yearsExp > 60))
       newErrors.yearsExperience = "Please enter a number between 0 and 60.";
-    }
 
-    // Field checks here...
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -143,23 +135,19 @@ const Profile = () => {
       setErrors({});
     }
 
-    if (profileImage && profileImage.size > 5 * 1024 * 1024) {
-      setErrors({
-        type: "error",
-        text: "Image must be under 5MB.",
-      });
-
-      return;
-    }
-
+    // 📸 Image upload (optional)
     let profileImageUrl = "";
-
     if (profileImage) {
+      if (profileImage.size > 5 * 1024 * 1024) {
+        setErrors({ profileImage: "Image must be under 5MB." });
+        return;
+      }
+
       const fileExt = profileImage.name.split(".").pop();
       const fileName = `user-${user.id}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      const { error: uploadError, data: uploadData } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from("profile-pictures")
         .upload(filePath, profileImage, {
           contentType: profileImage.type,
@@ -167,40 +155,38 @@ const Profile = () => {
         });
 
       if (uploadError) {
-        setErrors((prev) => ({
-          ...prev,
+        setErrors({
           profileImage: `Image upload failed: ${uploadError.message}`,
-        }));
+        });
         return;
-      } else {
-        setErrors((prev) => ({ ...prev, profileImage: null }));
       }
 
       const { data: urlData } = supabase.storage
         .from("profile-pictures")
         .getPublicUrl(filePath);
 
-      profileImageUrl = urlData.publicUrl;
+      profileImageUrl = urlData?.publicUrl || "";
     }
 
+    // 📝 Upsert to Supabase
     const finalPreferredName = preferredName?.trim() || firstName;
+
     const { error } = await supabase.from("profiles").upsert([
       {
         id: user.id,
         email: user.email,
-        first_name: firstName || null,
-        last_name: lastName || null,
-        preferred_name: finalPreferredName || null,
-        years_experience: formData.yearsExperience || null,
-        birth_month: formData.birthMonth || null,
-        birth_day: formData.birthDay || null,
+        first_name: firstName,
+        last_name: lastName,
+        preferred_name: finalPreferredName,
+        years_experience: yearsExperience || null,
+        birth_month: birthMonth || null,
+        birth_day: birthDay || null,
         country: country === "Other" ? customCountry : country || null,
-        profile_img_url:
-          profileImageUrl || savedProfile?.profile_img_url || null,
-        linkedin: linkedinUrl || null,
-        github: githubUrl || null,
-        blog: blogUrl || null,
-        self_intro: formData.selfIntro || null,
+        profile_img_url: profileImageUrl || null,
+        linkedin: linkedin?.trim() || null,
+        github: github?.trim() || null,
+        blog: blog?.trim() || null,
+        self_intro: selfIntro?.trim() || null,
       },
     ]);
 
@@ -210,29 +196,45 @@ const Profile = () => {
         type: "error",
         text: "Something went wrong while saving your profile.",
       });
-    } else {
-      setShowPopup(true);
-
-      setSavedProfile({
-        email: user.email,
-        first_name: firstName,
-        last_name: lastName,
-        preferred_name: finalPreferredName,
-        yearsExperience: formData.yearsExperience,
-        birth_month: birthMonth,
-        birth_day: birthDay,
-        country: country === "Other" ? customCountry : country,
-        profile_img_url:
-          profileImageUrl || savedProfile?.profile_img_url || null,
-        linkedin: linkedin,
-        github: github,
-        blog: blog,
-        self_intro: formData.selfIntro || null,
-      });
+      return;
     }
+
+    // ✅ Success: update local state
+    setShowPopup(true);
+
+    setSavedProfile({
+      email: user.email,
+      first_name: firstName,
+      last_name: lastName,
+      preferred_name: finalPreferredName,
+      yearsExperience,
+      birth_month: birthMonth,
+      birth_day: birthDay,
+      country: country === "Other" ? customCountry : country,
+      profile_img_url: profileImageUrl,
+      linkedin,
+      github,
+      blog,
+      self_intro: selfIntro,
+    });
+
+    setFormData({
+      firstName,
+      lastName,
+      preferredName: finalPreferredName,
+      yearsExperience,
+      birthMonth,
+      birthDay,
+      country,
+      customCountry,
+      linkedin,
+      github,
+      blog,
+      selfIntro,
+    });
   };
 
-  //////// SHOW first name as Preferred name if it is Null.
+  //////// SHOW first name as Preferred name if it is Null
   const [savedProfile, setSavedProfile] = useState(null);
 
   useEffect(() => {
@@ -242,35 +244,36 @@ const Profile = () => {
         error: userError,
       } = await supabase.auth.getUser();
 
-      if (user && !userError) {
-        setEmail(user.email);
+      if (!user || userError) return;
 
-        const { data: profileData, error: profileError } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", user.id)
-          .single();
+      setEmail(user.email);
 
-        if (!profileError) {
-          setSavedProfile(profileData);
+      const { data: profileData, error: profileError } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
 
-          // Optional: pre-fill formData with saved data
-          setFormData((prev) => ({
-            ...prev,
-            firstName: profileData.first_name || "",
-            lastName: profileData.last_name || "",
-            preferredName: profileData.preferred_name || "",
-            yearsExperience: profileData.years_experience || "",
-            birthMonth: profileData.birth_month || "",
-            birthDay: profileData.birth_day || "",
-            country: profileData.country || "",
-            customCountry: profileData.custom_country || "",
-            linkedin: profileData.linkedin,
-            github: profileData.github,
-            blog: profileData.blog,
-            self_intro: profileData.selfIntro || null,
-          }));
-        }
+      if (profileError || !profileData) return;
+
+      setSavedProfile(profileData);
+
+      if (!hasLoadedProfile) {
+        setFormData({
+          firstName: profileData.first_name || "",
+          lastName: profileData.last_name || "",
+          preferredName: profileData.preferred_name || "",
+          yearsExperience: profileData.years_experience || "",
+          birthMonth: profileData.birth_month || "",
+          birthDay: profileData.birth_day || "",
+          country: profileData.country || "",
+          customCountry: profileData.custom_country || "",
+          linkedin: profileData.linkedin || "",
+          github: profileData.github || "",
+          blog: profileData.blog || "",
+          selfIntro: profileData.self_intro || "",
+        });
+        setHasLoadedProfile(true); // ✅ This prevents it from running again
       }
     };
 
@@ -340,20 +343,30 @@ const Profile = () => {
               name="firstName"
               label="First Name"
               placeholder="e.g., Sridevi"
+              required={true}
               value={formData.firstName}
               onChange={handleChange}
               maxLength={100}
+              error={errors.firstName}
             />
+            {errors.firstName && (
+              <p className="error-message">{errors.firstName}</p>
+            )}
 
             <TextInput
               id="lastName"
               name="lastName"
               label="Last Name"
               placeholder="e.g., Balla"
+              required={true}
               value={formData.lastName}
               onChange={handleChange}
               maxLength={50}
+              error={errors.lastName}
             />
+            {errors.lastName && (
+              <p className="error-message">{errors.lastName}</p>
+            )}
 
             <TextInput
               id="preferredName"
@@ -506,11 +519,7 @@ const Profile = () => {
               {errors.blog && <p className="error-msg">{errors.blog}</p>}
             </div>
 
-            <button
-              type="submit"
-              className="save-button"
-              onClick={handleSaveProfile}
-            >
+            <button type="submit" className="button" id="btn-profile">
               Save Profile
             </button>
           </form>

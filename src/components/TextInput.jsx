@@ -16,7 +16,7 @@ const TextInput = ({
   <div className="text-field">
     <label htmlFor={id}>
       {label}
-      {required && <span className="required"> *</span>}
+      {required && <span className="required"> * </span>}
     </label>
     <input
       type="text"
