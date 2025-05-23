@@ -13,7 +13,7 @@ const NumberInput = ({
   error,
 }) => {
   return (
-    <div className="form-group">
+    <div className="num-field">
       <label htmlFor={id}>{label}</label>
       <input
         type="number"
@@ -27,7 +27,7 @@ const NumberInput = ({
         step={step}
         className={error ? "error" : ""}
       />
-      {error && <p className="error-message">{error}</p>}
+      {error && <p className="error-msg">{error}</p>}
     </div>
   );
 };

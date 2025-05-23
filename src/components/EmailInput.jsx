@@ -11,7 +11,7 @@ const EmailInput = ({
   placeholder,
 }) => {
   return (
-    <div className="form-group">
+    <div className="email-field">
       <label htmlFor={name}>{label}</label>
       <input
         id={name}

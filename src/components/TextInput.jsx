@@ -13,7 +13,7 @@ const TextInput = ({
   minLength,
   maxLength,
 }) => (
-  <div className="form-group">
+  <div className="text-field">
     <label htmlFor={id}>
       {label}
       {required && <span className="required"> *</span>}

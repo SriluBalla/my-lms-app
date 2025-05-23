@@ -369,13 +369,13 @@ const Profile = () => {
         <section className="body__right">
           <h2>Your Profile</h2>
           <form>
-            <div className="form-group">
+            <div className="email-field">
               <p className="readonly-email">
                 Email: <b>{email} </b>{" "}
               </p>
             </div>
 
-            {/* <div className="form-group">
+            {/* <div className="image-field">
               <label htmlFor="profileImage">Upload Profile Image </label>
               <input
                 type="file"
@@ -398,7 +398,7 @@ const Profile = () => {
                 }}
               />
               {errors.profileImage && (
-                <p className="error-message">{errors.profileImage}</p>
+                <p className="error-msg">{errors.profileImage}</p>
               )}
             </div> */}
 
@@ -532,7 +532,7 @@ const Profile = () => {
             </p>
 
             <p>
-              <div className="form-group">
+              <div className="text-field">
                 <label htmlFor="linkedin">LinkedIn Profile</label>
                 <input
                   type="url"
@@ -547,11 +547,11 @@ const Profile = () => {
                   className={errors.linkedin ? "error" : ""}
                 />
                 {errors.linkedin && (
-                  <p className="error-message">{errors.linkedin}</p>
+                  <p className="error-msg">{errors.linkedin}</p>
                 )}
               </div>
 
-              <div className="form-group">
+              <div className="text-field">
                 <label htmlFor="github">Github Profile</label>
                 <input
                   type="url"
@@ -566,11 +566,11 @@ const Profile = () => {
                   className={errors.github ? "error" : ""}
                 />
                 {errors.github && (
-                  <p className="error-message">{errors.github}</p>
+                  <p className="error-msg">{errors.github}</p>
                 )}
               </div>
 
-              <div className="form-group">
+              <div className="text-field">
                 <label htmlFor="blog">Blog</label>
                 <input
                   type="url"
@@ -584,7 +584,7 @@ const Profile = () => {
                   required={false}
                   className={errors.blog ? "error" : ""}
                 />
-                {errors.blog && <p className="error-message">{errors.blog}</p>}
+                {errors.blog && <p className="error-msg">{errors.blog}</p>}
               </div>
             </p>
             <button

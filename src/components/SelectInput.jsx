@@ -12,7 +12,7 @@ const SelectInput = ({
   required = false,
 }) => {
   return (
-    <div className="form-group">
+    <div className="select-ddl">
       <label htmlFor={id}>{label}</label>
       <select
         id={id}
@@ -29,7 +29,7 @@ const SelectInput = ({
           </option>
         ))}
       </select>
-      {error && <p className="error-message">{error}</p>}
+      {error && <p className="error-msg">{error}</p>}
     </div>
   );
 };

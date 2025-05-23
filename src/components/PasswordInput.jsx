@@ -13,7 +13,7 @@ const PasswordInput = ({
   const [showPassword, setShowPassword] = useState(true);
 
   return (
-    <div className="form-group">
+    <div className="password-field">
       <label htmlFor={name}>{label}</label>
       <input
         id={name}

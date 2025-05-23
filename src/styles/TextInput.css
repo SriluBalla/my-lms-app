@@ -1,14 +1,24 @@
-.text-field,
-.form-group {
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 0.3rem;
-  
+input
+{
+  width: 90%;
+  padding: 8px;
+  font-size: 1.1rem;
+  border: 1px solid #073c53;
+  border-radius: 5px;
 }
 
-.text-field label,
-.form-group label {
+.input-error {
+  border-color: red;
+  border: 1px solid red;
+  background: #fff5f5;
+}
+
+label
+ {
   display: block;
+  font-size: 1.1rem;
+    font-weight: bold;
+
 }
 
 .required {
@@ -16,32 +26,14 @@
   margin-left: 0.25rem;
 }
 
-.text-field input,
-.form-group input {
-  width: 90%;
-  padding: 8px;
-  font-size: 1rem;
-  border: 1px solid #073c53;
-  border-radius: 4px;
-}
-
-.input-error {
-  border-color: red;
-}
-
-.error-message {
+.error-msg {
   color: red;
   font-size: 0.85rem;
   margin-top: 0.25rem;
 }
 
-
 .custom-country-input {
 padding: 2rem;
-}
-
-.error-msg {
-    color: red;
 }
 
 select {
@@ -72,7 +64,7 @@ select {
 }
 
 .password-rules li.invalid {
-  color: rgb(13, 1, 1);
+  color: rgb(37, 2, 2);
   font-weight: bold;
 }
 
@@ -92,14 +84,4 @@ select {
   margin-top: 4px;
 }
 
-.error-message {
-  color: red;
-  font-size: 0.85rem;
-  margin-top: 4px;
-}
-
-input.error {
-  border: 1px solid red;
-  background: #fff5f5;
-}
 
