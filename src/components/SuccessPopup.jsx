@@ -1,5 +1,6 @@
-// components/SuccessPopup.jsx
 import React, { useEffect } from "react";
+import "../styles/PopUp.css";
+
 
 const SuccessPopup = ({ message, onClose }) => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const SuccessPopup = ({ message, onClose }) => {
   if (!message) return null;
 
   return (
-    <div className="success-popup">
+    <div className="F">
       <span>{message}</span>
       <button className="close-button" onClick={onClose}>×</button>
     </div>

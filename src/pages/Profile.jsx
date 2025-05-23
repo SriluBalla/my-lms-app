@@ -148,7 +148,6 @@ const Profile = () => {
         type: "error",
         text: "Image must be under 5MB.",
       });
-      setTimeout(() => setMessage({ type: "", text: "" }), 2000);
 
       return;
     }
@@ -189,13 +188,13 @@ const Profile = () => {
       {
         id: user.id,
         email: user.email,
-        first_name: firstName,
-        last_name: lastName,
-        preferred_name: finalPreferredName,
+        first_name: firstName || null,
+        last_name: lastName || null,
+        preferred_name: finalPreferredName || null,
         years_experience: formData.yearsExperience || null,
-        birth_month: birthMonth,
-        birth_day: birthDay,
-        country: country === "Other" ? customCountry : country,
+        birth_month: formData.birthMonth || null,
+        birth_day: formData.birthDay || null,
+        country: country === "Other" ? customCountry : country || null,
         profile_img_url:
           profileImageUrl || savedProfile?.profile_img_url || null,
         linkedin: linkedinUrl || null,
@@ -211,7 +210,6 @@ const Profile = () => {
         type: "error",
         text: "Something went wrong while saving your profile.",
       });
-      setTimeout(() => setMessage({ type: "", text: "" }), 2000);
     } else {
       setShowPopup(true);
 
@@ -416,6 +414,9 @@ const Profile = () => {
                 ]}
                 placeholder="Month"
               />
+              {errors.birthDay && (
+                <p className="error-message">{errors.birthDay}</p>
+              )}
 
               <select
                 id="birthDay"
