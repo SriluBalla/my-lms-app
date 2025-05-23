@@ -84,3 +84,22 @@ select {
   cursor: pointer;
   margin-left: 8px;
 }
+
+.char-count {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+input.error {
+  border: 1px solid red;
+  background: #fff5f5;
+}
+
