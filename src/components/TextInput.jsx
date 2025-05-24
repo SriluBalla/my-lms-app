@@ -14,7 +14,7 @@ const TextInput = ({
   maxLength,
 }) => (
   <div className="text-field">
-    <label htmlFor={id}>
+    <label htmlFor={name}>
       {label}
       {required && <span className="required"> * </span>}
     </label>

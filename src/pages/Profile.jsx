@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Layout from "../components/Layout";
-import { supabase } from "../supabaseDB";
-import TextInput from "../components/TextInput";
-import TextAreaInput from "../components/TextArea";
-import NumberInput from "../components/NumberInput";
-import SuccessPopup from "../components/SuccessPopup";
-import SelectInput from "../components/SelectInput";
-import SavedProfileCard from "../components/ProfileSummary";
+// Fixed version of Not_Saving_Profile.jsx using the working logic
 
+import React, { useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import TextInput from "../components/TextInput";
+import NumberInput from "../components/NumberInput";
+import TextAreaInput from "../components/TextArea";
+import SelectInput from "../components/SelectInput";
+import SuccessPopup from "../components/SuccessPopup";
+import SavedProfileCard from "../components/ProfileSummary";
+import { supabase } from "../supabaseDB";
 import "../styles/main.css";
 
 const Profile = () => {
@@ -26,50 +27,56 @@ const Profile = () => {
     selfIntro: "",
   });
 
-  const [hasLoadedProfile, setHasLoadedProfile] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
+  const [savedProfile, setSavedProfile] = useState(null);
+  const [email, setEmail] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [errors, setErrors] = useState({});
 
-  // Email field displays the email text
-  const [email, setEmail] = useState("");
-
   useEffect(() => {
-    const fetchEmail = async () => {
+    const fetchProfile = async () => {
       const {
         data: { user },
-        error,
+        error: userError,
       } = await supabase.auth.getUser();
 
-      if (user && !error) {
-        setEmail(user.email);
+      if (!user || userError) return;
+
+      setEmail(user.email);
+
+      const { data: profileData, error: profileError } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      if (!profileError && profileData && profileData.first_name) {
+        setSavedProfile(profileData);
+        setFormData({
+          firstName: profileData.first_name || "",
+          lastName: profileData.last_name || "",
+          preferredName: profileData.preferred_name || "",
+          yearsExperience: profileData.years_experience || "",
+          birthMonth: profileData.birth_month || "",
+          birthDay: profileData.birth_day || "",
+          country: profileData.country || "",
+          customCountry: profileData.custom_country || "",
+          linkedin: profileData.linkedin || "",
+          github: profileData.github || "",
+          blog: profileData.blog || "",
+          selfIntro: profileData.self_intro || "",
+        });
       }
     };
 
-    fetchEmail();
+    fetchProfile();
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  //////// ddl Country
-  const handleCountryChange = (e) => {
-    const { value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      country: value,
-      customCountry: "", // Clear customCountry if not "Other"
-    }));
-  };
-
-  ////// Member Photos
-  const [profileImage, setProfileImage] = useState(null);
-
-  // SAVE data entered in the Profile
   const handleSaveProfile = async (e) => {
     e.preventDefault();
 
@@ -93,49 +100,36 @@ const Profile = () => {
       error: userError,
     } = await supabase.auth.getUser();
 
-    if (userError || !user) {
-      setErrors({ type: "error", text: "User not authenticated" });
+    if (!user || userError) {
+      setErrors({ general: "User not authenticated" });
       return;
     }
 
-    // 🔍 Validation
     const newErrors = {};
 
-    if (!firstName) newErrors.firstName = "Please provide your first name.";
-    if (!lastName) newErrors.lastName = "Please provide your last name.";
-
     if (
-      linkedin?.trim() &&
-      !/^https?:\/\/(www\.)?linkedin\.com\/.+/.test(linkedin)
-    )
-      newErrors.linkedin = "Please enter a valid LinkedIn URL.";
-
-    if (
-      github?.trim() &&
-      !/^https?:\/\/(www\.)?github\.com\/[A-Za-z0-9_-]+\/?$/.test(github)
-    )
-      newErrors.github = "Please enter a valid GitHub URL.";
-
-    if (blog?.trim()) {
-      try {
-        new URL(blog);
-      } catch {
-        newErrors.blog = "Please enter a valid blog URL.";
-      }
+      formData.linkedin?.trim() &&
+      !/^https?:\/\/(www\.)?linkedin\.com\/.+/.test(formData.linkedin)
+    ) {
+      newErrors.linkedin =
+        "Please enter a valid LinkedIn URL (e.g., https://linkedin.com/in/yourname)";
     }
 
-    const yearsExp = String(yearsExperience || "").trim();
-    if (yearsExp && (isNaN(yearsExp) || yearsExp < 0 || yearsExp > 60))
-      newErrors.yearsExperience = "Please enter a number between 0 and 60.";
+    if (
+      formData.github?.trim() &&
+      !/^https?:\/\/(www\.)?github\.com\/[A-Za-z0-9_-]+\/?$/.test(
+        formData.github
+      )
+    ) {
+      newErrors.github =
+        "Please enter a valid GitHub URL (e.g., https://github.com/your-username)";
+    }
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+      setErrors(newErrors); // ✅ this updates the UI
       return;
-    } else {
-      setErrors({});
     }
 
-    // 📸 Image upload (optional)
     let profileImageUrl = "";
     if (profileImage) {
       if (profileImage.size > 5 * 1024 * 1024) {
@@ -155,20 +149,19 @@ const Profile = () => {
         });
 
       if (uploadError) {
-        setErrors({
-          profileImage: `Image upload failed: ${uploadError.message}`,
-        });
+        setErrors({ profileImage: `Upload failed: ${uploadError.message}` });
         return;
       }
 
       const { data: urlData } = supabase.storage
         .from("profile-pictures")
         .getPublicUrl(filePath);
-
       profileImageUrl = urlData?.publicUrl || "";
     }
 
-    // 📝 Upsert to Supabase
+    const yearsExp = String(yearsExperience || "").trim();
+    const parsedYears = isNaN(Number(yearsExp)) ? null : Number(yearsExp);
+    const parsedBirthDay = birthDay ? parseInt(birthDay) : null;
     const finalPreferredName = preferredName?.trim() || firstName;
 
     const { error } = await supabase.from("profiles").upsert([
@@ -178,9 +171,9 @@ const Profile = () => {
         first_name: firstName,
         last_name: lastName,
         preferred_name: finalPreferredName,
-        years_experience: yearsExperience || null,
+        years_experience: parsedYears,
         birth_month: birthMonth || null,
-        birth_day: birthDay || null,
+        birth_day: parsedBirthDay,
         country: country === "Other" ? customCountry : country || null,
         profile_img_url: profileImageUrl || null,
         linkedin: linkedin?.trim() || null,
@@ -191,98 +184,16 @@ const Profile = () => {
     ]);
 
     if (error) {
-      console.error("Error saving profile:", error);
-      setErrors({
-        type: "error",
-        text: "Something went wrong while saving your profile.",
-      });
+      console.error("❌ Supabase Save Error:", error);
+      alert(`Error saving profile: ${error.message}`);
       return;
     }
 
-    // ✅ Success: update local state
     setShowPopup(true);
-
-    setSavedProfile({
-      email: user.email,
-      first_name: firstName,
-      last_name: lastName,
-      preferred_name: finalPreferredName,
-      yearsExperience,
-      birth_month: birthMonth,
-      birth_day: birthDay,
-      country: country === "Other" ? customCountry : country,
-      profile_img_url: profileImageUrl,
-      linkedin,
-      github,
-      blog,
-      self_intro: selfIntro,
-    });
-
-    setFormData({
-      firstName,
-      lastName,
-      preferredName: finalPreferredName,
-      yearsExperience,
-      birthMonth,
-      birthDay,
-      country,
-      customCountry,
-      linkedin,
-      github,
-      blog,
-      selfIntro,
-    });
   };
 
-  //////// SHOW first name as Preferred name if it is Null
-  const [savedProfile, setSavedProfile] = useState(null);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
-
-      if (!user || userError) return;
-
-      setEmail(user.email);
-
-      const { data: profileData, error: profileError } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
-
-      if (profileError || !profileData) return;
-
-      setSavedProfile(profileData);
-
-      if (!hasLoadedProfile) {
-        setFormData({
-          firstName: profileData.first_name || "",
-          lastName: profileData.last_name || "",
-          preferredName: profileData.preferred_name || "",
-          yearsExperience: profileData.years_experience || "",
-          birthMonth: profileData.birth_month || "",
-          birthDay: profileData.birth_day || "",
-          country: profileData.country || "",
-          customCountry: profileData.custom_country || "",
-          linkedin: profileData.linkedin || "",
-          github: profileData.github || "",
-          blog: profileData.blog || "",
-          selfIntro: profileData.self_intro || "",
-        });
-        setHasLoadedProfile(true); // ✅ This prevents it from running again
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
-  ////// PROFILE PAGE
   return (
-    <Layout title="Profile" description="Your Profile">
+    <Layout title="Profile" description="Manage your profile">
       <div className="body__outline">
         <section className="hero__head">
           <h2>Welcome to Your Profile</h2>
@@ -301,72 +212,38 @@ const Profile = () => {
           </section>
         )}
 
-        {/* Editable fields */}
-        <section className="body__right">
+        <div className="body__right">
           <h2>Your Profile</h2>
-          <form>
-            <div className="email-field">
-              <p className="readonly-email">
-                Email: <b>{email} </b>{" "}
-              </p>
-            </div>
 
-            {/* <div className="image-field">
-              <label htmlFor="profileImage">Upload Profile Image </label>
-              <input
-                type="file"
-                id="profileImage"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (!file) return;
+          <div className="email-field">
+            <p className="readonly-email">
+              Email: <b>{email} </b>{" "}
+            </p>
+          </div>
 
-                  if (file.size > 1 * 1024 * 1024) {
-                    setErrors((prev) => ({
-                      ...prev,
-                      profileImage: "Image must be smaller than 1MB.",
-                    }));
-                    setProfileImage(null);
-                  } else {
-                    setErrors((prev) => ({ ...prev, profileImage: null }));
-                    setProfileImage(file);
-                  }
-                }}
-              />
-              {errors.profileImage && (
-                <p className="error-msg">{errors.profileImage}</p>
-              )}
-            </div> */}
-
+          <form onSubmit={handleSaveProfile}>
             <TextInput
               id="firstName"
               name="firstName"
               label="First Name"
               placeholder="e.g., Sridevi"
-              required={true}
               value={formData.firstName}
               onChange={handleChange}
               maxLength={100}
+              required={true}
               error={errors.firstName}
             />
-            {errors.firstName && (
-              <p className="error-message">{errors.firstName}</p>
-            )}
-
             <TextInput
               id="lastName"
               name="lastName"
               label="Last Name"
               placeholder="e.g., Balla"
-              required={true}
               value={formData.lastName}
               onChange={handleChange}
-              maxLength={50}
+              maxLength={100}
+              required={true}
               error={errors.lastName}
             />
-            {errors.lastName && (
-              <p className="error-message">{errors.lastName}</p>
-            )}
 
             <TextInput
               id="preferredName"
@@ -376,18 +253,20 @@ const Profile = () => {
               value={formData.preferredName}
               onChange={handleChange}
               maxLength={50}
+              required={false}
+              error={errors.preferredName}
             />
 
             <NumberInput
               id="yearsExperience"
               name="yearsExperience"
-              label="No. of years in IT "
+              label="No. of years in IT"
               placeholder="e.g., 5"
               value={formData.yearsExperience}
               onChange={handleChange}
               min={0}
               max={60}
-              step={1}
+              required={false}
               error={errors.yearsExperience}
             />
             <em>(as Dev, QA, SDET, DevOps, etc.)</em>
@@ -396,11 +275,11 @@ const Profile = () => {
               id="selfIntro"
               name="selfIntro"
               label="Self Introduction"
-              placeholder="Write a short introduction about yourself..."
+              placeholder="What would like for your community to know about you...."
               value={formData.selfIntro}
               onChange={handleChange}
-              maxLength={2000}
-              rows={12}
+              maxLength={1000}
+              required={false}
               error={errors.selfIntro}
             />
 
@@ -425,11 +304,10 @@ const Profile = () => {
                   "November",
                   "December",
                 ]}
-                placeholder="Month"
+                placeholder="-- Month --"
+                required={true}
+                error={errors.birthMonth}
               />
-              {errors.birthDay && (
-                <p className="error-message">{errors.birthDay}</p>
-              )}
 
               <select
                 id="birthDay"
@@ -446,12 +324,25 @@ const Profile = () => {
               </select>
             </span>
 
+            {showPopup && (
+              <SuccessPopup
+                message={
+                  <>
+                    Your profile has been saved successfully!
+                    <br />
+                  <b>  Refresh the page to view your public profile. </b>
+                  </>
+                }
+                onClose={() => setShowPopup(false)}
+              />
+            )}
+
             <SelectInput
               id="country"
               name="country"
               label="Country of Residence"
               value={formData.country}
-              onChange={handleCountryChange}
+              onChange={handleChange}
               options={[
                 "USA",
                 "Canada",
@@ -460,76 +351,44 @@ const Profile = () => {
                 "China",
                 "Japan",
                 "Africa",
-                "Other",
               ]}
-              placeholder="-- Select Country --"
+              placeholder="-- Country --"
               error={errors.country}
             />
 
-            <div className="text-field">
-              <label htmlFor="linkedin">LinkedIn Profile</label>
-              <input
-                type="url"
-                id="linkedin"
-                name="linkedin"
-                placeholder="https://www.linkedin.com/in/your-name"
-                value={formData.linkedin || ""}
-                onChange={handleChange}
-                maxLength={100}
-                title="Only valid LinkedIn URLs are allowed"
-                required={false}
-                className={errors.linkedin ? "error" : ""}
-              />
-              {errors.linkedin && (
-                <p className="error-msg">{errors.linkedin}</p>
-              )}
-            </div>
+            <TextInput
+              id="linkedin"
+              name="linkedin"
+              label="LinkedIn Profile"
+              placeholder="https://www.linkedin.com/in/your-name"
+              title="Only valid LinkedIn URLs are allowed"
+              value={formData.linkedin}
+              onChange={handleChange}
+              maxLength={100}
+              required={false}
+              className={errors.linkedin ? "error" : ""}
+            />
+            {errors.linkedin && <p className="error-msg">{errors.linkedin}</p>}
 
-            <div className="text-field">
-              <label htmlFor="github">Github Profile</label>
-              <input
-                type="url"
-                id="github"
-                name="github"
-                placeholder="https://github.com/your-name"
-                value={formData.github || ""}
-                onChange={handleChange}
-                maxLength={100}
-                title="Only valid Github URLs are allowed"
-                required={false}
-                className={errors.github ? "error" : ""}
-              />
-              {errors.github && <p className="error-msg">{errors.github}</p>}
-            </div>
+            <TextInput
+              id="github"
+              name="github"
+              label="GitHub Profile"
+              placeholder="https://github.com/your-name"
+              title="Only valid GitHub URLs are allowed"
+              value={formData.github}
+              onChange={handleChange}
+              maxLength={100}
+              required={false}
+              className={errors.github ? "error" : ""}
+            />
+            {errors.github && <p className="error-msg">{errors.github}</p>}
 
-            <div className="text-field">
-              <label htmlFor="blog">Blog</label>
-              <input
-                type="url"
-                id="blog"
-                name="blog"
-                placeholder="https://mylegitblog.com"
-                value={formData.blog || ""}
-                onChange={handleChange}
-                maxLength={100}
-                title="Only valid Github URLs are allowed"
-                required={false}
-                className={errors.blog ? "error" : ""}
-              />
-              {errors.blog && <p className="error-msg">{errors.blog}</p>}
-            </div>
-
-            <button type="submit" className="button" id="btn-profile">
+            <button type="submit" className="save-button">
               Save Profile
             </button>
           </form>
-          {showPopup && (
-            <SuccessPopup
-              message="Your profile has been saved successfully!"
-              onClose={() => setShowPopup(false)}
-            />
-          )}
-        </section>
+        </div>
       </div>
     </Layout>
   );

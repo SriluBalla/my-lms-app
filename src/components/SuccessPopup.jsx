@@ -6,14 +6,14 @@ const SuccessPopup = ({ message, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 2000); // auto-close after 2 seconds
+    }, 3000); // auto-close after 2 seconds
     return () => clearTimeout(timer);
   }, [onClose]);
 
   if (!message) return null;
 
   return (
-    <div className="F">
+    <div className="success-popup">
       <span>{message}</span>
       <button className="close-button" onClick={onClose}>×</button>
     </div>

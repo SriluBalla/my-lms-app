@@ -64,7 +64,7 @@ const Register = () => {
       email: normalizedEmail,
       password: formData.password,
       options: {
-        emailRedirectTo: "https://sriluballa.github.io/my-lms-app/profile",
+        emailRedirectTo: "https://sriluballa.github.io/my-lms-app/",
       },
     });
 

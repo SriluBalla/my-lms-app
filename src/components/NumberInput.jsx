@@ -14,7 +14,7 @@ const NumberInput = ({
 }) => {
   return (
     <div className="num-label">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <input
         type="number"
         id="numField"

@@ -13,7 +13,7 @@ const TextAreaInput = ({
 }) => {
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <textarea
         id="text-area"
         name={name}
