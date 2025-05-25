@@ -1,15 +1,8 @@
-
 img {
   width: 100%;
   height: auto;
   border-radius: 8px;
   position: sticky;
-}
-
-.why-image {
-  width: 500px;
-  height: auto;
-  overflow: hidden;
 }
 
 .image-caption {
@@ -19,11 +12,26 @@ img {
   text-align: center;
 }
 
+.drop-zone {
+  border-color: #045542;
+  border-radius: 8px;
+  border-width: 5px;
+}
+
+.drop-zone button {
+  
+}
+
+.why-image {
+  width: 500px;
+  height: auto;
+  overflow: hidden;
+}
+
 img:hover {
   /* -webkit-transform:scale(1.5);  */
   /* transform:scale(1.5); */
 }
-
 
 /* PHOTOs */
 .profile-image-preview img {

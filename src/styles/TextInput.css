@@ -4,7 +4,7 @@ password-field
 email-field
 */
 
-*{
+* {
   border-radius: 5px;
 }
 .custom-country-input {
@@ -12,7 +12,6 @@ email-field
 }
 
 .ddl-select {
-  
 }
 
 .ddl-group {
@@ -31,8 +30,13 @@ em {
   margin-top: 0.5rem;
 }
 
-.group-links{
+.group-links {
+}
 
+.role-display {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  font-size: 1rem;
 }
 
 input {
@@ -61,8 +65,7 @@ label {
   margin-bottom: 0.5rem;
 }
 
-
-#numField{
+#numField {
   width: 30%;
   margin-bottom: 5px;
 }
@@ -101,7 +104,7 @@ select {
   margin-top: 0.5rem;
 }
 
-#text-area{
+#text-area {
   width: 90%;
   padding: 8px;
   font-size: 1.1rem;

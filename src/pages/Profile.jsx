@@ -217,7 +217,6 @@ const Profile = () => {
             <ProfileImageUploader
               userId={user.id}
               onUpload={(url) => setProfileImageUrl(url)}
-              
             />
           )}
 

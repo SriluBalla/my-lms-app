@@ -77,29 +77,61 @@ const ProfileImageUploader = ({ userId, onUpload }) => {
     }
 
     setUploadStatus("success");
-    setUploadMessage("Image uploaded and saved successfully!");
+    setUploadMessage("Image uploaded and saved successfully! If you are replacing and image, please hard refresh the page to see the new image");
     setIsUploading(false);
     onUpload(publicUrl);
   };
 
   return (
-    <div className="form-group">
-      <label htmlFor="profileImage">Upload Profile Image</label>
-      <input
-        type="file"
-        id="profileImage"
-        accept="image/*"
-        onChange={(e) => setProfileImage(e.target.files[0])}
-      />
-      <button type="button" onClick={handleUpload} disabled={isUploading} className="button">
-        {isUploading ? "Uploading..." : "Upload"}
-      </button>
-      {uploadMessage && (
-        <p className={uploadStatus === "success" ? "success-msg" : "error-msg"}>
-          {uploadMessage}
-        </p>
-      )}
-    </div>
+
+    <div
+  onDragOver={(e) => e.preventDefault()}
+  onDrop={(e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      setProfileImage(file);
+    }
+  }}
+  className="drop-zone"
+  style={{
+    border: "2px dashed #aaa",
+    padding: "1rem",
+    textAlign: "center",
+    borderRadius: "0.5rem",
+    marginBottom: "1rem",
+  }}
+>
+  <p>Drag and drop an image here, or click below to select a file</p>
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => setProfileImage(e.target.files[0])}
+  />
+  {profileImage && (
+  <div style={{ marginTop: "1rem" }}>
+    <img
+      src={URL.createObjectURL(profileImage)}
+      alt="Preview"
+      style={{ maxWidth: "150px", borderRadius: "0.5rem" }}
+    />
+
+    <button type="button" onClick={handleUpload} disabled={isUploading} className="button">
+         {isUploading ? "Uploading..." : "Upload"}
+       </button>
+       {uploadMessage && (
+         <p className={uploadStatus === "success" ? "success-msg" : "error-msg"}>
+           {uploadMessage}
+         </p>
+       )}
+  </div>
+      
+)}
+
+</div>
+
+
+
   );
 };
 
