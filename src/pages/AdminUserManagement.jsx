@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseDB";
 import Layout from "../components/Layout";
+import SavedProfileCard from "../components/ProfileCard";
 
 const AdminUserManager = () => {
   const [users, setUsers] = useState([]);
@@ -37,28 +38,56 @@ const AdminUserManager = () => {
     fetchUsers();
   }, []);
 
- const updateUserRole = async (userId, roleKey) => {
-  const roleId = ROLE_IDS[roleKey];
-
-  const { error } = await supabase
-    .from("user_role_assignments")
-    .upsert([{ user_id: userId, role_id: roleId }], { onConflict: ['user_id'] });
-
-  console.log("Role assigned:", { userId, roleKey, roleId });
-
-  if (error) {
-    alert(`Error assigning role: ${error.message}`);
-  } else {
-    alert(`Assigned ${roleKey} role successfully`);
-
-    setUsers((prev) =>
-      prev.map((user) =>
-        user.user_id === userId ? { ...user, role: roleKey } : user
-      )
+  const isProfileRelevant = (user) => {
+    return (
+      user.first_name ||
+      user.last_name ||
+      user.preferred_name ||
+      user.self_intro ||
+      user.profile_img_url
     );
-  }
-};
+  };
 
+  const updateUserRole = async (userId, roleKey) => {
+    const roleId = ROLE_IDS[roleKey];
+
+    const { error } = await supabase
+      .from("user_role_assignments")
+      .upsert([{ user_id: userId, role_id: roleId }], {
+        onConflict: ["user_id"],
+      });
+
+    console.log("Role assigned:", { userId, roleKey, roleId });
+
+    if (error) {
+      alert(`Error assigning role: ${error.message}`);
+    } else {
+      alert(`Assigned ${roleKey} role successfully`);
+
+      setUsers((prev) =>
+        prev.map((user) =>
+          user.user_id === userId ? { ...user, role: roleKey } : user
+        )
+      );
+    }
+  };
+
+  const updateProfileStatus = async (userId, status) => {
+    const { error } = await supabase
+      .from("profiles")
+      .update({ profile_status: status })
+      .eq("id", userId);
+
+    if (error) {
+      alert(`Error updating profile status: ${error.message}`);
+    } else {
+      setUsers((prev) =>
+        prev.map((user) =>
+          user.user_id === userId ? { ...user, profile_status: status } : user
+        )
+      );
+    }
+  };
 
   return (
     <Layout title="User Management" description="Manage user roles">
@@ -70,7 +99,7 @@ const AdminUserManager = () => {
           </p>
         </section>
 
-        <section className="heroOne">
+        <section className="heroOne user-management">
           {loading && <p>Loading users...</p>}
           {error && <p className="error">{error}</p>}
 
@@ -78,38 +107,62 @@ const AdminUserManager = () => {
             <table className="user-table">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Set Role</th>
-                  <th>Country</th>
-                  <th>Joined</th>
+                  <th className="card user-profile">Profile Updated</th>
+                  <th className="btn-approve">Approve</th>
+                  <th className="btn-set-role">Set Role</th>
                 </tr>
               </thead>
-              <tbody className="comparison-table">
+              <tbody className="table">
                 {users.map((user) => (
                   <tr key={user.user_id}>
                     <td>
-                      {user.first_name} {user.last_name}
+                      {isProfileRelevant(user) && (
+                        <SavedProfileCard profile={user} />
+                      )}
                     </td>
-                    <td>{user.email}</td>
-                    <td>{user.role}</td>
+                    <td>
+                      <textarea id = "text-area"
+                        placeholder="Reason for flagging..."
+                        value={user.flagNote || ""}
+                        onChange={(e) =>
+                          setUsers((prev) =>
+                            prev.map((u) =>
+                              u.user_id === user.user_id
+                                ? { ...u, flagNote: e.target.value }
+                                : u
+                            )
+                          )
+                        }
+                        rows={3}
+                        className="flag-note-input"
+                      />
+                      <button
+                        className="button flagged"
+                        onClick={() =>
+                          handleFlagUser(user.user_id, user.flagNote)
+                        }
+                      >
+                        🚫 Flag
+                      </button>
+                      <button
+                        className="button approve"
+                        onClick={() =>
+                          updateProfileStatus(user.user_id, "approved")
+                        }
+                      >
+                        ✅ Approve
+                      </button>
+                    </td>
                     <td>
                       {Object.keys(ROLE_IDS).map((role) => (
                         <button
                           key={role}
                           onClick={() => updateUserRole(user.user_id, role)}
-                          className="small-button"
+                          className={`button ${role}`}
                         >
-                          {role}
+                          {role.toUpperCase()}
                         </button>
                       ))}
-                    </td>
-                    <td>{user.country || "—"}</td>
-                    <td>
-                      {user.created_at
-                        ? new Date(user.created_at).toLocaleDateString()
-                        : "—"}
                     </td>
                   </tr>
                 ))}

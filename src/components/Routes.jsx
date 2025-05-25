@@ -6,6 +6,7 @@ import Why from "../pages/Why.jsx";
 import Login from "../pages/Login.jsx";
 import Register from "../pages/Register.jsx";
 import Profile from "../pages/Profile.jsx";
+import MemberProfiles from "../pages/MemberProfiles.jsx";
 import Red_Acknowledment from "../pages/Red_Ack.jsx";
 import AdminUserManager from "../pages/AdminUserManagement.jsx";
 
@@ -31,22 +32,6 @@ const routes = [
     element: <Register />,
   },
   {
-    path: "/profile",
-    element: (
-      <ProtectedRoute>
-        <Profile />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/admin-user-manager",
-    element: (
-      <ProtectedRoute allowedRoles={["admin", "superadmin", "user"]}>
-        <AdminUserManager />
-      </ProtectedRoute>
-    ),
-  },
-  {
     path: "/why/*",
     element: <Why />,
   },
@@ -54,6 +39,31 @@ const routes = [
     path: "/*",
     element: <NotFound />,
   },
+  {
+    path: "/profile",
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "superadmin", "user", "member", "lead"]}>
+        <Profile />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/member-profiles",
+    element: (
+    <ProtectedRoute allowedRoles={["admin", "superadmin", "user", "member", "lead"]}>
+        <MemberProfiles />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/admin-user-manager",
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "superadmin", "user", "member", "lead"]}>
+        <AdminUserManager />
+      </ProtectedRoute>
+    ),
+  },
+  
 ];
 
 export default routes;

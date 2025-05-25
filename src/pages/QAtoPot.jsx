@@ -18,7 +18,7 @@ const QAtoPOT = () => {
 
 <section className="heroOne">
   <h3>Key Differences Between POT and QA</h3>
-  <table className="comparison-table">
+  <table className="table">
     <thead>
       <tr>
         <th>Aspect</th>

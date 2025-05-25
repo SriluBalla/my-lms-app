@@ -1,31 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { supabase } from "../supabaseDB";
+import React, { useState } from "react";
 
-const SavedProfileCard = () => {
-  const [profile, setProfile] = useState(null);
+const SavedProfileCard = ({ profile }) => {
   const [showFullIntro, setShowFullIntro] = useState(false);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (user) {
-        const { data: profileData, error } = await supabase
-          .from("user_admin_view")
-          .select("*")
-          .eq("user_id", user.id)
-          .single();
-
-        if (profileData && !error) {
-          setProfile(profileData);
-        }
-      }
-    };
-
-    fetchProfile();
-  }, []);
 
   if (!profile) return null;
 
@@ -54,8 +30,6 @@ const SavedProfileCard = () => {
     self_intro,
     years_experience,
   } = profile;
-
-  console.log("Profile image URL:", profile.profile_img_url);
 
   return (
     <section>

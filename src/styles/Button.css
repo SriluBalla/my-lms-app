@@ -14,7 +14,47 @@
   text-decoration: none;
   transition: background 0.3s ease-in-out;
   width: auto;
-  white-space:nowrap;
+  white-space: nowrap;
+}
+
+.button.admin {
+  background: linear-gradient(to top, #ce205a, #d06f8e);
+  font-size: .8rem;
+  padding: 4px 8px;
+}
+
+.button.approve {
+  background: linear-gradient(to top, #08be54, #7fe9a4);
+  font-size: 1rem;
+  padding: 4px 8px;
+}
+.button.flagged {
+  background: linear-gradient(to top, #ea3c3c, #d06f8e);
+  font-size: 1rem;
+  padding: 4px 8px;
+}
+
+.button.leader {
+  background: linear-gradient(to top, #ce20c8, #e48ae1);
+  font-size: .8rem;
+  padding: 4px 8px;
+}
+
+.button.member {
+  background: linear-gradient(to top, #0b632b, #8be7ad);
+  font-size: .8rem;
+  padding: 4px 8px;
+}
+
+.button.superadmin {
+  display: none;
+  font-size: .8rem;
+  padding: 4px 8px;
+}
+
+.button.user {
+  font-size: .8rem;
+  padding: 4px 8px;
 }
 
 .button:hover {
@@ -24,7 +64,7 @@
 }
 
 .save-button {
-  background:  white;
+  background: white;
 }
 
 .left-btn {
@@ -37,4 +77,3 @@
 .right-btn {
   text-align: right;
 }
-

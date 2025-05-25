@@ -5,7 +5,7 @@ import NumberInput from "../components/NumberInput";
 import TextAreaInput from "../components/TextArea";
 import SelectInput from "../components/SelectInput";
 import SuccessPopup from "../components/SuccessPopup";
-import SavedProfileCard from "../components/ProfileSummary";
+import SavedProfileCard from "../components/ProfileCard";
 import UserRole from "../components/UserRole";
 import ProfileImageUploader from "../components/ImageUploader";
 import { supabase } from "../supabaseDB";
