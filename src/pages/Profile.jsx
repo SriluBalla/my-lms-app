@@ -305,7 +305,7 @@ const Profile = () => {
                   "December",
                 ]}
                 placeholder="-- Month --"
-                required={true}
+                required={false}
                 error={errors.birthMonth}
               />
 
@@ -384,7 +384,7 @@ const Profile = () => {
             />
             {errors.github && <p className="error-msg">{errors.github}</p>}
 
-            <button type="submit" className="save-button">
+            <button type="submit" className="button">
               Save Profile
             </button>
           </form>
