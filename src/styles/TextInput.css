@@ -28,7 +28,7 @@ em {
 .error-msg {
   color: red;
   font-size: 1rem;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
 .group-links{
@@ -93,6 +93,12 @@ select {
   font-size: 1.1rem;
   height: auto;
   padding: 8px;
+}
+
+.success-msg {
+  color: green;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
 #text-area{

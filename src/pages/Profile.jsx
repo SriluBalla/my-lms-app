@@ -1,5 +1,3 @@
-// Fixed version of Not_Saving_Profile.jsx using the working logic
-
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import TextInput from "../components/TextInput";
@@ -8,6 +6,8 @@ import TextAreaInput from "../components/TextArea";
 import SelectInput from "../components/SelectInput";
 import SuccessPopup from "../components/SuccessPopup";
 import SavedProfileCard from "../components/ProfileSummary";
+import UserRole from "../components/UserRole";
+import ProfileImageUploader from "../components/ImageUploader";
 import { supabase } from "../supabaseDB";
 import "../styles/main.css";
 
@@ -16,6 +16,7 @@ const Profile = () => {
     firstName: "",
     lastName: "",
     preferredName: "",
+    role: "",
     yearsExperience: "",
     birthMonth: "",
     birthDay: "",
@@ -27,11 +28,24 @@ const Profile = () => {
     selfIntro: "",
   });
 
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImageUrl, setProfileImageUrl] = useState("");
+  const [uploadError, setUploadError] = useState("");
   const [savedProfile, setSavedProfile] = useState(null);
   const [email, setEmail] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [errors, setErrors] = useState({});
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) setUser(user);
+    };
+
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -45,9 +59,9 @@ const Profile = () => {
       setEmail(user.email);
 
       const { data: profileData, error: profileError } = await supabase
-        .from("profiles")
+        .from("user_admin_view")
         .select("*")
-        .eq("id", user.id)
+        .eq("user_id", user.id)
         .maybeSingle();
 
       if (!profileError && profileData && profileData.first_name) {
@@ -84,6 +98,7 @@ const Profile = () => {
       firstName,
       lastName,
       preferredName,
+      profile_img_url,
       yearsExperience,
       birthMonth,
       birthDay,
@@ -130,39 +145,12 @@ const Profile = () => {
       return;
     }
 
-    let profileImageUrl = "";
-    if (profileImage) {
-      if (profileImage.size > 5 * 1024 * 1024) {
-        setErrors({ profileImage: "Image must be under 5MB." });
-        return;
-      }
-
-      const fileExt = profileImage.name.split(".").pop();
-      const fileName = `user-${user.id}.${fileExt}`;
-      const filePath = `${fileName}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from("profile-pictures")
-        .upload(filePath, profileImage, {
-          contentType: profileImage.type,
-          upsert: true,
-        });
-
-      if (uploadError) {
-        setErrors({ profileImage: `Upload failed: ${uploadError.message}` });
-        return;
-      }
-
-      const { data: urlData } = supabase.storage
-        .from("profile-pictures")
-        .getPublicUrl(filePath);
-      profileImageUrl = urlData?.publicUrl || "";
-    }
-
     const yearsExp = String(yearsExperience || "").trim();
     const parsedYears = isNaN(Number(yearsExp)) ? null : Number(yearsExp);
     const parsedBirthDay = birthDay ? parseInt(birthDay) : null;
     const finalPreferredName = preferredName?.trim() || firstName;
+
+    // const profileImageUrl = await handleImageUpload(user);
 
     const { error } = await supabase.from("profiles").upsert([
       {
@@ -174,6 +162,8 @@ const Profile = () => {
         years_experience: parsedYears,
         birth_month: birthMonth || null,
         birth_day: parsedBirthDay,
+        profile_img_url:
+          profileImageUrl || savedProfile?.profile_img_url || null,
         country: country === "Other" ? customCountry : country || null,
         profile_img_url: profileImageUrl || null,
         linkedin: linkedin?.trim() || null,
@@ -220,6 +210,16 @@ const Profile = () => {
               Email: <b>{email} </b>{" "}
             </p>
           </div>
+
+          <UserRole />
+
+          {user && user.id && (
+            <ProfileImageUploader
+              userId={user.id}
+              onUpload={(url) => setProfileImageUrl(url)}
+              
+            />
+          )}
 
           <form onSubmit={handleSaveProfile}>
             <TextInput
@@ -330,7 +330,7 @@ const Profile = () => {
                   <>
                     Your profile has been saved successfully!
                     <br />
-                  <b>  Refresh the page to view your public profile. </b>
+                    <b> Refresh the page to view your public profile. </b>
                   </>
                 }
                 onClose={() => setShowPopup(false)}
