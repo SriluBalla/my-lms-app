@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseDB";
 import Layout from "../components/Layout";
 import SavedProfileCard from "../components/ProfileCard";
+import ConfirmMessage from "../components/ConfirmMessage";
+
 
 const AdminUserManager = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const ROLE_IDS = {
     user: "c1e95deb-5e76-41bc-ac9f-fbcc45d2f56f",
@@ -62,7 +66,12 @@ const AdminUserManager = () => {
     if (error) {
       alert(`Error assigning role: ${error.message}`);
     } else {
-      alert(`Assigned ${roleKey} role successfully`);
+      {
+        successMessage && <p className="success-msg">{successMessage}</p>;
+      }
+      {
+        errorMessage && <p className="error-msg">{errorMessage}</p>;
+      }
 
       setUsers((prev) =>
         prev.map((user) =>
@@ -87,6 +96,36 @@ const AdminUserManager = () => {
         )
       );
     }
+  };
+
+  const handleFlagUser = async (userId, noteText) => {
+    const {
+      data: { user: reviewer },
+      error: reviewerError,
+    } = await supabase.auth.getUser();
+
+    if (reviewerError || !reviewer) {
+      setErrorMessage("Error identifying reviewer.");
+      return;
+    }
+
+    const { error: noteError } = await supabase
+      .from("profile_review_notes")
+      .insert([
+        {
+          user_id: userId,
+          reviewer_id: reviewer.id,
+          note_text: noteText,
+        },
+      ]);
+
+    if (noteError) {
+      setErrorMessage(`Failed to submit flag note: ${noteError.message}`);
+      return;
+    }
+
+    await updateProfileStatus(userId, "flagged");
+    setSuccessMessage("User flagged and note submitted successfully.");
   };
 
   return (
@@ -121,7 +160,8 @@ const AdminUserManager = () => {
                       )}
                     </td>
                     <td>
-                      <textarea id = "text-area"
+                      <textarea
+                        id="text-area"
                         placeholder="Reason for flagging..."
                         value={user.flagNote || ""}
                         onChange={(e) =>
