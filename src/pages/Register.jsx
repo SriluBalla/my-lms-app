@@ -10,7 +10,7 @@ import "../styles/main.css";
 const Register = () => {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState({ type: "", text: "" });
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -24,7 +24,9 @@ const Register = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
+  const isValidEmail = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
+
   const isValidPassword = (password) =>
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(password);
 
@@ -33,34 +35,41 @@ const Register = () => {
     const { email, password, confirmPassword } = formData;
 
     if (!isValidEmail(email)) {
-      errors.email = "Valid email address required";
+      setMessage({ type: "error", text: "Valid email address required." });
+      return false;
     }
 
     if (!isValidPassword(password)) {
-      errors.password =
-        "Password must contain uppercase, lowercase, number, special character, and be at least 8 characters.";
+      setMessage({
+        type: "warn",
+        text:
+          "Password must contain uppercase, lowercase, number, special character, and be at least 8 characters.",
+      });
+      return false;
     }
 
     if (password !== confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
+      setMessage({ type: "warn", text: "Passwords do not match." });
+      return false;
     }
 
     setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+    return true;
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     if (loading) return;
 
+    setMessage({ type: "", text: "" });
+
     if (!validateForm()) return;
 
     setLoading(true);
-    setMessage({ type: "", text: "" });
 
     const normalizedEmail = formData.email.trim().toLowerCase();
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: normalizedEmail,
       password: formData.password,
       options: {
@@ -77,22 +86,18 @@ const Register = () => {
       setMessage({ type: "error", text: msg });
 
       if (error.message === "User already registered") {
-        setTimeout(() => navigate("/login"), 1500);
+        setTimeout(() => navigate("/login"), 2000);
       }
 
       setLoading(false);
       return;
     }
 
-    // Refined success message
     setMessage({
       type: "success",
-      text:
-        data.user === null
-          ? "This email is already registered but not confirmed. A new confirmation email was sent."
-          : "Check your email to confirm your account.",
+      text: "Check your email to confirm your account 📬",
     });
-
+    setTimeout(() => navigate("/profile"), 1500);
     setLoading(false);
   };
 
@@ -101,6 +106,9 @@ const Register = () => {
       <section className="body__outline">
         <div className="body__center">
           <h2>Create Account</h2>
+
+          <ConfirmMessage type={message.type} text={message.text} />
+
           <form onSubmit={handleRegister}>
             <TextInput
               id="email"
@@ -113,7 +121,8 @@ const Register = () => {
               placeholder="you@mail.com"
               maxLength={100}
               autoComplete="email"
-              error={formErrors.email}
+              message={formErrors.email}
+              type="error"
             />
 
             <PasswordInput
@@ -124,7 +133,8 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               showRules={false}
-              error={formErrors.password}
+              message={formErrors.password}
+              type="error"
             />
 
             <PasswordInput
@@ -134,7 +144,8 @@ const Register = () => {
               placeholder="Match the password"
               value={formData.confirmPassword}
               onChange={handleChange}
-              error={formErrors.confirmPassword}
+              message={formErrors.confirmPassword}
+              type="error"
             />
 
             <div className="center-btn">
@@ -143,7 +154,11 @@ const Register = () => {
                 className="button"
                 id="btn-clear"
                 onClick={() =>
-                  setFormData({ email: "", password: "", confirmPassword: "" })
+                  setFormData({
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                  })
                 }
               >
                 Clear
@@ -159,8 +174,6 @@ const Register = () => {
               </button>
             </div>
           </form>
-
-          <ConfirmMessage type={message?.type} text={message?.text} />
         </div>
       </section>
     </Layout>

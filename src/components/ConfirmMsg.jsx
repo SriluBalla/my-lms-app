@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "../styles/Message.css";
 
 const ConfirmMessage = ({ type, text }) => {
-  if (!text) return null;
+  const [visible, setVisible] = useState(!!text);
 
-  const className = type === "error" ? "error-msg" : "success-msg";
+  useEffect(() => {
+    if (text) {
+      setVisible(true);
+      const timer = setTimeout(() => setVisible(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [text]);
+
+  if (!visible || !text) return null;
+
+  const classMap = {
+    success: "msg-success",
+    error: "msg-error",
+    info: "msg-info",
+    warn: "msg-warn",
+  };
 
   return (
-    <div className={`confirm-message ${className}`}>
-      {text}
+    <div className={`msg-wrapper ${classMap[type]}`}>
+      <span className="msg-text">{text}</span>
+      <button className="close-button" onClick={() => setVisible(false)}>
+        ×
+      </button>
     </div>
   );
 };

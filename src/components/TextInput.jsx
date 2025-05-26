@@ -1,6 +1,6 @@
-// components/TextInput.jsx
 import React from "react";
 import "../styles/TextInput.css";
+import ConfirmMessage from "./ConfirmMsg"; // ✅ Import
 
 const TextInput = ({
   id,
@@ -12,6 +12,9 @@ const TextInput = ({
   required = false,
   minLength,
   maxLength,
+  title,
+  message = "",
+  type = "error", // ✅ used for ConfirmMessage
 }) => (
   <div className="text-field">
     <label htmlFor={name}>
@@ -28,7 +31,11 @@ const TextInput = ({
       required={required}
       minLength={minLength}
       maxLength={maxLength}
+      title={title}
     />
+
+    {/* ✅ Use ConfirmMessage if message exists */}
+    {message && <ConfirmMessage type={type} text={message} />}
   </div>
 );
 

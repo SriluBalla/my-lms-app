@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseDB";
 import Layout from "../components/Layout";
 import SavedProfileCard from "../components/ProfileCard";
-import ConfirmMessage from "../components/ConfirmMessage";
+import ConfirmMessage from "../components/ConfirmMsg";
 
 
 const AdminUserManager = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const ROLE_IDS = {
     user: "c1e95deb-5e76-41bc-ac9f-fbcc45d2f56f",
@@ -64,7 +62,8 @@ const AdminUserManager = () => {
     console.log("Role assigned:", { userId, roleKey, roleId });
 
     if (error) {
-      alert(`Error assigning role: ${error.message}`);
+      setMessage({ type: "error", text: `Error assigning role: ${error.message}` });
+
     } else {
       {
         successMessage && <p className="success-msg">{successMessage}</p>;
@@ -88,7 +87,7 @@ const AdminUserManager = () => {
       .eq("id", userId);
 
     if (error) {
-      alert(`Error updating profile status: ${error.message}`);
+      setMessage({ type: "error", text: `Error updating profile status: ${error.message}` });
     } else {
       setUsers((prev) =>
         prev.map((user) =>

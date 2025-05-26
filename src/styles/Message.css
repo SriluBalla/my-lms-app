@@ -1,0 +1,110 @@
+.popup-success {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: hsl(105, 76%, 87%);
+  color: #2d662d;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #2d662d;
+  cursor: pointer;
+}
+
+.msg-wrapper {
+  align-items: center;
+  border-radius: 4px;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+}
+
+.msg-inline {
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.msg-error {
+  color: red;
+  background-color: #ffe5e5;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.msg-error::before {
+  content: "❌";
+}
+
+.msg-info {
+  color: #0b2dd5;
+  background-color: #eef2ff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.msg-info::before {
+  content: "ℹ️";
+}
+
+.msg-success {
+  color: green;
+  background-color: hsl(105, 76%, 87%);
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.msg-success::before {
+  content: "✅";
+}
+
+.msg-warn {
+  color: rgb(219, 77, 26);
+  background-color: rgb(228, 228, 163);
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.msg-warn::before {
+  content: "⚠️";
+}
+
+.msg-text {
+  font-size: 1rem;
+  text-align: center;
+}
+
+
+
+.password-rules {
+  list-style: none;
+  padding: 0;
+  margin-left: 20px;
+  font-size: 0.9rem;
+}
+
+.password-rules li.valid {
+  color: rgb(3, 43, 3);
+  text-decoration: underline;
+}
+
+.password-rules li.invalid {
+  color: rgb(37, 2, 2);
+  font-weight: bold;
+}
+
+.required {
+  color: rgb(172, 66, 9);
+  margin-left: 0.25rem;
+}
+

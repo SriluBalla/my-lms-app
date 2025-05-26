@@ -4,7 +4,8 @@ import TextInput from "../components/TextInput";
 import NumberInput from "../components/NumberInput";
 import TextAreaInput from "../components/TextArea";
 import SelectInput from "../components/SelectInput";
-import SuccessPopup from "../components/SuccessPopup";
+import SuccessPopup from "../components/ConfirmPopup";
+import ConfirmMessage from "../components/ConfirmMsg";
 import SavedProfileCard from "../components/ProfileCard";
 import UserRole from "../components/UserRole";
 import ProfileImageUploader from "../components/ImageUploader";
@@ -29,7 +30,7 @@ const Profile = () => {
   });
 
   const [profileImageUrl, setProfileImageUrl] = useState("");
-  const [uploadError, setUploadError] = useState("");
+  // const [uploadError, setUploadError] = useState("");
   const [savedProfile, setSavedProfile] = useState(null);
   const [email, setEmail] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -175,7 +176,11 @@ const Profile = () => {
 
     if (error) {
       console.error("❌ Supabase Save Error:", error);
-      alert(`Error saving profile: ${error.message}`);
+      setMessage({
+        type: "Error",
+        text: `Error saving profile: ${error.message}`,
+      });
+
       return;
     }
 
@@ -231,6 +236,7 @@ const Profile = () => {
               maxLength={100}
               required={true}
               error={errors.firstName}
+              type="error"
             />
             <TextInput
               id="lastName"
@@ -242,6 +248,7 @@ const Profile = () => {
               maxLength={100}
               required={true}
               error={errors.lastName}
+              type="error"
             />
 
             <TextInput
@@ -254,6 +261,7 @@ const Profile = () => {
               maxLength={50}
               required={false}
               error={errors.preferredName}
+              type="error"
             />
 
             <NumberInput
@@ -266,6 +274,7 @@ const Profile = () => {
               min={0}
               max={60}
               required={false}
+              type="error"
               error={errors.yearsExperience}
             />
             <em>(as Dev, QA, SDET, DevOps, etc.)</em>
@@ -280,6 +289,7 @@ const Profile = () => {
               maxLength={1000}
               required={false}
               error={errors.selfIntro}
+              type="error"
             />
 
             <label>Date of Birth and Month</label>
@@ -306,6 +316,7 @@ const Profile = () => {
                 placeholder="-- Month --"
                 required={false}
                 error={errors.birthMonth}
+                type="error"
               />
 
               <select
@@ -353,6 +364,7 @@ const Profile = () => {
               ]}
               placeholder="-- Country --"
               error={errors.country}
+              type="warn"
             />
 
             <TextInput
@@ -365,9 +377,9 @@ const Profile = () => {
               onChange={handleChange}
               maxLength={100}
               required={false}
-              className={errors.linkedin ? "error" : ""}
+              message={errors.linkedin}
+              type="warn"
             />
-            {errors.linkedin && <p className="error-msg">{errors.linkedin}</p>}
 
             <TextInput
               id="github"
@@ -379,11 +391,15 @@ const Profile = () => {
               onChange={handleChange}
               maxLength={100}
               required={false}
-              className={errors.github ? "error" : ""}
+              message={errors.github}
+              type="warn"
             />
-            {errors.github && <p className="error-msg">{errors.github}</p>}
 
-            <button type="submit" className="button">
+            <button
+              type="submit"
+              className="button"
+              onClick={handleSaveProfile}
+            >
               Save Profile
             </button>
           </form>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../styles/PopUp.css";
+import "../styles/main.css";
 
 
 const SuccessPopup = ({ message, onClose }) => {
@@ -13,7 +13,7 @@ const SuccessPopup = ({ message, onClose }) => {
   if (!message) return null;
 
   return (
-    <div className="success-popup">
+    <div className="popup-success">
       <span>{message}</span>
       <button className="close-button" onClick={onClose}>×</button>
     </div>

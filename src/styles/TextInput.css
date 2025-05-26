@@ -24,12 +24,6 @@ em {
   margin-top: 4px;
 }
 
-.error-msg {
-  color: red;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
-
 .group-links {
 }
 
@@ -70,38 +64,10 @@ label {
   margin-bottom: 5px;
 }
 
-.password-rules {
-  list-style: none;
-  padding: 0;
-  margin-left: 20px;
-  font-size: 0.9rem;
-}
-
-.password-rules li.valid {
-  color: rgb(3, 43, 3);
-  text-decoration: underline;
-}
-
-.password-rules li.invalid {
-  color: rgb(37, 2, 2);
-  font-weight: bold;
-}
-
-.required {
-  color: red;
-  margin-left: 0.25rem;
-}
-
 select {
   font-size: 1.1rem;
   height: auto;
   padding: 8px;
-}
-
-.success-msg {
-  color: green;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
 }
 
 #text-area {
