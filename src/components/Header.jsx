@@ -10,6 +10,7 @@ const Header = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState("user");
+  const [profile, setProfile] = useState(null);
 
   const menuRef = useRef();
   const profileRef = useRef();
@@ -56,6 +57,24 @@ const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+  const fetchProfileImage = async () => {
+    if (!user) return;
+
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("profile_img_url")
+      .eq("id", user.id)
+      .single();
+
+    if (!error && data) {
+      setProfile(data);
+    }
+  };
+
+  fetchProfileImage();
+}, [user]);
+
 
   return (
     <header className="header">
@@ -95,18 +114,23 @@ const Header = () => {
         <NavLink id="pot" className="nav__link" to="/pot">
           POT
         </NavLink>
-        {/* </nav> */}
         {user && (
           <div ref={profileRef} className="profile-dropdown">
+           
             <img
-              src="/images/global/Profile-placeholder.png"
+              src={
+                profile?.profile_img_url
+                  ? profile.profile_img_url
+                  : "/images/global/Profile-placeholder.png"
+              }
               alt="Profile"
               className="profile-icon"
               onClick={() => {
                 setDropdownOpen((prev) => !prev);
-                if (!dropdownOpen) setMenuOpen(false); // close nav if profile is opening
+                if (!dropdownOpen) setMenuOpen(false);
               }}
             />
+
             {dropdownOpen && (
               <div className="profile-menu">
                 <MenuItem
@@ -135,7 +159,7 @@ const Header = () => {
                   id="userManager"
                   label="User Management"
                   to="/admin-user-manager"
-                  roles={["admin", "superadmin","user"]}
+                  roles={["admin", "superadmin", "user"]}
                   userRole={userRole}
                 />
                 <MenuItem
