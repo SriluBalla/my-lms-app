@@ -5,9 +5,10 @@ import "../styles/main.css";
 
 const ReviewNote = () => {
   const [note, setNote] = useState(null);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
-    const fetchNote = async () => {
+    const fetchNoteAndStatus = async () => {
       const {
         data: { user },
         error: authError,
@@ -15,6 +16,21 @@ const ReviewNote = () => {
 
       if (!user || authError) return;
 
+      // Get profile status
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("profile_status")
+        .eq("id", user.id)
+        .single();
+
+      if (profileError || !profile || profile.profile_status !== "flagged") {
+        setStatus(profile?.profile_status || "unknown");
+        return; // Don't fetch note if not flagged
+      }
+
+      setStatus("flagged");
+
+      // Fetch latest review note
       const { data, error } = await supabase
         .from("profile_review_notes")
         .select("note_text, created_at")
@@ -28,14 +44,14 @@ const ReviewNote = () => {
       }
     };
 
-    fetchNote();
+    fetchNoteAndStatus();
   }, []);
 
-  if (!note) return null;
+  if (status !== "flagged" || !note) return null;
 
   return (
-    <div className="review-note warning-box">
-      <em>To display this publicly in the Member Profiles section, please address the following issues:</em>
+    <div className="review-note msg-info">
+      <p>To display this publicly in the Member Profiles section, please address the following issues:</p>
       <p><strong>⚠️ Flagged:</strong>  {note} </p>
     </div>
   );

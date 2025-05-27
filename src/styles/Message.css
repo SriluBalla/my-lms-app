@@ -15,48 +15,65 @@
 }
 
 .btn-close {
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  color: #2d662d;
-  cursor: pointer;
+  position: relative;
+  float: right;
+  background: red;
+  color: white;
+  top: -10px;
+  right: -10px;
 }
 
 .msg-wrapper {
+  align-items: center;
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 4px;
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
 }
 
 .msg-error {
-  color: #721c24;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
+   background-color: #f8d7da;
+  border-left: 5px solid #721c24;
+  border-radius: 0.5rem;
+  color: #a10808;
+  font-size: 1rem;
+  padding: .5rem;
+  margin: 1rem 0;
+  text-align: center;
 }
 
 .msg-info {
+  background-color: #62d7eb;
+  border-left: 5px solid #0c5460;
+  border-radius: 0.5rem;
   color: #0c5460;
-  background-color: #d1ecf1;
-  border: 1px solid #bee5eb;
+  font-size: 1rem;
+  padding: .5rem;
+  margin: 1rem 0;
+  text-align: center;
 }
 
 .msg-success {
-  color: #155724;
   background-color: #d4edda;
-  border: 1px solid #c3e6cb;
+  border-left: 5px solid #155724;
+  border-radius: 0.5rem;
+  color: #155724;
+  font-size: 1rem;
+  padding: .5rem;
+  margin: 1rem 0;
+  text-align: center;
 }
-
 
 .msg-warn {
-  color: #856404;
   background-color: #fff3cd;
-  border: 1px solid #ffeeba;
-}
-
-.msg-text {
+  border-left: 5px solid #f5c518;
+  border-radius: 0.5rem;
+  color: #856404;
   font-size: 1rem;
+  padding: .5rem;
+  margin: 1rem 0;
   text-align: center;
 }
 
@@ -90,5 +107,5 @@
   margin: 1rem 0;
   border-radius: 0.5rem;
   color: #856404;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }

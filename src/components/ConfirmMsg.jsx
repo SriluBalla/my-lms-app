@@ -24,8 +24,6 @@ const ConfirmMessage = ({ type, text }) => {
   return (
     <div className={`msg-wrapper ${classMap[type]}`}>
       <span className="msg-text">{text}</span>
-      <button className="close-button" type="button" aria-label="Close" onClick={() => setVisible(false)}> X
-      </button>
     </div>
   );
 };

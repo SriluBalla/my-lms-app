@@ -19,7 +19,6 @@ img {
 }
 
 .drop-zone button {
-  
 }
 
 .why-image {
@@ -32,9 +31,10 @@ img:hover {
   /* -webkit-transform:scale(1.5);  */
   /* transform:scale(1.5); */
 }
-
 /* PHOTOs */
+
 .profile-image-preview img {
+  margin: 0 auto;
   border-radius: 25%;
   border: 2px solid #ccc;
   margin-top: 1rem;
