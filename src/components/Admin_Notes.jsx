@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseDB";
 import "../styles/main.css";
 
-const ReviewNote = () => {
+const AdminNote = () => {
   const [note, setNote] = useState(null);
   const [status, setStatus] = useState("");
 
@@ -52,9 +52,10 @@ const ReviewNote = () => {
   return (
     <div className="review-note msg-info">
       <p>To display this publicly in the Member Profiles section, please address the following issues:</p>
+      
       <p><strong>⚠️ Flagged:</strong>  {note} </p>
     </div>
   );
 };
 
-export default ReviewNote;
+export default AdminNote;

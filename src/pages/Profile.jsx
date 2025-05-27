@@ -10,7 +10,7 @@ import SavedProfileCard from "../components/Card_Profile";
 import UserRole from "../components/SQL_get_Roles";
 import ProfileImageUploader from "../components/Upload_Helper";
 import { supabase } from "../supabaseDB";
-import ReviewNote from "../components/Admin_Notes";
+import AdminNote from "../components/Admin_Notes";
 import "../styles/main.css";
 
 const Profile = () => {
@@ -224,7 +224,7 @@ const Profile = () => {
               the information you want to be recognized by.
             </strong>
           </p>
-          <ReviewNote />
+          <AdminNote />
         </section>
 
         {savedProfile && (
