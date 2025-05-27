@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ConfirmMessage from "./ConfirmMsg"; // reuse ConfirmMessage for visual feedback
+import ConfirmMessage from "./Msg_in_Body"; // reuse ConfirmMessage for visual feedback
 
 const ConsoleLog = ({ title = "Console", logs = [] }) => {
   const [visible, setVisible] = useState(false);

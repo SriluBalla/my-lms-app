@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import TextInput from "../components/TextInput";
-import NumberInput from "../components/NumberInput";
-import TextAreaInput from "../components/TextArea";
-import SelectInput from "../components/SelectInput";
-import SuccessPopup from "../components/ConfirmPopup";
-import ConfirmMessage from "../components/ConfirmMsg";
-import SavedProfileCard from "../components/ProfileCard";
-import UserRole from "../components/UserRole";
-import ProfileImageUploader from "../components/ImageUploader";
+import TextInput from "../components/Input_TextField";
+import NumberInput from "../components/Input_Number";
+import TextAreaInput from "../components/Input_TextArea";
+import SelectInput from "../components/Input_Select";
+import SuccessPopup from "../components/Msg_in_Popup";
+import ConfirmMessage from "../components/Msg_in_Body";
+import SavedProfileCard from "../components/Card_Profile";
+import UserRole from "../components/SQL_get_Roles";
+import ProfileImageUploader from "../components/Upload_Helper";
 import { supabase } from "../supabaseDB";
-import ReviewNote from "../components/ReviewNote";
+import ReviewNote from "../components/Admin_Notes";
 import "../styles/main.css";
 
 const Profile = () => {

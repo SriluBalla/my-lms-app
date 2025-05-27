@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import TextInput from "../components/TextInput";
-import PasswordInput from "../components/PasswordInput";
-import ConfirmMessage from "../components/ConfirmMsg";
+import TextInput from "../components/Input_TextField";
+import PasswordInput from "../components/Input_Password";
+import ConfirmMessage from "../components/Msg_in_Body";
 import { supabase } from "../supabaseDB";
 import "../styles/main.css";
 

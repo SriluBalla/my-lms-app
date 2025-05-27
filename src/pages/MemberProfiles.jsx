@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseDB";
 import Layout from "../components/Layout";
 import routes from "../components/Routes";
-import SavedProfileCard from "../components/ProfileCard";
-import ConfirmMessage from "../components/ConfirmMsg";
+import SavedProfileCard from "../components/Card_Profile";
+import ConfirmMessage from "../components/Msg_in_Body";
 import "../styles/main.css";
 
 const MemberProfiles = () => {

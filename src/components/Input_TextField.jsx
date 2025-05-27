@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/TextInput.css";
-import ConfirmMessage from "./ConfirmMsg"; // ✅ Import
+import ConfirmMessage from "./Msg_in_Body"; // ✅ Import
 
 const TextInput = ({
   id,

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseDB";
 import Layout from "../components/Layout";
-import TextInput from "../components/TextInput";
-import PasswordInput from "../components/PasswordInput";
-import ConfirmMessage from "../components/ConfirmMsg";
-import ConsoleLog from "../components/ConsoleLog";
+import TextInput from "../components/Input_TextField";
+import PasswordInput from "../components/Input_Password";
+import ConfirmMessage from "../components/Msg_in_Body";
+import ConsoleLog from "../components/Msg_ConsoleLog";
 import "../styles/main.css";
 
 const Login = () => {

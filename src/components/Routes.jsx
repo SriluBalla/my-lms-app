@@ -1,4 +1,4 @@
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./SQL_Role_Assignment.jsx";
 import Home from "../pages/Index.jsx";
 import NotFound from "../pages/NotFound.jsx"; 
 import QAtoPot from "../pages/QAtoPot.jsx";
