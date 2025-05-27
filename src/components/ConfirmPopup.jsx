@@ -6,7 +6,7 @@ const SuccessPopup = ({ message, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 3000); // auto-close after 2 seconds
+    }, 10000); // auto-close after 2 seconds
     return () => clearTimeout(timer);
   }, [onClose]);
 

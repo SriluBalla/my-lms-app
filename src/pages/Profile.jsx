@@ -10,6 +10,7 @@ import SavedProfileCard from "../components/ProfileCard";
 import UserRole from "../components/UserRole";
 import ProfileImageUploader from "../components/ImageUploader";
 import { supabase } from "../supabaseDB";
+import ReviewNote from "../components/ReviewNote";
 import "../styles/main.css";
 
 const Profile = () => {
@@ -30,11 +31,11 @@ const Profile = () => {
   });
 
   const [profileImageUrl, setProfileImageUrl] = useState("");
-  // const [uploadError, setUploadError] = useState("");
   const [savedProfile, setSavedProfile] = useState(null);
   const [email, setEmail] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState({ type: "", text: "" });
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -44,7 +45,6 @@ const Profile = () => {
       } = await supabase.auth.getUser();
       if (user) setUser(user);
     };
-
     fetchUser();
   }, []);
 
@@ -92,14 +92,27 @@ const Profile = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const requiresPendingStatus = (newData, oldData) => {
+    const checkFields = [
+      "first_name",
+      "last_name",
+      "preferred_name",
+      "self_intro",
+      "profile_img_url",
+    ];
+    return checkFields.some(
+      (field) => newData[field]?.trim() !== oldData[field]?.trim()
+    );
+  };
+
   const handleSaveProfile = async (e) => {
     e.preventDefault();
+    setMessage({ type: "", text: "" });
 
     const {
       firstName,
       lastName,
       preferredName,
-      profile_img_url,
       yearsExperience,
       birthMonth,
       birthDay,
@@ -117,7 +130,10 @@ const Profile = () => {
     } = await supabase.auth.getUser();
 
     if (!user || userError) {
-      setErrors({ general: "User not authenticated" });
+      setMessage({
+        type: "error",
+        text: "You must be logged in to save your profile.",
+      });
       return;
     }
 
@@ -142,7 +158,7 @@ const Profile = () => {
     }
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors); // ✅ this updates the UI
+      setErrors(newErrors);
       return;
     }
 
@@ -151,54 +167,64 @@ const Profile = () => {
     const parsedBirthDay = birthDay ? parseInt(birthDay) : null;
     const finalPreferredName = preferredName?.trim() || firstName;
 
-    // const profileImageUrl = await handleImageUpload(user);
-
-    const { error } = await supabase.from("profiles").upsert([
+    const shouldSetPending = requiresPendingStatus(
       {
-        id: user.id,
-        email: user.email,
         first_name: firstName,
         last_name: lastName,
         preferred_name: finalPreferredName,
-        years_experience: parsedYears,
-        birth_month: birthMonth || null,
-        birth_day: parsedBirthDay,
+        self_intro: selfIntro,
         profile_img_url:
           profileImageUrl || savedProfile?.profile_img_url || null,
-        country: country === "Other" ? customCountry : country || null,
-        profile_img_url: profileImageUrl || null,
-        linkedin: linkedin?.trim() || null,
-        github: github?.trim() || null,
-        blog: blog?.trim() || null,
-        self_intro: selfIntro?.trim() || null,
       },
-    ]);
+      savedProfile
+    );
+
+    const updatedProfile = {
+      id: user.id,
+      email: user.email,
+      first_name: firstName,
+      last_name: lastName,
+      preferred_name: finalPreferredName,
+      years_experience: parsedYears,
+      birth_month: birthMonth || null,
+      birth_day: parsedBirthDay,
+      profile_img_url: profileImageUrl || savedProfile?.profile_img_url || null,
+      country: country === "Other" ? customCountry : country || null,
+      linkedin: linkedin?.trim() || null,
+      github: github?.trim() || null,
+      blog: blog?.trim() || null,
+      self_intro: selfIntro?.trim() || null,
+      profile_status: shouldSetPending
+        ? "pending"
+        : savedProfile?.profile_status || "approved",
+    };
+
+    const { error } = await supabase.from("profiles").upsert([updatedProfile]);
 
     if (error) {
       console.error("❌ Supabase Save Error:", error);
       setMessage({
-        type: "Error",
+        type: "error",
         text: `Error saving profile: ${error.message}`,
       });
-
       return;
     }
-
     setShowPopup(true);
   };
 
+  
   return (
     <Layout title="Profile" description="Manage your profile">
       <div className="body__outline">
         <section className="hero__head">
           <h2>Welcome to Your Profile</h2>
           <p>
-            {" "}
             <strong>
               Tell your story to the Product Owner in Test community by sharing
               the information you want to be recognized by.
             </strong>
           </p>
+          <ReviewNote />
         </section>
 
         {savedProfile && (
@@ -210,9 +236,11 @@ const Profile = () => {
         <div className="body__right">
           <h2>Your Profile</h2>
 
+          <ConfirmMessage type={message.type} text={message.text} />
+
           <div className="email-field">
             <p className="readonly-email">
-              Email: <b>{email} </b>{" "}
+              Email: <b>{email}</b>
             </p>
           </div>
 
@@ -235,9 +263,10 @@ const Profile = () => {
               onChange={handleChange}
               maxLength={100}
               required={true}
-              error={errors.firstName}
+              message={errors.firstName}
               type="error"
             />
+
             <TextInput
               id="lastName"
               name="lastName"
@@ -247,7 +276,7 @@ const Profile = () => {
               onChange={handleChange}
               maxLength={100}
               required={true}
-              error={errors.lastName}
+              message={errors.lastName}
               type="error"
             />
 
@@ -260,7 +289,7 @@ const Profile = () => {
               onChange={handleChange}
               maxLength={50}
               required={false}
-              error={errors.preferredName}
+              message={errors.preferredName}
               type="error"
             />
 
@@ -274,8 +303,8 @@ const Profile = () => {
               min={0}
               max={60}
               required={false}
+              message={errors.yearsExperience}
               type="error"
-              error={errors.yearsExperience}
             />
             <em>(as Dev, QA, SDET, DevOps, etc.)</em>
 
@@ -288,7 +317,7 @@ const Profile = () => {
               onChange={handleChange}
               maxLength={1000}
               required={false}
-              error={errors.selfIntro}
+              message={errors.selfIntro}
               type="error"
             />
 
@@ -315,7 +344,7 @@ const Profile = () => {
                 ]}
                 placeholder="-- Month --"
                 required={false}
-                error={errors.birthMonth}
+                message={errors.birthMonth}
                 type="error"
               />
 
@@ -340,7 +369,7 @@ const Profile = () => {
                   <>
                     Your profile has been saved successfully!
                     <br />
-                    <b> Refresh the page to view your public profile. </b>
+                    <b>Refresh the page to view your public profile.</b>
                   </>
                 }
                 onClose={() => setShowPopup(false)}
@@ -363,7 +392,7 @@ const Profile = () => {
                 "Africa",
               ]}
               placeholder="-- Country --"
-              error={errors.country}
+              message={errors.country}
               type="warn"
             />
 
@@ -395,11 +424,7 @@ const Profile = () => {
               type="warn"
             />
 
-            <button
-              type="submit"
-              className="button"
-              onClick={handleSaveProfile}
-            >
+            <button type="submit" className="button">
               Save Profile
             </button>
           </form>

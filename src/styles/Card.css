@@ -1,0 +1,33 @@
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.member-card {
+  background: #b7eff7;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
+.member-card:hover {
+  transform: translateY(-5px);
+}
+
+.member-card img {
+  border-radius: 15%;
+  height: 200px;
+  margin-right: 20px;
+  padding: 8px 16px;
+  width: auto;
+}
+
+.member-card img:hover {
+  background: none;
+  transform: scale(2);
+}
+

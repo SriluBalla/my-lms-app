@@ -6,7 +6,7 @@
   color: #2d662d;
   padding: 1rem 1.25rem;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -23,68 +23,42 @@
 }
 
 .msg-wrapper {
-  align-items: center;
+  padding: 15px;
+  margin-bottom: 20px;
   border-radius: 4px;
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-}
-
-.msg-inline {
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .msg-error {
-  color: red;
-  background-color: #ffe5e5;
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
-}
-
-.msg-error::before {
-  content: "❌";
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
 }
 
 .msg-info {
-  color: #0b2dd5;
-  background-color: #eef2ff;
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
-}
-
-.msg-info::before {
-  content: "ℹ️";
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
 }
 
 .msg-success {
-  color: green;
-  background-color: hsl(105, 76%, 87%);
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
 }
 
-.msg-success::before {
-  content: "✅";
-}
 
 .msg-warn {
-  color: rgb(219, 77, 26);
-  background-color: rgb(228, 228, 163);
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
-}
-
-.msg-warn::before {
-  content: "⚠️";
+  color: #856404;
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
 }
 
 .msg-text {
   font-size: 1rem;
   text-align: center;
 }
-
-
 
 .password-rules {
   list-style: none;
@@ -108,3 +82,13 @@
   margin-left: 0.25rem;
 }
 
+/* styles/ReviewNote.css */
+.warning-box {
+  background-color: #fff3cd;
+  border-left: 5px solid #f5c518;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  color: #856404;
+  font-size: 0.95rem;
+}

@@ -7,7 +7,7 @@ const ConfirmMessage = ({ type, text }) => {
   useEffect(() => {
     if (text) {
       setVisible(true);
-      const timer = setTimeout(() => setVisible(false), 5000);
+      const timer = setTimeout(() => setVisible(false), 50000);
       return () => clearTimeout(timer);
     }
   }, [text]);
@@ -24,8 +24,7 @@ const ConfirmMessage = ({ type, text }) => {
   return (
     <div className={`msg-wrapper ${classMap[type]}`}>
       <span className="msg-text">{text}</span>
-      <button className="close-button" onClick={() => setVisible(false)}>
-        ×
+      <button className="close-button" type="button" aria-label="Close" onClick={() => setVisible(false)}> X
       </button>
     </div>
   );

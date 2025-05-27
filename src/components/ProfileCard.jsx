@@ -32,7 +32,7 @@ const SavedProfileCard = ({ profile }) => {
   } = profile;
 
   return (
-    <section>
+    <div className="profile-card">
       <img
         className="profile-image-preview"
         src={
@@ -41,7 +41,7 @@ const SavedProfileCard = ({ profile }) => {
             : "/images/global/Profile-placeholder.png"
         }
         alt="Profile"
-        title="Hello there, soon you will be able to share how you look with your community"
+        title="Profile Picture"
       />
 
       <h2 className="text-center">{preferred_name}</h2>
@@ -57,10 +57,10 @@ const SavedProfileCard = ({ profile }) => {
           {first_name} {last_name}
         </li>
         <li>
-          🌎 <strong>{country}</strong>
+          Country of Residence:  <strong>{country}</strong>
         </li>
         <li>
-          🎁 🎂 <strong>{birth_day} {birth_month}</strong> 🙌 🥳
+          Birthday: <strong>{birth_day} {birth_month}</strong> 
         </li>
         {years_experience && (
           <li>
@@ -100,7 +100,7 @@ const SavedProfileCard = ({ profile }) => {
           )}
         </p>
       )}
-    </section>
+    </div>
   );
 };
 
