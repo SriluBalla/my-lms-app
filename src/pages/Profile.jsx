@@ -319,6 +319,7 @@ const Profile = () => {
               required={false}
               message={errors.selfIntro}
               type="error"
+              className="text-area"
             />
 
             <label>Date of Birth and Month</label>

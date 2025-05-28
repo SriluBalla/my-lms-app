@@ -17,7 +17,7 @@ const NumberInput = ({
       <label htmlFor={name}>{label}</label>
       <input
         type="number"
-        id="numField"
+        id={name}
         name={name}
         placeholder={placeholder}
         value={value || ""}

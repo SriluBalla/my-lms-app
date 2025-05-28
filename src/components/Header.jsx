@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseDB";
@@ -81,6 +82,8 @@ const Header = () => {
       <div className="navbar__container">
         <Link to="/" id="logoImg" className="logo">
           <img
+          // src="/images/global/Logo.png"
+
             src={`${import.meta.env.BASE_URL}images/global/Logo.png`}
             alt="Product Owner in Test Logo"
           />

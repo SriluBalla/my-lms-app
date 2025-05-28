@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseDB";
 import Layout from "../components/Layout";
 import SavedProfileCard from "../components/Card_Profile";
+import TextAreaInput from "../components/Input_TextArea";
 import ConfirmMessage from "../components/Msg_in_Body";
 
 const AdminUserManager = () => {
@@ -216,8 +217,8 @@ const AdminUserManager = () => {
                       )}
                     </td>
                     <td>
-                      <textarea
-                        id="text-area"
+                      <TextAreaInput
+                        id="admin-note"
                         placeholder="Reason for flagging should be mentioned"
                         required={true}
                         maxLength={100}
@@ -232,7 +233,7 @@ const AdminUserManager = () => {
                           )
                         }
                         rows={3}
-                        className="flag-note-input"
+                        className="text-area"
                       />
 
                       <button

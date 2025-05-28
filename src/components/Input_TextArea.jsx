@@ -13,9 +13,9 @@ const TextAreaInput = ({
 }) => {
   return (
     <div>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <textarea
-        id="text-area"
+        id={id}
         name={name}
         placeholder={placeholder}
         value={value || ""}

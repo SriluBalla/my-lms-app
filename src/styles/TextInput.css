@@ -59,7 +59,7 @@ label {
   margin-bottom: 0.5rem;
 }
 
-#numField {
+#yearsExperience {
   width: 30%;
   margin-bottom: 5px;
 }
@@ -70,7 +70,7 @@ select {
   padding: 8px;
 }
 
-#text-area {
+textarea {
   width: 90%;
   padding: 8px;
   font-size: 1.1rem;

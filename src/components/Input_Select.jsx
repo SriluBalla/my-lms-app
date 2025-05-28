@@ -13,7 +13,7 @@ const SelectInput = ({
 }) => {
   return (
     <div className="ddl-select">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <select
         id={id}
         name={name}

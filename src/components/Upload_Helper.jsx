@@ -69,13 +69,17 @@ const ProfileImageUploader = ({ userId, onUpload }) => {
 
     if (dbError) {
       setUploadStatus("error");
-      setUploadMessage(`Image uploaded, but failed to save URL: ${dbError.message}`);
+      setUploadMessage(
+        `Image uploaded, but failed to save URL: ${dbError.message}`
+      );
       setIsUploading(false);
       return;
     }
 
     setUploadStatus("success");
-    setUploadMessage("Image uploaded and saved successfully! If you are replacing an image, please hard refresh the page to see the new image.");
+    setUploadMessage(
+      "Image uploaded and saved successfully! If you are replacing an image, please hard refresh the page to see the new image."
+    );
     setIsUploading(false);
     onUpload(publicUrl);
   };
@@ -99,8 +103,13 @@ const ProfileImageUploader = ({ userId, onUpload }) => {
         marginBottom: "1rem",
       }}
     >
-      <p>Drag and drop an image here, or click below to select a file that is <strong>1 MB or less</strong></p>
+      <p>
+        Drag and drop an image here, or click below to select a file that is{" "}
+        <strong>1 MB or less</strong>
+      </p>
+
       <input
+        data-testid="file-upload"
         type="file"
         accept="image/*"
         onChange={(e) => setProfileImage(e.target.files[0])}
