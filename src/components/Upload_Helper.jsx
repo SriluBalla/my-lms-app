@@ -18,7 +18,7 @@ const ProfileImageUploader = ({ userId, onUpload }) => {
 
     if (profileImage.size > 1 * 1024 * 1024) {
       setUploadStatus("error");
-      setUploadMessage("Original file must be under 1 MB.");
+      setUploadMessage("File must be under 1 MB");
       setIsUploading(false);
       return;
     }
@@ -107,6 +107,7 @@ const ProfileImageUploader = ({ userId, onUpload }) => {
         Drag and drop an image here, or click below to select a file that is{" "}
         <strong>1 MB or less</strong>
       </p>
+      
 
       <input
         data-testid="file-upload"

@@ -29,3 +29,4 @@ echo "node_modules\n.env\n.env.local\ndist" > .gitignore
 #Files
 src/pages/temp.jsx
 src/SQL/*
+src/components/__tests__/sample.test.jsx
