@@ -64,6 +64,7 @@ const UserRole = () => {
         <span
           key={role.key}
           title={role.title}
+            data-testid={`role-${role.key}`}
           style={{
             fontWeight: role.key === userRole ? "bold" : "normal",
             marginRight: index < ROLE_INFO.length - 1 ? "0.5rem" : 0,

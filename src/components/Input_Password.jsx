@@ -17,6 +17,7 @@ const PasswordInput = ({
       <label htmlFor={name}>{label}</label>
       <input
         id={name}
+        test-id={name}
         name={name}
         type={showPassword ? "text" : "password"}
         value={value}
