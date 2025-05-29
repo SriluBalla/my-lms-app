@@ -122,7 +122,7 @@ const Register = () => {
               maxLength={100}
               autoComplete="email"
               message={formErrors.email}
-              type="error"
+              
             />
 
             <PasswordInput

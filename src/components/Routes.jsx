@@ -1,3 +1,4 @@
+import React from "react";
 import ProtectedRoute from "./SQL_Role_Assignment.jsx";
 import Home from "../pages/Index.jsx";
 import NotFound from "../pages/NotFound.jsx"; 

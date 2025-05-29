@@ -138,6 +138,7 @@ const Header = () => {
               <div className="profile-menu">
                 <MenuItem
                   id="account"
+                  testId="account"
                   label="Account"
                   to="/account"
                   roles={["user", "member", "admin", "superadmin"]}
@@ -145,6 +146,7 @@ const Header = () => {
                 />
                 <MenuItem
                   id="profile"
+                  testId="profile"
                   label="Profile"
                   to="/profile"
                   roles={["user", "member", "admin", "superadmin"]}
@@ -152,6 +154,7 @@ const Header = () => {
                 />
                 <MenuItem
                   id="memberProfile"
+                  testId="memberProfile"
                   label="Member Profiles"
                   to="/member-profiles"
                   roles={["user", "member", "admin", "superadmin"]}
@@ -160,6 +163,7 @@ const Header = () => {
 
                 <MenuItem
                   id="userManager"
+                  testId="userManager"
                   label="User Management"
                   to="/admin-user-manager"
                   roles={["admin", "superadmin", "user"]}
@@ -174,6 +178,7 @@ const Header = () => {
                 />
                 <button
                   id="signOut"
+                  test-id="signOut"
                   className="nav-button"
                   onClick={handleLogout}
                 >
