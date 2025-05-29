@@ -23,7 +23,7 @@ const ConfirmMessage = ({ type, text }) => {
 
   return (
     <div className={`msg-wrapper ${classMap[type]}`}>
-      <span className="msg-text">{text}</span>
+      <span test-id={`${classMap[type]}`} id={`${classMap[type]}`} >{text}</span>
     </div>
   );
 };

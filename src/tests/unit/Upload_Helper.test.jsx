@@ -110,8 +110,8 @@ describe("ProfileImageUploader", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("upload-error")).toBeInTheDocument();
-      expect(screen.getByTestId("upload-error")).toHaveTextContent(/file must be under 1 mb/i);
+      expect(screen.getByTestId("msg-error")).toBeInTheDocument();
+      expect(screen.getByText(/^file must be under 1 mb$/i)).toBeInTheDocument();
     });
 
     expect(imageCompression).not.toHaveBeenCalled();
