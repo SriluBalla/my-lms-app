@@ -24,7 +24,7 @@ const TextInput = ({
     <input
       type="text"
       id={id}
-      test-id={name}
+      data-testid={name}
       name={name}
       placeholder={placeholder}
       value={value}

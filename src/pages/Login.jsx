@@ -65,7 +65,7 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <TextInput
               id="email"
-              test-id="email"
+              data-testid="email"
               label="Email"
               name="email"
               type="email"
@@ -79,7 +79,7 @@ const Login = () => {
             />
             <PasswordInput
               id="password"
-              test-id="password"
+              data-testid="password"
               label="Password"
               name="password"
               placeholder="Registered password as is"
@@ -93,7 +93,7 @@ const Login = () => {
               <button
                 type="button"
                 className="button"
-                test-id="btn-clear"
+                data-testid="btn-clear"
                 onClick={() => setFormData({ email: "", password: "" })}
               >
                 Clear

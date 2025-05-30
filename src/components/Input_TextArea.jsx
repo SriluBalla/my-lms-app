@@ -16,7 +16,7 @@ const TextAreaInput = ({
       <label htmlFor={id}>{label}</label>
       <textarea
         id={id}
-        test-id={name}
+        data-testid={name}
         name={name}
         placeholder={placeholder}
         value={value || ""}

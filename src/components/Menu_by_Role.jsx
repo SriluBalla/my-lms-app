@@ -10,7 +10,7 @@ const MenuItem = ({ to, label, id, roles = [], userRole }) => {
   if (!roles.includes(userRole)) return null;
 
   return (
-    <Link id={id} test-id={id} className="profile-link" to={to}>
+    <Link id={id} data-testid={id} className="profile-link" to={to}>
       {label}
     </Link>
   );
