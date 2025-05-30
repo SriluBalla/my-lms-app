@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseDB";
 import MenuItem from "./Menu_by_Role";
+import ButtonNav from "./ButtonNav";
+import ButtonAuth from "./ButtonAuth";
 import "../styles/Header.css";
 
 const Header = () => {
@@ -176,34 +178,17 @@ const Header = () => {
                   roles={["superadmin"]}
                   userRole={userRole}
                 />
-                <button
-                  id="signOut"
-                  test-id="signOut"
-                  className="nav-button"
-                  onClick={handleLogout}
-                >
-                  Sign Out
-                </button>
+                <ButtonAuth id="signOut" label="Sign Out" action="signOut" />
+
               </div>
             )}
           </div>
         )}
         {!user && (
           <>
-            <button
-              id="signIn"
-              className="nav-button"
-              onClick={() => navigate("/login")}
-            >
-              Sign In
-            </button>
-            <button
-              id="register"
-              className="nav-button"
-              onClick={() => navigate("/register1")}
-            >
-              Register
-            </button>
+          <ButtonAuth id="signIn" label="Sign In" to="/login" />
+          <ButtonAuth id="red-ack" label="Register" to="/register1" />
+
           </>
         )}
       </nav>

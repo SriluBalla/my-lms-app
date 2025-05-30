@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import imageCompression from "browser-image-compression";
 import { supabase } from "../supabaseDB";
+import ButtonAction from "../components/ButtonAction";
 import ConfirmMessage from "./Msg_in_Body";
 
 const ProfileImageUploader = ({ userId, onUpload }) => {
@@ -107,7 +108,6 @@ const ProfileImageUploader = ({ userId, onUpload }) => {
         Drag and drop an image here, or click below to select a file that is{" "}
         <strong>1 MB or less</strong>
       </p>
-      
 
       <input
         data-testid="file-upload"
@@ -123,16 +123,14 @@ const ProfileImageUploader = ({ userId, onUpload }) => {
             alt="Preview"
             style={{ maxWidth: "150px", borderRadius: "0.5rem" }}
           />
-
-          <button
-            type="button"
+         
+          <ButtonAction
+            id="upload"
+            label={isUploading ? "Uploading..." : "Upload"}
             onClick={handleUpload}
             disabled={isUploading}
             className="button"
-          >
-            {isUploading ? "Uploading..." : "Upload"}
-          </button>
-
+          />
           {/* ✅ Use ConfirmMessage for feedback */}
           {uploadMessage && (
             <ConfirmMessage type={uploadStatus} text={uploadMessage} />

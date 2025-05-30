@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import { useNavigate } from "react-router-dom";
+import ButtonNav from "../components/ButtonNav";
 import "../styles/main.css";
 
 const Red_Acknowledment = () => {
@@ -150,10 +151,9 @@ const Red_Acknowledment = () => {
             never shared for marketing purposes.
           </p>
 
+
           <div className="center-btn">
-            <button className="button" onClick={() => navigate("/register")}>
-              Accept and Continue
-            </button>
+              <ButtonNav id="register" label="Accept and Continue" to="/register" />
           </div>
         </div>
       </div>

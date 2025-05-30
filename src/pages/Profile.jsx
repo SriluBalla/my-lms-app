@@ -11,6 +11,7 @@ import UserRole from "../components/SQL_get_Roles";
 import ProfileImageUploader from "../components/Upload_Helper";
 import { supabase } from "../supabaseDB";
 import AdminNote from "../components/Admin_Notes";
+import ButtonSubmit from "../components/ButtonSubmit";
 import "../styles/main.css";
 
 const Profile = () => {
@@ -212,7 +213,6 @@ const Profile = () => {
     setShowPopup(true);
   };
 
-  
   return (
     <Layout title="Profile" description="Manage your profile">
       <div className="body__outline">
@@ -425,9 +425,8 @@ const Profile = () => {
               type="warn"
             />
 
-            <button type="submit" className="button">
-              Save Profile
-            </button>
+            <ButtonSubmit id="saveProfile" label="Save Profile" />
+            
           </form>
         </div>
       </div>

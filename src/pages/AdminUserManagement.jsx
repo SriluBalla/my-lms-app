@@ -4,6 +4,9 @@ import Layout from "../components/Layout";
 import SavedProfileCard from "../components/Card_Profile";
 import TextAreaInput from "../components/Input_TextArea";
 import ConfirmMessage from "../components/Msg_in_Body";
+import ButtonAction from "../components/ButtonAction";
+
+import "../styles/main.css";
 
 const AdminUserManager = () => {
   const [users, setUsers] = useState([]);
@@ -187,11 +190,12 @@ const AdminUserManager = () => {
           <p>
             Profiles newly created and updated (image, name, Bio) show up in
             this list. <br />
-            Minimum requirement for approval of a user is First name and Last name. <br />
+            Minimum requirement for approval of a user is First name and Last
+            name. <br />
             Make sure the profile picture is of the author's. <br />
-            Inappropriate images will have to be flagged / Correction needed. 
-            Look for Name (First, Last, Preferred) and Self Intro for any inappropriate content.
-            
+            Inappropriate images will have to be flagged / Correction needed.
+            Look for Name (First, Last, Preferred) and Self Intro for any
+            inappropriate content.
           </p>
         </section>
 
@@ -236,36 +240,38 @@ const AdminUserManager = () => {
                         className="text-area"
                       />
 
-                      <button
-                        className="button flagged"
+                      <ButtonAction
+                        id={`flag-${user.user_id}`}
+                        label="Corrections Needed"
+                        className="flagged"
                         onClick={() => {
                           console.log("🚩 Flag clicked for:", user.user_id);
                           handleFlagUser(user.user_id, user.flagNote);
                         }}
-                      >
-                        Corrections Needed
-                      </button>
+                      />
 
-                      <button
-                        className="button approve"
-                        onClick={() =>
-                          updateProfileStatus(user.user_id, "approved")
-                        }
-                      >
-                        Approve
-                      </button>
+                      <ButtonAction
+                        id={`approve-${user.user_id}`}
+                        label="Approve"
+                        className="approve"
+                        onClick={() => {
+                          updateProfileStatus(user.user_id, "approved");
+                        }}
+                      />
                       <ConfirmMessage type={message.type} text={message.text} />
 
                       <h3 className="text-center">Set Role</h3>
+
                       {Object.keys(ROLE_IDS).map((role) => (
-                        <button
+                        <ButtonAction
                           key={role}
+                          id={`set-role-${role}-${user.user_id}`}
+                          label={role.toUpperCase()}
+                          className={role}
                           onClick={() => updateUserRole(user.user_id, role)}
-                          className={`button ${role}`}
-                        >
-                          {role.toUpperCase()}
-                        </button>
+                        />
                       ))}
+
                     </td>
                   </tr>
                 ))}
