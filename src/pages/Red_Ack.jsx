@@ -8,8 +8,10 @@ const Red_Acknowledment = () => {
 
   return (
     <Layout title="Register" description="Create your account page 1">
+      
       <div className="body__outline">
-        <section className="hero__head">
+      
+        <section className="hero heading">
           <h2>Welcome to Registration</h2>
           <p>
             {" "}
@@ -25,7 +27,8 @@ const Red_Acknowledment = () => {
             the Product Owner in Test™ community.
           </p>
         </section>
-        <section className="body__left">
+
+        <section className="hero blue left">
           <h4>📛 First & Last Name</h4>{" "}
           <p>
             <i>
@@ -71,14 +74,13 @@ const Red_Acknowledment = () => {
               number, special char
             </i>
           </p>
-          <h4> 🚻 Gender </h4>
           <h4>🌎 Country of Residence</h4>
           <p>
             We ask for your country of residence to help us understand your time
             zone and provide a more relevant experience when needed.
           </p>
         </section>
-        <section className="body__right">
+        <section className="hero lite-blue right">
           <h4>📸 A profile image</h4>
           <p>
             <i>
@@ -142,7 +144,7 @@ const Red_Acknowledment = () => {
           </p>
         </section>
 
-        <div className="body__center">
+        <div className="hero green">
           <p>
             By clicking <b>“Accept and Continue”</b>, you agree to share the
             information provided above for the purpose of account creation,

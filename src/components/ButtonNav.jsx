@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseDB";
 
-const ButtonAuth = ({ id, label, to, action }) => {
+const ButtonNav = ({ id, label, to, action }) => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
@@ -22,11 +22,11 @@ const ButtonAuth = ({ id, label, to, action }) => {
   );
 };
 
-ButtonAuth.propTypes = {
+ButtonNav.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   to: PropTypes.string,
   action: PropTypes.string, // e.g., "signOut"
 };
 
-export default ButtonAuth;
+export default ButtonNav;

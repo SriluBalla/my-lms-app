@@ -35,7 +35,8 @@ const MemberProfiles = () => {
       image={`${import.meta.env.BASE_URL}/images/global/Seo_pot.png`}
     >
       <div className="body__outline">
-        <section className="hero__head">
+        
+        <section className="hero heading">
           <h2>Member Profiles</h2>
           <p>
             <strong>Sort and filter by Name, Role - User, Member, Leader, Admin, Date joined, Country, No. of years in IT</strong>

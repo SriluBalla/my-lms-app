@@ -185,7 +185,8 @@ const AdminUserManager = () => {
   return (
     <Layout title="User Management" description="Manage user roles">
       <div className="body__outline">
-        <section className="hero__head">
+
+        <section className="hero heading">
           <h2>View and Edit Users</h2>
           <p>
             Profiles newly created and updated (image, name, Bio) show up in
@@ -201,11 +202,11 @@ const AdminUserManager = () => {
 
         <ConfirmMessage type={message.type} text={message.text} />
 
-        <section className="heroOne user-management">
+        <section className="hero lite-blue">
           {loading && <p>Loading users...</p>}
 
           {!loading && (
-            <table className="user-table">
+            <table className="table">
               <thead>
                 <tr>
                   <th className="card user-profile">Profile Updated</th>

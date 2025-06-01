@@ -216,7 +216,7 @@ const Profile = () => {
   return (
     <Layout title="Profile" description="Manage your profile">
       <div className="body__outline">
-        <section className="hero__head">
+        <section className="hero heading">
           <h2>Welcome to Your Profile</h2>
           <p>
             <strong>
@@ -228,12 +228,12 @@ const Profile = () => {
         </section>
 
         {savedProfile && (
-          <section className="body__left">
+          <section className="hero blue left">
             <SavedProfileCard profile={savedProfile} />
           </section>
         )}
 
-        <div className="body__right">
+        <div className="hero lite-blue right">
           <h2>Your Profile</h2>
 
           <ConfirmMessage type={message.type} text={message.text} />

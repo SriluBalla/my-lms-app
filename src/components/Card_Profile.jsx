@@ -34,7 +34,7 @@ const SavedProfileCard = ({ profile }) => {
   return (
     <div className="profile-card">
       <img
-        className="profile-image-preview"
+        className="profile-image"
         src={
           profile_img_url
             ? profile_img_url

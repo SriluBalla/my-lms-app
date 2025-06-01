@@ -11,7 +11,7 @@ const Layout = ({ title, description, keywords, children }) => {
       
       <Header />
 
-      <main className="p-4">
+      <main>
         {children}
       </main>
 

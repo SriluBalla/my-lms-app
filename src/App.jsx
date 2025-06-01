@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import routes from './components/Routes';
-import { supabase } from './supabaseDB';
+import routes from "./components/Routes";
+import { supabase } from "./supabaseDB";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -13,16 +13,24 @@ function App() {
       }
     });
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
 
     return () => listener.subscription.unsubscribe();
   }, []);
 
   return (
-    <Router>
+    <Router
+    future=
+        {{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}>
       <Routes>
+        
         {routes.map(({ path, element }, index) => (
           <Route key={index} path={path} element={element} />
         ))}

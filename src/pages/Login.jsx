@@ -58,8 +58,10 @@ const Login = () => {
 
   return (
     <Layout title="Login" description="Log into your account">
+      
       <section className="body__outline">
-        <div className="body__center">
+      
+        <div className="hero green">
           <h2>Login</h2>
 
           <form onSubmit={handleLogin}>
@@ -109,7 +111,6 @@ const Login = () => {
             </div>
           </form>
 
-          {/* ✅ Show message and logs below the form */}
           <ConfirmMessage type={message.type} text={message.text} />
           {/* <ConsoleLog title="Login Debug Log" logs={logs} /> */}
         </div>

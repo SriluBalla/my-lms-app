@@ -24,8 +24,7 @@ const Register = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const isValidEmail = (email) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
 
   const isValidPassword = (password) =>
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(password);
@@ -42,8 +41,7 @@ const Register = () => {
     if (!isValidPassword(password)) {
       setMessage({
         type: "warn",
-        text:
-          "Password must contain uppercase, lowercase, number, special character, and be at least 8 characters.",
+        text: "Password must contain uppercase, lowercase, number, special character, and be at least 8 characters.",
       });
       return false;
     }
@@ -102,33 +100,34 @@ const Register = () => {
   // };
 
   // Inside your Register.jsx component's handleRegister function:
-const handleRegister = async (e) => {
-  e.preventDefault(); // Ensure this is present
-  // ... (your validation logic) ...
+  const handleRegister = async (e) => {
+    e.preventDefault(); // Ensure this is present
+    // ... (your validation logic) ...
 
-  if (isValid) { // Assuming you have an isValid check
-    console.log("handleRegister: Validation passed, attempting signup..."); // <--- ADD THIS
-    try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      // ... rest of your logic
-    } catch (error) {
-      console.error("Supabase signUp threw an error:", error); // <--- ADD THIS
-      // ...
+    if (isValid) {
+      // Assuming you have an isValid check
+      console.log("handleRegister: Validation passed, attempting signup..."); // <--- ADD THIS
+      try {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
+        // ... rest of your logic
+      } catch (error) {
+        console.error("Supabase signUp threw an error:", error); // <--- ADD THIS
+        // ...
+      }
+    } else {
+      console.log("handleRegister: Validation failed, not calling signUp."); // <--- ADD THIS
     }
-  } else {
-    console.log("handleRegister: Validation failed, not calling signUp."); // <--- ADD THIS
-  }
-};
+  };
   return (
     <Layout title="Register" description="Create your account">
+      
       <section className="body__outline">
-        <div className="body__center">
+      
+        <div className="hero green">
           <h2>Create Account</h2>
-
-          <ConfirmMessage type={message.type} text={message.text} />
 
           <form onSubmit={handleRegister}>
             <TextInput
@@ -144,7 +143,6 @@ const handleRegister = async (e) => {
               maxLength={100}
               autoComplete="email"
               message={formErrors.email}
-              
             />
 
             <PasswordInput
@@ -153,6 +151,7 @@ const handleRegister = async (e) => {
               label="Password"
               name="password"
               placeholder="8 to 50, UPPER lower !@#$ 7889"
+              maxLength={100}
               value={formData.password}
               onChange={handleChange}
               showRules={false}
@@ -195,10 +194,11 @@ const handleRegister = async (e) => {
                 data-testid="btn-register"
                 disabled={loading}
               >
-                {loading ? "Registering..." : "Register"}
+                {loading ? "Registering..." : "Register for your account"}
               </button>
             </div>
           </form>
+          <ConfirmMessage type={message.type} text={message.text} />
         </div>
       </section>
     </Layout>
