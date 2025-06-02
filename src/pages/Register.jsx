@@ -126,7 +126,7 @@ const Register = () => {
       
       <section className="body__outline">
       
-        <div className="hero green">
+        <div className="hero bGreen-bgGreen">
           <h2>Create Account</h2>
 
           <form onSubmit={handleRegister}>

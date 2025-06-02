@@ -28,7 +28,7 @@ const Red_Acknowledment = () => {
           </p>
         </section>
 
-        <section className="hero blue left">
+        <section className="hero blue left flex">
           <h4>📛 First & Last Name</h4>{" "}
           <p>
             <i>
@@ -80,7 +80,8 @@ const Red_Acknowledment = () => {
             zone and provide a more relevant experience when needed.
           </p>
         </section>
-        <section className="hero lite-blue right">
+        
+        <section className="hero lite-blue right flex">
           <h4>📸 A profile image</h4>
           <p>
             <i>
@@ -144,7 +145,7 @@ const Red_Acknowledment = () => {
           </p>
         </section>
 
-        <div className="hero green">
+        <section className="hero bGreen-bgGreen flex">
           <p>
             By clicking <b>“Accept and Continue”</b>, you agree to share the
             information provided above for the purpose of account creation,
@@ -157,7 +158,7 @@ const Red_Acknowledment = () => {
           <div className="center-btn">
               <ButtonNav id="register" label="Accept and Continue" to="/register" />
           </div>
-        </div>
+        </section>
       </div>
     </Layout>
   );

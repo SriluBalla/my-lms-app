@@ -34,7 +34,10 @@ const Login = () => {
     }
 
     if (!normalizedEmail.includes("@")) {
-      setMessage({ type: "error", text: "Please enter a valid email address." });
+      setMessage({
+        type: "error",
+        text: "Please enter a valid email address.",
+      });
       setLogs((prev) => [...prev, "Validation failed: invalid email"]);
       return;
     }
@@ -58,12 +61,11 @@ const Login = () => {
 
   return (
     <Layout title="Login" description="Log into your account">
-      
       <section className="body__outline">
-      
-        <div className="hero green">
-          <h2>Login</h2>
-
+        <div className="hero bGreen-bgGreen">
+          <div>
+            <h2>Login</h2>
+          </div>
           <form onSubmit={handleLogin}>
             <TextInput
               id="email"

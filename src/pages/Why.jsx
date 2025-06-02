@@ -13,7 +13,7 @@ const Why = () => {
       ]}
     >
       <div className="body__outline">
-        <section className="hero lite-blue">
+        <section className="hero lite-blue flex">
           <div className="hero-text">
             <h1>Rethinking the Testing Role in Software Development</h1>
 
@@ -75,7 +75,7 @@ const Why = () => {
 
         {/* QA Challenges  */}
 
-        <section className="hero blue">
+        <section className="hero blue flex">
           <figure>
             <img
               className="hero-image"
@@ -99,7 +99,7 @@ const Why = () => {
           </div>
         </section>
 
-        <section className="hero lite-blue">
+        <section className="hero lite-blue flex">
           <div className="hero-text">
             <h3>Lack of Standardization</h3>
             <p>
@@ -123,7 +123,7 @@ const Why = () => {
           </figure>
         </section>
 
-        <section className="hero blue">
+        <section className="hero blue flex">
           <figure>
             <img
               className="hero-image"
@@ -147,7 +147,7 @@ const Why = () => {
           </div>
         </section>
 
-        <section className="hero lite-blue">
+        <section className="hero lite-blue flex">
           <div className="hero-text">
             <h3>“Bug Finders” and “Final Step”</h3>
             <p>
@@ -180,7 +180,7 @@ const Why = () => {
           </figure>
         </section>
 
-        <section className="hero blue">
+        <section className="hero blue flex">
           <figure>
             <img
               className="hero-image"
@@ -204,7 +204,7 @@ const Why = () => {
           </div>
         </section>
 
-        <section className="hero lite-blue">
+        <section className="hero lite-blue flex">
           <div className="hero-text">
             <h3>QA Role Is Marginalized</h3>
 
@@ -236,7 +236,7 @@ const Why = () => {
           </figure>
         </section>
 
-        <section className="hero blue">
+        <section className="hero blue flex">
           <figure>
             <img
               className="hero-image"
@@ -261,7 +261,7 @@ const Why = () => {
           </div>
         </section>
 
-        <section className="hero lite-blue">
+        <section className="hero lite-blue flex">
           <div className="hero-text">
             <h3>Lack of Organizational Understanding about Testing </h3>
 
@@ -285,7 +285,7 @@ const Why = () => {
           </figure>
         </section>
 
-        <section className="hero blue">
+        <section className="hero blue flex">
           <figure>
             <img
               className="hero-image"
@@ -309,7 +309,7 @@ const Why = () => {
         </section>
 
         {/* Optional CTA  */}
-        <section className="hero lite-blue">
+        <section className="hero lite-blue flex">
           <h2>A new Testing Role — With a Singular Focus on the PRODUCT</h2>
           <p>
             We can’t expect different results by repeating the same approaches.

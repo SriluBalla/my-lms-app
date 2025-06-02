@@ -1,17 +1,18 @@
 * {
   font-family: Georgia, serif;
-  color: #040327;
+  color: black;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .body__outline {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.manifesto {
-  padding: 10px;
+  gap: 2rem;
+  justify-content: space-between;
+  padding: 2rem;
 }
 
 .heading {
@@ -23,66 +24,34 @@
 }
 
 .hero {
-  font-size: 1rem;
   flex-wrap: wrap;
+  gap: 25px;
   justify-content: space-between;
   padding: 20px 10%;
 }
 
-.lite-blue {
-  background: #e3f3fa;
-  border-right: 4px solid #0986bc;
+.flex {
   display: flex;
-}
-
-.blue {
-  background: #7ecbeb;
-  border-left: 4px solid #0986bc;
-  display: flex;
-}
-
-.navy {
-  background: #5651e2;
-  border-right: 4px solid rgb(7, 94, 131);
-  display: flex;
-}
-
-.green {
-  background: #7fe7bf;
-  border-left: 4px solid #0f8156;
-  border-radius: 8px;
-  position: relative;
-  margin: 0 auto;
-  width: auto;
 }
 
 .hero-text {
   flex: 1;
-  min-width: 300px;
   position: relative;
   z-index: 1;
 }
 
 .left {
-  border-left: 4px solid #0986bc;
   float: left;
   flex: 1;
-  width: 50%;
   padding: 2rem;
+  width: 50%;
 }
 
 .right {
-  border-left: 4px solid #0986bc;
   float: right;
   flex: 1;
   padding: 2rem;
   width: 50%;
-}
-
-.hero-center {
-  padding: 8px 16px;
-  margin: 0 auto;
-  background: #78cbee;
 }
 
 .list {
@@ -92,6 +61,59 @@
 p {
   margin-bottom: 30px;
   gap: 25px;
+}
+
+.manifesto-points {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.manifesto-poem {
+  font-family: "Georgia", serif;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 1.8;
+  padding: 1rem;
+  text-align: center;
+}
+
+/*  HERO COLORS with border */
+.lite-blue {
+  background: #e3f3fa;
+  border-right: 4px solid #0986bc;
+  border-radius: 0.5rem;
+}
+
+.blue {
+  background: #7ecbeb;
+  border-left: 4px solid #0986bc;
+  border-radius: 0.5rem;
+}
+
+.bGreen-bgGreen {
+  background: #7fe7bf;
+  border-left: 4px solid #0f8156;
+  border-radius: 8px;
+  /* position: relative; */
+}
+
+.bYellow-bgPink {
+  background: #ede995;
+  border-left: 4px solid #df4cab;
+  border-radius: 0.5rem;
+}
+
+.bgPink-bPink {
+  background: #ed95ce;
+  border-right: 4px solid #b01278;
+  border-radius: 0.5rem;
+}
+
+.manifesto-poem p {
+  margin: 0.5rem 0;
 }
 
 /* Mobile stuff */

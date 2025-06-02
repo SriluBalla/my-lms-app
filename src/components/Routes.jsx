@@ -9,6 +9,7 @@ import Register from "../pages/Register.jsx";
 import Profile from "../pages/Profile.jsx";
 import MemberProfiles from "../pages/MemberProfiles.jsx";
 import Red_Acknowledment from "../pages/Red_Ack.jsx";
+import PotManifesto from "../pages/Pot-Manifesto.jsx";
 import AdminUserManager from "../pages/AdminUserManagement.jsx";
 
 const routes = [
@@ -37,6 +38,10 @@ const routes = [
     element: <Why />,
   },
   {
+    path: "/pot-manifesto",
+    element: <PotManifesto />,
+  },
+  {
     path: "/*",
     element: <NotFound />,
   },
@@ -48,6 +53,7 @@ const routes = [
       </ProtectedRoute>
     ),
   },
+  
   {
     path: "/member-profiles",
     element: (

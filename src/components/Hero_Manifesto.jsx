@@ -4,7 +4,7 @@ import "../styles/main.css";
 
 export default function Hero_Manifesto() {
   return (
-    <section className="hero lite-blue">
+    <section className="hero lite-blue flex">
       <figure>
         <img
           className="hero-image"
@@ -16,22 +16,25 @@ export default function Hero_Manifesto() {
 
       <div className="hero-text">
         <h2>Manifesto</h2>
-        <p className="manifesto">
-          <b>Product</b> over <i>Process</i>
-        </p>
-        <p className="manifesto">
-          <b>Opportunities to Improve</b> not <i>Bugs to Squash</i>
-        </p>
-        <p className="manifesto">
-          <b>How does It Work?</b> not <i>Pass or Fail</i>
-        </p>
-        <p className="manifesto">
-          <b>Complete Product Exploration</b> not <i>Isolated Verification</i>
-        </p>
-        <p className="manifesto">
-          <b>Check Cases After Exploration</b> not
+        <ul class="bullet-no">
+          <li>
+            <b>Product</b> over <i>Process</i>
+          </li>
+          <li>
+            <b>Opportunities to Improve</b> not <i>Bugs to Squash</i>
+          </li>
+          <li>
+            <b>How does It Work?</b> not <i>Pass or Fail</i>
+          </li>
+          <li>
+            <b>Complete Product Exploration</b> not <i>Isolated Verification</i>
+          </li>
+          <li>
+            <b>Check Cases After Exploration</b> not
           <i>Test Cases From Assumptions</i>
-        </p>
+          </li>
+        </ul>
+
         <ButtonNav
           id="pot-manifesto"
           label="POT Manifesto"

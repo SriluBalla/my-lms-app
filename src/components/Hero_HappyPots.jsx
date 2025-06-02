@@ -4,7 +4,7 @@ import "../styles/main.css";
 
 export default function Hero_HappyPots() {
   return (
-    <section className="hero blue">
+    <section className="hero blue flex">
       <div className="hero-text">
         <h2>Welcome to the World of Product Owner in Test™</h2>
         <p>
