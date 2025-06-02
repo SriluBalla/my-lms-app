@@ -42,17 +42,6 @@ label {
   margin-bottom: 5px;
 }
 
-.bullet-no {
-  list-style: none;
-  padding-left: 1.5rem;
-  margin-top: 1rem;
-  font-size: 0.95rem;
-}
-
-.bullet-no li {
-  margin-bottom: 0.5rem;
-}
-
 #yearsExperience {
   width: 30%;
   margin-bottom: 5px;
