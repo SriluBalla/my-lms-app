@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { supabase } from "../supabaseDB";
+import { supabase } from "../../supabaseDB";
 
 
 const MenuItem = ({ to, label, id, roles = [], userRole }) => {

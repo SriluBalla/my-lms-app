@@ -1,8 +1,8 @@
 import React from "react";
-import ButtonNav from "../components/ButtonNav";
-import "../styles/main.css";
+import ButtonNav from "../Button/ButtonNav";
+import "../../styles/main.css";
 
-export default function Hero_HappyPots() {
+export default function HeroHappyPots() {
   return (
     <section className="hero blue flex">
       <div className="hero-text">

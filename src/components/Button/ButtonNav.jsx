@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../supabaseDB";
+import { supabase } from "../../supabaseDB";
 
 const ButtonNav = ({ id, label, to, action }) => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../supabaseDB";
+import { supabase } from "../../supabaseDB";
 
 const UserRole = () => {
   const [userRole, setUserRole] = useState("user");

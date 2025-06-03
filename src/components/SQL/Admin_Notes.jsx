@@ -1,7 +1,7 @@
 // components/ReviewNote.jsx
 import React, { useEffect, useState } from "react";
-import { supabase } from "../supabaseDB";
-import "../styles/main.css";
+import { supabase } from "../../supabaseDB";
+import "../../styles/main.css";
 
 const AdminNote = () => {
   const [note, setNote] = useState(null);

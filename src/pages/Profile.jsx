@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
-import TextInput from "../components/Input_TextField";
-import NumberInput from "../components/Input_Number";
-import TextAreaInput from "../components/Input_TextArea";
-import SelectInput from "../components/Input_Select";
-import SuccessPopup from "../components/Msg_in_Popup";
-import ConfirmMessage from "../components/Msg_in_Body";
-import SavedProfileCard from "../components/Card_Profile";
-import UserRole from "../components/SQL_get_Roles";
-import ProfileImageUploader from "../components/Upload_Helper";
 import { supabase } from "../supabaseDB";
-import AdminNote from "../components/Admin_Notes";
-import ButtonSubmit from "../components/ButtonSubmit";
+import Layout from "../components/Layout";
+import TextInput from "../components/Input/Input_TextField";
+import NumberInput from "../components/Input/Input_Number";
+import TextAreaInput from "../components/Input/Input_TextArea";
+import SelectInput from "../components/Input/Input_Select";
+import SuccessPopup from "../components/Message/Msg_in_Popup";
+import ConfirmMessage from "../components/Message/Msg_in_Body";
+import SavedProfileCard from "../components/SQL/Card_Profile";
+import UserRole from "../components/SQL/SQL_get_Roles";
+import ProfileImageUploader from "../components/SQL/Upload_Helper";
+import AdminNote from "../components/SQL/Admin_Notes";
+import ButtonSubmit from "../components/Button/ButtonSubmit";
 import "../styles/main.css";
 
 const Profile = () => {

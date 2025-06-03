@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../styles/main.css";
+import "../../styles/main.css";
 
 
 const SuccessPopup = ({ message, onClose }) => {

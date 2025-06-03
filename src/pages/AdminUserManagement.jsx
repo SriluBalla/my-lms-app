@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseDB";
 import Layout from "../components/Layout";
-import SavedProfileCard from "../components/Card_Profile";
-import TextAreaInput from "../components/Input_TextArea";
-import ConfirmMessage from "../components/Msg_in_Body";
-import ButtonAction from "../components/ButtonAction";
+import SavedProfileCard from "../components/SQL/Card_Profile";
+import TextAreaInput from "../components/Input/Input_TextArea";
+import ConfirmMessage from "../components/Message/Msg_in_Body";
+import ButtonAction from "../components/Button/ButtonAction";
 
 import "../styles/main.css";
 

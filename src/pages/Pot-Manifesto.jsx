@@ -76,14 +76,14 @@ const PotManifesto = () => {
                   Processes are tools, not goals. They can guide us, but they
                   must never blind us.
                 </li>
-                <li>We challenge rituals that ignore reality.</li>
+                <li>We bypass rituals that ignore reality.</li>
                 <li>
-                  We prioritize working features, truthful behavior, and user
+                  We prioritize working features, actual behavior, and user
                   experience over procedural perfection.
                 </li>
                 <li>
-                  We adapt the process to fit the product—not the other way
-                  around.
+                  We adapt the process to fit the product exploration, NOT the
+                  other way around.
                 </li>
                 <li>
                   Because what matters most is not how well we followed the
@@ -97,9 +97,8 @@ const PotManifesto = () => {
                 <p>The template never tapped the screen.</p>
                 <p> Only the product holds the truth.</p>
                 <p>
-                  So we follow the product,
-                  <br />
-                  Not the path someone else drew on a paper.
+                  So we follow the product, Not the path someone else drew on a
+                  paper.
                 </p>
               </div>
             </div>
@@ -131,7 +130,7 @@ const PotManifesto = () => {
                 </li>
                 <li>
                   Our goal is not to say, “Something is broken,” but to ask,
-                  “How can this be better?”
+                  “How can this issue be solved for good?”
                 </li>
               </ul>
             </div>
@@ -209,18 +208,17 @@ const PotManifesto = () => {
             <div>
               <ul class="manifesto-points">
                 <li>
-                  Requirement verification asks, “Does it meet expectations?”
+                  Requirement verification asks, “Does this unit meet
+                  expectations?”
                 </li>
                 <li>
-                  Product exploration goes deeper and asks, “How does it
-                  actually behave?”
+                  Product exploration goes deeper and asks, “How does the whole
+                  product behave?”
                 </li>
                 <li>
-                  We don’t stop at isolated checks of individual features.
-                </li>
-                <li>
-                  We observe the product in motion—in integration, in user flow,
-                  in real-world edge cases.
+                  We observe for consistancy among the product in pages, in
+                  features, in codding standards, in motion—in integration, in
+                  user flow, in real-world edge cases.
                 </li>
                 <li>
                   We examine how it behaves when systems talk to each other,
@@ -229,12 +227,12 @@ const PotManifesto = () => {
                 </li>
                 <li>
                   True insight does not come from confirming what we already
-                  believe.
+                  believe. It comes from discovering what we didn’t think to
+                  ask.
                 </li>
-                <li>It comes from discovering what we didn’t think to ask.</li>
                 <li>
-                  Exploration is how we learn what the product truly is—not just
-                  what it was supposed to be.
+                  Exploration is how we learn what the product truly is, not
+                  just what it was supposed to be.
                 </li>
               </ul>
             </div>
@@ -270,38 +268,36 @@ const PotManifesto = () => {
                   test cases built from assumptions in the requirements.
                 </li>
                 <li>
-                  Check cases are grounded in truth. They capture how the
-                  product actually behaves: with meaningful steps, real data,
-                  annotated screenshots, and contextual knowledge.
-                </li>
-                <li>
-                  They support the product through releases, updates, audits,
-                  and user support—because they reflect what is real.
-                </li>
-                <li>
                   Test cases written too early—based on incomplete specs or
                   imagined behavior—often validate intention but miss reality.
                 </li>
                 <li>
-                  They ignore visual inconsistencies, data insights, system
-                  interactions, or UX friction points that only surface through
-                  use.
+                  Check cases are grounded in truth. They capture how the
+                  product actually behaves: with action steps, data from
+                  databases, annotated screenshots, and contextual knowledge.
                 </li>
                 <li>
-                  Exploration comes first. Documentation follows
-                  understanding—not the other way around.
+                  We support the product through releases, updates, audits, and
+                  user support, because they reflect what is real.
+                </li>
+
+                <li>
+                  We pay attention to visual inconsistencies, data insights,
+                  system interactions, or UX friction points that only surface
+                  through use.
+                </li>
+                <li>
+                  Exploration comes first. Documentation follows from the
+                  understanding, not the other way around.
                 </li>
               </ul>
             </div>
 
             <div class="manifesto-poem bgPoem">
-              <p>
-                Documentation follows understanding—not the other way around.
-              </p>
               <p>You can’t write a map for a land you haven’t walked.</p>
-              <p>We do not invent steps—we trace them.</p>
-              <p> We do not assume data—we observe it.</p>
-              <p>We do not guess what should happen—we test what does.</p>
+              <p>We do not invent steps, we trace them.</p>
+              <p> We do not assume data, we observe it.</p>
+              <p>We do not guess what should happen, we test what does.</p>
               <p>
                 Check cases are crafted after the journey, not drawn from
                 wishful blueprints.
@@ -318,9 +314,10 @@ const PotManifesto = () => {
 
           <div class="principle">
             <h3>We are Quality Assistants. We are not Quality Assurance.</h3>
+
+            <h4>Quality is everyone’s responsibility.</h4>
             <p>
-              <em>Quality is everyone’s responsibility.</em>
-              <br />
+              {" "}
               Quality cannot be measured by pass rates or assured by documents.
               But it can be <strong>supported</strong>,{" "}
               <strong>observed</strong>, and <strong>refined</strong> through
@@ -418,9 +415,9 @@ const PotManifesto = () => {
           <div class="principle">
             <h3>We seek understanding, not just validation.</h3>
             <p>
-              Validation asks, <em>“Did we build it right?”</em>
+              Validation asks, <b>“Did we build it right?”</b>
               <br />
-              Understanding asks, <em>“What have we really built?”</em>
+              Understanding asks, <b>“What have we really built?”</b>
               <br />
               We pursue the kind of knowledge that helps people fix, improve,
               connect, and evolve the product—not just ship it.

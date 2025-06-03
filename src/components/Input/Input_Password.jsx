@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/main.css"; // Adjust if needed
+import "../../styles/main.css"; // Adjust if needed
 
 const PasswordInput = ({
   label,

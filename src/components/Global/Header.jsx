@@ -1,10 +1,10 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { supabase } from "../supabaseDB";
-import MenuItem from "./Menu_by_Role";
-import ButtonNav from "./ButtonNav";
-import "../styles/Header.css";
+import { supabase } from "../../supabaseDB";
+import MenuItem from "../SQL/Menu_by_Role";
+import ButtonNav from "../Button/ButtonNav";
+import "../../styles/Header.css";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);

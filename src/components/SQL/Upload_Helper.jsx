@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import imageCompression from "browser-image-compression";
-import { supabase } from "../supabaseDB";
-import ButtonAction from "../components/ButtonAction";
-import ConfirmMessage from "./Msg_in_Body";
+import { supabase } from "../../supabaseDB";
+import ButtonAction from "../Button/ButtonAction";
+import ConfirmMessage from "../Message/Msg_in_Body";
 
 const ProfileImageUploader = ({ userId, onUpload }) => {
   const [profileImage, setProfileImage] = useState(null);

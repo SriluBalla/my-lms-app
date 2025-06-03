@@ -1,7 +1,7 @@
 import React from 'react';
-import SEO from './SEO';
-import Header from './Header';
-import Footer from './Footer';
+import SEO from './Global/SEO';
+import Header from './Global/Header';
+import Footer from './Global/Footer';
 
 
 const Layout = ({ title, description, keywords, children }) => {

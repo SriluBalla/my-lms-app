@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../styles/Message.css";
+import "../../styles/Message.css";
 
 const ConfirmMessage = ({ type, text }) => {
   const [visible, setVisible] = useState(!!text);

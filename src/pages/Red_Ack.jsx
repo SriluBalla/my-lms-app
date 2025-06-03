@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import { useNavigate } from "react-router-dom";
-import ButtonNav from "../components/ButtonNav";
+import ButtonNav from "../components/Button/ButtonNav";
 import "../styles/main.css";
 
 const Red_Acknowledment = () => {
