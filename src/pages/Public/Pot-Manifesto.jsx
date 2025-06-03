@@ -70,7 +70,7 @@ const PotManifesto = () => {
               Product <em>Over</em> <i>Process</i>
             </h2>
             <div>
-              <ul class="manifesto-points">
+              <ul className="manifesto-points">
                 <li>We do not serve the process—we serve the product.</li>
                 <li>
                   Processes are tools, not goals. They can guide us, but they
@@ -92,7 +92,7 @@ const PotManifesto = () => {
                 </li>
               </ul>
 
-              <div class="manifesto-poem bgPoem">
+              <div className="manifesto-poem bgPoem">
                 <p>The checklist never felt the pain.</p>
                 <p>The template never tapped the screen.</p>
                 <p> Only the product holds the truth.</p>
@@ -114,7 +114,7 @@ const PotManifesto = () => {
               Opportunities to Improve, <em>Not</em> <i>Bugs to Squash</i>
             </h2>
             <div>
-              <ul class="manifesto-points">
+              <ul className="manifesto-points">
                 <li>
                   Every issue we encounter is a signal—an opportunity to refine,
                   reimagine, or reinforce the product.{" "}
@@ -134,7 +134,7 @@ const PotManifesto = () => {
                 </li>
               </ul>
             </div>
-            <div class="manifesto-poem bgPoem">
+            <div className="manifesto-poem bgPoem">
               <p>We don’t chase flaws with a hammer in hand.</p>
               <p>We do not hunt defects. We uncover possibilities.</p>
               <p>
@@ -157,7 +157,7 @@ const PotManifesto = () => {
               How Does It Work? <em>Not </em> <i>Pass or Fail</i>
             </h2>
             <div>
-              <ul class="manifesto-points">
+              <ul className="manifesto-points">
                 <li>
                   The product is what it is—not what it was meant to be. Our
                   goal is not to declare whether a feature <u>“passes”</u> or{" "}
@@ -183,7 +183,7 @@ const PotManifesto = () => {
                 </li>
               </ul>
             </div>
-            <div class="manifesto-poem bgPoem">
+            <div className="manifesto-poem bgPoem">
               <p>We don’t just ask, “Did it pass?”</p>
               <p>We ask, “What does this do in the hands of the user?”</p>
               <p>
@@ -206,7 +206,7 @@ const PotManifesto = () => {
               <i>Isolated Verification</i>
             </h2>
             <div>
-              <ul class="manifesto-points">
+              <ul className="manifesto-points">
                 <li>
                   Requirement verification asks, “Does this unit meet
                   expectations?”
@@ -236,7 +236,7 @@ const PotManifesto = () => {
                 </li>
               </ul>
             </div>
-            <div class="manifesto-poem bgPoem">
+            <div className="manifesto-poem bgPoem">
               <p>Boxes don’t build confidence.</p>
               <p>Pass marks don’t tell stories.</p>
               <p>
@@ -262,7 +262,7 @@ const PotManifesto = () => {
               <i>Test Cases From Assumptions </i>
             </h2>
             <div>
-              <ul class="manifesto-points">
+              <ul className="manifesto-points">
                 <li>
                   We write check cases after we’ve explored the product— not
                   test cases built from assumptions in the requirements.
@@ -293,7 +293,7 @@ const PotManifesto = () => {
               </ul>
             </div>
 
-            <div class="manifesto-poem bgPoem">
+            <div className="manifesto-poem bgPoem">
               <p>You can’t write a map for a land you haven’t walked.</p>
               <p>We do not invent steps, we trace them.</p>
               <p> We do not assume data, we observe it.</p>
@@ -312,7 +312,7 @@ const PotManifesto = () => {
         <section id="guiding-principles" className="hero guiding-principle">
           <h2>🧭 Guiding Principles</h2>
 
-          <div class="principle">
+          <div className="principle">
             <h3>We are Quality Assistants. We are not Quality Assurance.</h3>
 
             <h4>Quality is everyone’s responsibility.</h4>
@@ -328,7 +328,7 @@ const PotManifesto = () => {
             </p>
           </div>
 
-          <div class="principle">
+          <div className="principle">
             <h3>You cannot weigh the baby until it’s born.</h3>
             <p>
               You can’t measure value from diagrams, specs, or intentions alone.
@@ -340,7 +340,7 @@ const PotManifesto = () => {
             </p>
           </div>
 
-          <div class="principle">
+          <div className="principle">
             <h3>
               We stand at the product’s edge—where development ends and reality
               begins.
@@ -357,7 +357,7 @@ const PotManifesto = () => {
             </p>
           </div>
 
-          <div class="principle">
+          <div className="principle">
             <h3>Every working feature deserves to be questioned.</h3>
             <p>
               Just because it functions doesn’t mean it helps.
@@ -380,7 +380,7 @@ const PotManifesto = () => {
             </p>
           </div>
 
-          <div class="principle">
+          <div className="principle">
             <h3>
               We do not “break” the product—we discover where it is broken.
             </h3>
@@ -392,7 +392,7 @@ const PotManifesto = () => {
             </p>
           </div>
 
-          <div class="principle">
+          <div className="principle">
             <h3>Check Cases are not renamed Test Cases.</h3>
             <p>
               We don’t just verify what’s expected—we uncover what <em>is</em>.
@@ -412,7 +412,7 @@ const PotManifesto = () => {
             </p>
           </div>
 
-          <div class="principle">
+          <div className="principle">
             <h3>We seek understanding, not just validation.</h3>
             <p>
               Validation asks, <b>“Did we build it right?”</b>

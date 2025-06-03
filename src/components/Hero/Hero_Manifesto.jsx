@@ -16,7 +16,7 @@ export default function HeroManifesto() {
 
       <div className="hero-text">
         <h2>Manifesto</h2>
-        <ul class="bullet-no">
+        <ul className="bullet-no">
           <li>
             <b>Product</b> over <i>Process</i>
           </li>
