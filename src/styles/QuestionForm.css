@@ -1,0 +1,33 @@
+/* ======= BODY ======== */
+.add-question-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.form-body {
+  padding: 40px;
+}
+
+/* ====== CHECKBOX ======== */
+.checkbox-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkbox-form label {
+  font-weight: bold;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.option-row input[type="text"] {
+  flex: 1;
+  padding: 6px;
+}
+

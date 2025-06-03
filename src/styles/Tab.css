@@ -1,0 +1,22 @@
+.tab-nav {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 16px;
+}
+
+.tab-link {
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 12px 20px;
+  margin-right: 8px;
+  transition: background 0.2s ease;
+}
+
+.tab-link:hover {
+  font-style: italic;
+}
+
+.tab-link.active {
+  font-weight: bold;
+}
+

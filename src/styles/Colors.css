@@ -1,0 +1,59 @@
+/*   COLORS with border */
+.lite-blue {
+  background: #e3f3fa;
+  border-right: 4px solid #0986bc;
+}
+
+.blue {
+  background: #7ecbeb;
+  border-left: 4px solid #0986bc;
+}
+
+.bPink-bgYellow {
+  background: #eae47c;
+  border-left: 4px solid #df4cab;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.bRed-bgRed {
+  background: rgb(247, 219, 219);
+  border-left: 4px solid red;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.bOrange-bgYellow {
+  background: rgb(241, 243, 163);
+  border-left: 4px solid orange;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.bGreen-bgGreen {
+  background: #7fe7bf;
+  border-left: 4px solid #0f8156;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.bNavy-bgBlue {
+  background: rgb(177, 177, 235);
+  border-left: 4px solid blue;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.bPurple-bgViolet {
+  background: rgb(217, 158, 217);
+  border-left: 4px solid purple;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.guiding-principle {
+  background: rgb(220, 236, 212);
+  border-left: 4px solid rgb(34, 85, 7);
+  padding-bottom: 15px;
+  padding-top: 15px;
+}

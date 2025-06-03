@@ -10,7 +10,8 @@ import Profile from "../pages/Profile.jsx";
 import MemberProfiles from "../pages/Public/MemberProfiles.jsx";
 import Red_Acknowledment from "../pages/Auth/Red_Ack.jsx";
 import PotManifesto from "../pages/Public/Pot-Manifesto.jsx";
-import AdminUserManager from "../pages/Admin/AdminUserManagement.jsx";
+import AdminUserManager from "../pages/Admin/UserManagement.jsx";
+import AddQuestions from "../pages/Admin/AddQuestions.jsx"
 
 const routes = [
   {
@@ -53,7 +54,14 @@ const routes = [
       </ProtectedRoute>
     ),
   },
-  
+  {
+    path: "/admin-add-questions",
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "superadmin", "lead"]}>
+        <AddQuestions />
+      </ProtectedRoute>
+    ),
+  },
   {
     path: "/member-profiles",
     element: (

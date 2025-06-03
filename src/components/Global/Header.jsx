@@ -138,10 +138,10 @@ const Header = () => {
             {dropdownOpen && (
               <div className="profile-menu">
                 <MenuItem
-                  id="account"
-                  testId="account"
-                  label="Account"
-                  to="/account"
+                  id="add-questions"
+                  data-testId="add-questions"
+                  label="Add Questions"
+                  to="/admin-add-questions"
                   roles={["user", "member", "admin", "superadmin"]}
                   userRole={userRole}
                 />

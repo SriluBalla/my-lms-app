@@ -9,6 +9,7 @@ const TextAreaInput = ({
   onChange,
   maxLength = 1000,
   rows = 6,
+  required = false,
   error,
 }) => {
   return (
@@ -23,8 +24,10 @@ const TextAreaInput = ({
         onChange={onChange}
         maxLength={maxLength}
         rows={rows}
+        required={required}
         className={error ? "error" : ""}
       />
+      <br />
       <em>
         {(value?.length || 0)}/{maxLength} characters
       </em>
