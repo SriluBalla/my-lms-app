@@ -2,7 +2,7 @@ import React from "react";
 import { describe, it, expect } from "vitest";
 import { render, waitFor } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
-import SEO from "../../components/SEO";
+import SEO from "../../components/Global/SEO";
 
 const renderWithHelmet = (ui) =>
   render(<HelmetProvider>{ui}</HelmetProvider>);

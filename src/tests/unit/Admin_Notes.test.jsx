@@ -1,7 +1,7 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
-import AdminNote from "../../components/Admin_Notes"; // ✅ Confirm the filename
+import AdminNote from "../../components/SQL/Admin_Notes"; // ✅ Confirm the filename
 
 // ✅ Supabase mock
 vi.mock("../../supabaseDB", () => {

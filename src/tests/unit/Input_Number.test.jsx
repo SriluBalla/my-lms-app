@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import NumberInput from "../../components/Input_Number";
+import NumberInput from "../../components/Input/Input_Number";
 
 describe("NumberInput", () => {
   const defaultProps = {

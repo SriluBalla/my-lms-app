@@ -1,7 +1,7 @@
 import React from "react";
 import { describe, it, expect, vi, beforeAll, beforeEach, afterAll } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import ProfileImageUploader from "../../components/Upload_Helper";
+import ProfileImageUploader from "../../components/SQL/Upload_Helper";
 import imageCompression from "browser-image-compression";
 
 // ✅ Mock createObjectURL

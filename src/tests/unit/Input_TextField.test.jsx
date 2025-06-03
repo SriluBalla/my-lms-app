@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import TextInput from "../../components/Input_TextField";
+import TextInput from "../../components/Input/Input_TextField";
 
 describe("TextInput", () => {
   it("renders label and input with required asterisk", () => {

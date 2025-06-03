@@ -2,9 +2,10 @@ import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { MemoryRouter, Route, Routes as RouterRoutes } from "react-router-dom";
 import { render, screen, waitFor } from "@testing-library/react";
-import appRoutes from "../../components/Routes";
 import { supabase } from "../../supabaseDB";
-import { HelmetProvider } from "react-helmet-async"; // ✅ ADD THIS
+import { HelmetProvider } from "react-helmet-async"; 
+import appRoutes from "../../components/Routes";
+
 
 // ✅ Supabase mock setup (place this before importing supabase)
 vi.mock("../../supabaseDB", () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../components/Layout';
-import '../styles/NotFound.css';
+import Layout from '../../components/Layout';
+import '../../styles/NotFound.css';
 
 const NotFound = () => {
   const images = [

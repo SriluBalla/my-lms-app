@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from "../components/Layout";
-import HeroManifesto from "../components/Hero/Hero_Manifesto";
-import HeroHappyPots from "../components/Hero/Hero_HappyPots";
-import "../styles/main.css";
+import Layout from "../../components/Layout";
+import HeroManifesto from "../../components/Hero/Hero_Manifesto";
+import HeroHappyPots from "../../components/Hero/Hero_HappyPots";
+import "../../styles/main.css";
 
 const Home = () => {
   return (

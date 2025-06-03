@@ -1,5 +1,5 @@
-import Layout from "../components/Layout";
-import "../styles/main.css";
+import Layout from "../../components/Layout";
+import "../../styles/main.css";
 
 const QAtoPOT = () => {
   return (

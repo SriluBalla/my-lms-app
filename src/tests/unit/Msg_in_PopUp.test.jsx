@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import SuccessPopup from "../../components/Msg_in_PopUp";
+import SuccessPopup from "../../components/Message/Msg_in_PopUp";
 
 vi.useFakeTimers();
 

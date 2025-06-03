@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/Layout";
-import TextInput from "../components/Input/Input_TextField";
-import PasswordInput from "../components/Input/Input_Password";
-import ConfirmMessage from "../components/Message/Msg_in_Body";
-import { supabase } from "../supabaseDB";
-import "../styles/main.css";
+import Layout from "../../components/Layout";
+import TextInput from "../../components/Input/Input_TextField";
+import PasswordInput from "../../components/Input/Input_Password";
+import ConfirmMessage from "../../components/Message/Msg_in_Body";
+import { supabase } from "../../supabaseDB";
+import "../../styles/main.css";
 
 const Register = () => {
   const navigate = useNavigate();

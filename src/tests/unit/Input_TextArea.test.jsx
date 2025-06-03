@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import TextAreaInput from "../../components/Input_TextArea";
+import TextAreaInput from "../../components/Input/Input_TextArea";
 
 describe("TextAreaInput", () => {
   it("renders the textarea with label", () => {

@@ -2,7 +2,7 @@ import React from "react"; // ✅ Required for JSX
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import ProtectedRoute from "../../components/SQL_Role_Assignment";
+import ProtectedRoute from "../../components/SQL/SQL_Role_Assignment";
 
 // 🔥 Important: DO NOT import `supabase` directly — let Vitest mock it
 vi.mock("../../supabaseDB", () => {

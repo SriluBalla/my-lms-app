@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import SavedProfileCard from "../../components/Card_Profile";
+import SavedProfileCard from "../../components/SQL/Card_Profile";
 
 describe("SavedProfileCard", () => {
   const mockProfile = {

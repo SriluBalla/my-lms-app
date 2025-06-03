@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { describe, it, vi, beforeEach } from "vitest";
-import UserRole from "../../components/SQL_get_Roles";
+import UserRole from "../../components/SQL/SQL_get_Roles";
 
 let mockRole = "user";
 

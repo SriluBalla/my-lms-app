@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import ConfirmMessage from "../../components/Msg_in_Body";
+import ConfirmMessage from "../../components/Message/Msg_in_Body";
 
 describe("ConfirmMessage", () => {
   it("renders success message", () => {

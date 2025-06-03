@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import ConsoleLog from "../../components/Msg_ConsoleLog";
+import ConsoleLog from "../../components/Message/Msg_ConsoleLog";
 
 describe("ConsoleLog", () => {
   const sampleLogs = ["Log message 1", { msg: "Log message 2" }];

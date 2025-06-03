@@ -1,16 +1,16 @@
 import React from "react";
 import ProtectedRoute from "./SQL/SQL_Role_Assignment.jsx";
-import Home from "../pages/Index.jsx";
-import NotFound from "../pages/NotFound.jsx"; 
-import QAtoPot from "../pages/QAtoPot.jsx";
-import Why from "../pages/Why.jsx";
-import Login from "../pages/Login.jsx";
-import Register from "../pages/Register.jsx";
+import Home from "../pages/Public/Index.jsx";
+import NotFound from "../pages/Public/NotFound.jsx"; 
+import QAtoPot from "../pages/Public/QAtoPot.jsx";
+import Why from "../pages/Public/Why.jsx";
+import Login from "../pages/Auth/Login.jsx";
+import Register from "../pages/Auth/Register.jsx";
 import Profile from "../pages/Profile.jsx";
-import MemberProfiles from "../pages/MemberProfiles.jsx";
-import Red_Acknowledment from "../pages/Red_Ack.jsx";
-import PotManifesto from "../pages/Pot-Manifesto.jsx";
-import AdminUserManager from "../pages/AdminUserManagement.jsx";
+import MemberProfiles from "../pages/Public/MemberProfiles.jsx";
+import Red_Acknowledment from "../pages/Auth/Red_Ack.jsx";
+import PotManifesto from "../pages/Public/Pot-Manifesto.jsx";
+import AdminUserManager from "../pages/Admin/AdminUserManagement.jsx";
 
 const routes = [
   {

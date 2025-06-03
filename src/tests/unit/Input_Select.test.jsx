@@ -1,7 +1,7 @@
 // Input_Select.test.jsx
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import SelectInput from "../../components/Input_Select";
+import SelectInput from "../../components/Input/Input_Select";
 
 describe("SelectInput", () => {
   const options = ["Option 1", "Option 2", "Option 3"];

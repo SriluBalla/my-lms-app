@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../supabaseDB";
-import Layout from "../components/Layout";
-import SavedProfileCard from "../components/SQL/Card_Profile";
-import "../styles/main.css";
+import { supabase } from "../../supabaseDB";
+import Layout from "../../components/Layout";
+import SavedProfileCard from "../../components/SQL/Card_Profile";
+import "../../styles/main.css";
 
 const MemberProfiles = () => {
   const [members, setMembers] = useState([]);

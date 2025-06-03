@@ -4,13 +4,13 @@ import { render, screen } from "@testing-library/react";
 import Layout from "../../components/Layout";
 
 // ✅ Mock Header, Footer, and SEO so we can isolate Layout
-vi.mock("../../components/Header", () => ({
+vi.mock("../../components/Global/Header", () => ({
   default: () => <header data-testid="header">Mock Header</header>,
 }));
-vi.mock("../../components/Footer", () => ({
+vi.mock("../../components/Global/Footer", () => ({
   default: () => <footer data-testid="footer">Mock Footer</footer>,
 }));
-vi.mock("../../components/SEO", () => ({
+vi.mock("../../components/Global/SEO", () => ({
   default: ({ title, description, keywords }) => (
     <div data-testid="seo">
       SEO: {title} | {description} | {keywords?.join(", ")}
