@@ -1,33 +1,27 @@
-/* ======= BODY ======== */
-.add-question-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 24px;
-}
-
-.form-body {
-  padding: 40px;
-}
 
 /* ====== CHECKBOX ======== */
 .checkbox-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 5px;
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 25px;
 }
 
-.checkbox-form label {
-  font-weight: bold;
+.check-box {
+  height: 20px;
+  width: auto;
+}
+
+.check-box:hover {
+  background-color: #ccc;
 }
 
 .option-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.option-row input[type="text"] {
-  flex: 1;
-  padding: 6px;
+  gap: 15px;
 }
 

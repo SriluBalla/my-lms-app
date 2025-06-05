@@ -1,24 +1,16 @@
 * {
   border-radius: 5px;
 }
-.custom-country-input {
-  padding: 2rem;
-}
-
-.ddl-select {
-}
 
 .ddl-group {
   display: flex;
   gap: 2rem;
 }
+
 em {
   font-size: 0.9rem;
   color: #666;
   margin-top: 4px;
-}
-
-.group-links {
 }
 
 .role-display {

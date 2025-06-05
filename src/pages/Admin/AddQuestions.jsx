@@ -1,7 +1,15 @@
-import React, { useEffect, useState } from "react";
-// import { supabase } from "../../supabaseDB";
+import { useState, useEffect } from "react";
+import { supabase } from "../../supabaseDB";
 import Layout from "../../components/Layout";
+import TabbedPanel from "../../components/UI/TabbedPanel";
+import SelectChapter from "../../components/SQL/DDL_SelectChapter";
 import FormCheckbox from "../../components/Question/Form_CheckBox";
+import PreviewCheckboxQuestion from "../../components/Question/Q_CheckBox";
+// import FormRadiobutton from "../../components/Question/Form_Radiobutton";
+// import FormTrueFalse from "../../components/Question/Form_TrueFalse";
+// import FormMatchColumns from "../../components/Question/Form_Match";
+// import FormFillInTheBlank from "../../components/Question/Form_FillInTheBlank";
+// import FormShortAnswer from "../../components/Question/Form_ShortAnswer";
 import "../../styles/main.css";
 
 const TABS = [
@@ -29,9 +37,17 @@ const TABS = [
   { key: "shortanswer", label: "Short Answer", colorClass: "bPurple-bgViolet" },
 ];
 
-const AddQuestions = () => {
-  const [activeTab, setActiveTab] = useState("checkbox");
-  const activeTabObj = TABS.find((tab) => tab.key === activeTab);
+export default function AddQuestions() {
+  const [chapter, setChapter] = useState("");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function getUser() {
+      const { data } = await supabase.auth.getUser();
+      setUser(data?.user || null);
+    }
+    getUser();
+  }, []);
 
   return (
     <Layout
@@ -40,34 +56,25 @@ const AddQuestions = () => {
     >
       <div className="body__outline">
         <div className="add-question-wrapper">
-          <h1 className="form-title">Add a New Question</h1>
-
-          <nav className="tab-nav">
-            {TABS.map((tab) => (
-              <span
-                key={tab.key}
-                className={`tab-link ${tab.colorClass} ${
-                  activeTab === tab.key ? "active" : ""
-                }`}
-                onClick={() => setActiveTab(tab.key)}
-              >
-                {tab.label}
-              </span>
-            ))}
-          </nav>
-
-          <div className={`form-body ${activeTabObj?.colorClass}`}>
-            {activeTab === "checkbox" && <FormCheckbox />}
-            {activeTab === "radiobutton" && <FormRadiobutton />}
-            {activeTab === "truefalse" && <FormTrueFalse />}
-            {activeTab === "match" && <FormMatchColumns />}
-            {activeTab === "fillblank" && <FormFillInTheBlank />}
-            {activeTab === "shortanswer" && <FormShortAnswer />}
+          <div className="ddl-group">
+            <h1>Add a New Question for Chapter</h1>
+            <SelectChapter value={chapter} onChange={setChapter} />
           </div>
+
+          <TabbedPanel tabs={TABS} defaultTab="checkbox">
+            {{
+              checkbox: <FormCheckbox chapterId={chapter} user={user} />,
+              // radiobutton: <FormRadiobutton chapterId={chapter} user={user} />,
+              // truefalse: <FormTrueFalse chapterId={chapter} user={user} />,
+              // matchcolumn: <FormMatchColumns chapterId={chapter} user={user} />,
+              // fillintheblank: <FormFillInTheBlank chapterId={chapter} user={user} />,
+              // shortanswer: <FormShortAnswer chapterId={chapter} user={user} />,
+            }}
+          </TabbedPanel>
         </div>
+        
       </div>
+      
     </Layout>
   );
-};
-
-export default AddQuestions;
+}
