@@ -4,7 +4,6 @@ import Layout from "../../components/Layout";
 import TabbedPanel from "../../components/UI/TabbedPanel";
 import SelectChapter from "../../components/SQL/DDL_SelectChapter";
 import FormCheckbox from "../../components/Question/Form_CheckBox";
-import PreviewCheckboxQuestion from "../../components/Question/Q_CheckBox";
 // import FormRadiobutton from "../../components/Question/Form_Radiobutton";
 // import FormTrueFalse from "../../components/Question/Form_TrueFalse";
 // import FormMatchColumns from "../../components/Question/Form_Match";
