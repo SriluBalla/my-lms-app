@@ -36,6 +36,7 @@
   background: linear-gradient(to top, #0b632b, #8be7ad);
 }
 
+
 .button.superadmin {
   display: none;
 }
@@ -44,6 +45,11 @@
   background: #0a8bb7;
   font-weight: bold;
   color: white;
+}
+
+#deleteQuestion {
+  background: linear-gradient(to top, #e11111, #d18010);
+  color: black;
 }
 
 .save-button {

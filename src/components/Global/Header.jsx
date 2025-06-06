@@ -146,6 +146,22 @@ const Header = () => {
                   userRole={userRole}
                 />
                 <MenuItem
+                  id="edit-questions"
+                  data-testid="edit-questions"
+                  label="Edit Questions"
+                  to="/admin-edit-questions"
+                  roles={["user", "member", "admin", "superadmin"]}
+                  userRole={userRole}
+                />
+                <MenuItem
+                  id="grade-questions"
+                  data-testid="grade-questions"
+                  label="Grade Questions"
+                  to="/admin-grade-questions"
+                  roles={["user", "member", "admin", "superadmin"]}
+                  userRole={userRole}
+                />
+                <MenuItem
                   id="profile"
                   testId="profile"
                   label="Profile"

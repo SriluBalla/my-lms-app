@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { supabase } from "../../supabaseDB";
-import TextAreaInput from "../Input/Input_TextArea";
-import ButtonSubmit from "../Button/ButtonSubmit";
-import Msg_in_Body from "../Message/Msg_in_Body";
-import "../../styles/main.css";
+import { supabase } from "../../../supabaseDB";
+import TextAreaInput from "../../Input/Input_TextArea";
+import ButtonSubmit from "../../Button/ButtonSubmit";
+import Msg_in_Body from "../../Message/Msg_in_Body";
+import "../../../styles/main.css";
 
-export default function FormCheckbox({ chapterId, user }) {
+export default function AddCheckbox({ chapterId, user }) {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(
     Array(5).fill({ text: "", isCorrect: false })
@@ -24,51 +24,31 @@ export default function FormCheckbox({ chapterId, user }) {
     const filledOptions = options.filter((opt) => opt.text.trim() !== "");
 
     if (!chapterId || !question.trim() || filledOptions.length < 2) {
-  setMessage({
-    type: "error",
-    text: "Please enter at least two options and select a chapter.",
-  });
-  return;
-}
-
-    // Insert into checkbox_questions
-    const { data: questionData, error: questionError } = await supabase
-      .from("checkbox_questions")
-      .insert({
-        chapter_id: chapterId,
-        question_text: question,
-        created_by: user?.id,
-      })
-      .select()
-      .single();
-
-    if (questionError) {
-      console.error("Error saving question:", questionError.message);
-      setMessage({ type: "error", text: "Failed to save question." });
+      setMessage({
+        type: "error",
+        text: "Please enter at least two options and select a chapter.",
+      });
       return;
     }
 
-    const questionId = questionData.id;
-
-    // Insert each option
-    const optionsToInsert = filledOptions.map((opt) => ({
+    // Prepare column-value pairs for options
+    const payload = {
       chapter_id: chapterId,
-      question_id: questionId,
-      option_text: opt.text,
-      is_correct: opt.isCorrect,
+      question_text: question,
       created_by: user?.id,
-    }));
+    };
 
-    const { error: optionsError } = await supabase
-      .from("checkbox_options")
-      .insert(optionsToInsert);
+    filledOptions.forEach((opt, index) => {
+      payload[`option_${index + 1}`] = opt.text;
+      payload[`is_correct_${index + 1}`] = opt.isCorrect;
+    });
 
-    if (optionsError) {
-      console.error("Error saving options:", optionsError.message);
-      setMessage({
-        type: "error",
-        text: "Question saved, but options failed.",
-      });
+    // Insert into checkbox_qa
+    const { error } = await supabase.from("checkbox_qa").insert(payload);
+
+    if (error) {
+      console.error("Error saving question:", error.message);
+      setMessage({ type: "error", text: "Failed to save question." });
       return;
     }
 
@@ -77,15 +57,13 @@ export default function FormCheckbox({ chapterId, user }) {
       text: "Question and options saved successfully!",
     });
 
-    // Optionally reset the form here
     setQuestion("");
     setOptions(Array(5).fill({ text: "", isCorrect: false }));
   };
 
   return (
-    <form className="checkbox-form" onSubmit={handleSubmit}>
+    <form className="checkbox-form bBlue-bgBlue" onSubmit={handleSubmit}>
       <Msg_in_Body type={message.type} text={message.text} />
-
       <TextAreaInput
         id="checkboxes"
         name="checkboxes"
@@ -97,11 +75,9 @@ export default function FormCheckbox({ chapterId, user }) {
         required
         className="text-area"
       />
-
       <label>
         <strong>Options:</strong>
       </label>
-
       {options.map((opt, index) => (
         <div key={index} className="option-row">
           <input
@@ -110,7 +86,6 @@ export default function FormCheckbox({ chapterId, user }) {
             value={opt.text}
             onChange={(e) => handleOptionChange(index, "text", e.target.value)}
             placeholder={`Option ${index + 1}`}
-            
           />
           <label>
             <input
@@ -126,13 +101,11 @@ export default function FormCheckbox({ chapterId, user }) {
           </label>
         </div>
       ))}
-
-      <div className="submit-row">
+      <div className="center-btn">
         <ButtonSubmit
-          data-testid="previewQuestion"
-          label="Save and Preview Question"
+          data-testid="saveQuestionOptions"
+          label="Save Question and Options"
         />
-        
       </div>
     </form>
   );

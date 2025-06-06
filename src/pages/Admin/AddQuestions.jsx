@@ -3,7 +3,7 @@ import { supabase } from "../../supabaseDB";
 import Layout from "../../components/Layout";
 import TabbedPanel from "../../components/UI/TabbedPanel";
 import SelectChapter from "../../components/SQL/DDL_SelectChapter";
-import FormCheckbox from "../../components/Question/Form_CheckBox";
+import AddCheckbox from "../../components/Question/Checkbox/Add_CheckBox";
 // import FormRadiobutton from "../../components/Question/Form_Radiobutton";
 // import FormTrueFalse from "../../components/Question/Form_TrueFalse";
 // import FormMatchColumns from "../../components/Question/Form_Match";
@@ -15,7 +15,7 @@ const TABS = [
   {
     key: "checkbox",
     label: "Checkbox (Multiple Answers)",
-    colorClass: "blue",
+    colorClass: "bBlue-bgBlue",
   },
   {
     key: "radiobutton",
@@ -62,7 +62,8 @@ export default function AddQuestions() {
 
           <TabbedPanel tabs={TABS} defaultTab="checkbox">
             {{
-              checkbox: <FormCheckbox chapterId={chapter} user={user} />,
+              checkbox: <AddCheckbox chapterId={chapter} user={user} />,
+
               // radiobutton: <FormRadiobutton chapterId={chapter} user={user} />,
               // truefalse: <FormTrueFalse chapterId={chapter} user={user} />,
               // matchcolumn: <FormMatchColumns chapterId={chapter} user={user} />,
@@ -71,9 +72,7 @@ export default function AddQuestions() {
             }}
           </TabbedPanel>
         </div>
-        
       </div>
-      
     </Layout>
   );
 }

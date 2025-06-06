@@ -24,7 +24,7 @@ const PotManifesto = () => {
             <ul className="bullet-no bullet-link">
               <li
                 onClick={() => scrollToSection("product-over-process")}
-                className="bRed-bgRed"
+                className="bBlue-bgBlue"
               >
                 <b>Product</b> over <i>Process</i>
               </li>
@@ -64,7 +64,7 @@ const PotManifesto = () => {
           </div>
         </section>
 
-        <section className="hero bRed-bgRed" id="product-over-process">
+        <section className="hero bBlue-bgBlue" id="product-over-process">
           <div className="hero-text">
             <h2>
               Product <em>Over</em> <i>Process</i>

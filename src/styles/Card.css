@@ -9,7 +9,7 @@
   background: #b7eff7;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   border: 1px solid #ddd;
   transition: transform 0.2s ease;
 }
@@ -23,3 +23,10 @@
   transform: scale(2);
 }
 
+.card-qst {
+  border-radius: 20px;
+  border: 5px solid #2785ad;
+  flex-direction: column;
+  margin-bottom: 10px;
+  padding-left: 50px;
+}

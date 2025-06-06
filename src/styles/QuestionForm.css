@@ -1,4 +1,3 @@
-
 /* ====== CHECKBOX ======== */
 .checkbox-form {
   display: flex;
@@ -10,6 +9,10 @@
   padding-bottom: 25px;
 }
 
+.text-checkbox {
+  display: inline;
+}
+
 .check-box {
   height: 20px;
   width: auto;
@@ -19,9 +22,26 @@
   background-color: #ccc;
 }
 
+.question-card {
+  background: #fff;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
 .option-row {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
+.check-box {
+  width: 50%;
+  height: 25px;
+}
+
+.check-grade {
+  width: 5%;
+  height: 25px;
+}

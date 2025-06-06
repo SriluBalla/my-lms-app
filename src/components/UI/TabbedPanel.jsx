@@ -21,7 +21,7 @@ export default function TabbedPanel({ tabs = [], defaultTab = "", children }) {
         ))}
       </nav>
 
-      <div className={`tab-body ${activeTabObj?.colorClass}`}>
+      <div className={`tab-body ${activeTabObj}`}>
         {children[activeTab]}
       </div>
     </div>

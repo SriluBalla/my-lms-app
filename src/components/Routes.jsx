@@ -12,6 +12,8 @@ import Red_Acknowledment from "../pages/Auth/Red_Ack.jsx";
 import PotManifesto from "../pages/Public/Pot-Manifesto.jsx";
 import AdminUserManager from "../pages/Admin/UserManagement.jsx";
 import AddQuestions from "../pages/Admin/AddQuestions.jsx"
+import EditQuestions from "../pages/Admin/EditQuestions.jsx"
+import GradeQuestions from "../pages/Admin/GradeQuestions.jsx"
 
 const routes = [
   {
@@ -59,6 +61,22 @@ const routes = [
     element: (
       <ProtectedRoute allowedRoles={["admin", "superadmin", "lead"]}>
         <AddQuestions />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin-edit-questions",
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "superadmin", "lead"]}>
+        <EditQuestions />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin-grade-questions",
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "superadmin", "lead"]}>
+        <GradeQuestions />
       </ProtectedRoute>
     ),
   },
