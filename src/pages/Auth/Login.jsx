@@ -92,7 +92,7 @@ const Login = () => {
               error={message.password}
             />
 
-            <div className="center-btn">
+            <div className="center">
               <button
                 type="button"
                 className="button"

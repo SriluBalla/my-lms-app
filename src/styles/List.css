@@ -1,0 +1,22 @@
+/* ======== Lists and UL, LI =========== */
+
+.list {
+  list-style-type: circle;
+}
+
+.bullet-no {
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.bullet-link {
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  text-indent: 50px;
+  padding-right: 2rem;
+}
+
+.bullet-no li {
+  margin-bottom: 0.5rem;
+}

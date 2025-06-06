@@ -34,7 +34,7 @@ export default function DDL_SelectChapter({ value, onChange }) {
   }, []);
 
   return (
-    <div className="ddl-group">
+    <div className="ddl-chapter">
       <Msg_in_Body type={message.type} text={message.text} />
       <select
         id="chapter"

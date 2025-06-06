@@ -170,7 +170,7 @@ const Register = () => {
               type="error"
             />
 
-            <div className="center-btn">
+            <div className="center">
               <button
                 type="button"
                 className="button"

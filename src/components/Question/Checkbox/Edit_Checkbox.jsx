@@ -142,7 +142,7 @@ export default function EditCheckBox({ chapterId, user }) {
                     Are you sure you want to delete this question?
                   </p>
 
-                  <div className="center-btn">
+                  <div className="center">
                     <ButtonAction
                       type="button"
                       onClick={() => handleDelete(q.id)}

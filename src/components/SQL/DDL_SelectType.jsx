@@ -10,7 +10,7 @@ const QUESTION_TYPES = [
 export default function DDL_SelectType({ value, onChange }) {
 
   return (
-    <div className="ddl-group">
+    <div className="ddl-chapter">
       <select
         id="type"
         name="type"

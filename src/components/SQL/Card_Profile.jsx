@@ -44,10 +44,10 @@ const SavedProfileCard = ({ profile }) => {
         title="Profile Picture"
       />
 
-      <h2 className="text-center">{preferred_name}</h2>
+      <h2 className="center">{preferred_name}</h2>
 
       {role && (
-        <p className="text-center" title={`This user is a ${role}`}>
+        <p className="center" title={`This user is a ${role}`}>
           <strong>{role.toUpperCase()}</strong>
         </p>
       )}
@@ -91,7 +91,7 @@ const SavedProfileCard = ({ profile }) => {
             <>
               <button
                 onClick={toggleIntro}
-                className="toggle-intro-btn"
+                className="btn-toggle-intro"
                 aria-label="Toggle full self intro"
               >
                 {showFullIntro ? "Show less" : "Read more"}

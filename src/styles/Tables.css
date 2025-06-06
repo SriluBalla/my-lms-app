@@ -1,6 +1,4 @@
-/* =======================
-     TABLE
-     ==================== */
+/* ========= TABLE  ============= */
 
      .table {
     width: 100%;
@@ -30,7 +28,3 @@
   .table tr:nth-child(even) {
     background-color: #f9f9f9;
   }
-
-.card.user-profile {
-  width: 50%;
-}

@@ -228,12 +228,12 @@ const Profile = () => {
         </section>
 
         {savedProfile && (
-          <section className="hero blue left">
+          <section className="hero blue left-hero">
             <SavedProfileCard profile={savedProfile} />
           </section>
         )}
 
-        <div className="hero lite-blue right">
+        <div className="hero lite-blue right-hero">
           <h2>Your Profile</h2>
 
           <ConfirmMessage type={message.type} text={message.text} />

@@ -123,7 +123,7 @@ export default function GradeCheckBox({ chapterId }) {
               ))}
             </ul>
             {!submitted[q.id] && (
-              <div className="center-btn">
+              <div className="center">
                 <ButtonSubmit
                   type="submit"
                   data-testid="submitAnswer"

@@ -4,7 +4,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseDB";
 import MenuItem from "../SQL/Menu_by_Role";
 import ButtonNav from "../Button/ButtonNav";
-import "../../styles/Header.css";
+import "../../styles/Perm/Header.css";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);

@@ -1,3 +1,4 @@
+/* ======== BODY =========== */
 * {
   font-family: Georgia, serif;
   color: black;
@@ -23,61 +24,14 @@ html {
   width: auto;
 }
 
-.hero {
-  flex-wrap: wrap;
-  gap: 25px;
-  justify-content: space-between;
-  padding: 20px 10%;
-}
-
 .flex {
   display: flex;
 }
 
-.hero-text {
-  flex: 1;
-  position: relative;
-  z-index: 1;
-}
-
-.left {
-  float: left;
-  flex: 1;
-  padding: 2rem;
-  width: 50%;
-}
-
-.right {
-  float: right;
-  flex: 1;
-  padding: 2rem;
-  width: 50%;
-}
-
-.list {
-  list-style-type: circle;
-}
 
 p {
   margin-bottom: 30px;
   gap: 25px;
-}
-
-.bullet-no {
-  list-style: none;
-  margin-top: 2rem;
-}
-
-.bullet-link {
-  cursor: pointer;
-  font-size: 1.5rem;
-  margin-top: 2rem;
-  text-indent: 50px;
-  padding-right: 2rem;
-}
-
-.bullet-no li {
-  margin-bottom: 0.5rem;
 }
 
 .manifesto-points {
@@ -94,13 +48,6 @@ p {
   line-height: 1.8;
   padding: 1rem;
   text-align: left;
-}
-
-.bgPoem {
-  background: white;
-  border-right: 4px solid black;
-  padding-bottom: 15px;
-  padding-top: 15px;
 }
 
 .manifesto-poem p {

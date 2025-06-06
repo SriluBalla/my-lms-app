@@ -1,12 +1,16 @@
-/*   COLORS with border */
+/* ====== Colors and borders ======== */
 .lite-blue {
   background: #e3f3fa;
   border-right: 4px solid #0986bc;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 .blue {
   background: #7ecbeb;
   border-left: 4px solid #0986bc;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 .bBlue-bgBlue {
@@ -61,6 +65,13 @@
 .guiding-principle {
   background: rgb(220, 236, 212);
   border-left: 4px solid rgb(34, 85, 7);
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.bgPoem {
+  background: white;
+  border-right: 4px solid black;
   padding-bottom: 15px;
   padding-top: 15px;
 }

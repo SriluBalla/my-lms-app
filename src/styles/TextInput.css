@@ -1,11 +1,22 @@
+/* ======== TEXT INPUT ============ */
+
 * {
   border-radius: 5px;
 }
 
+/* ======== DROP DOWN LIST / SELECT ============ */
 .ddl-group {
   display: flex;
-  gap: 2rem;
+  gap: 25px;
 }
+
+select {
+  font-size: 1.1rem;
+  height: auto;
+  padding: 10px;
+}
+
+/* ======== DISPLAY TEXT ============ */
 
 em {
   font-size: 0.9rem;
@@ -17,13 +28,6 @@ em {
   margin-top: 15px;
   margin-bottom: 30px;
   font-size: 1rem;
-}
-
-input {
-  width: 90%;
-  padding: 8px;
-  font-size: 1.1rem;
-  border: 1px solid #073c53;
 }
 
 label {
@@ -39,13 +43,13 @@ label {
   margin-bottom: 5px;
 }
 
-select {
-  box-sizing: border-box;
+/* ======== INPUT / TEXT FIELD ============ */
+
+input {
+  width: 90%;
+  padding: 8px;
   font-size: 1.1rem;
-  height: auto;
-  padding: 10px;
-  background: transparent;
-  width: auto;
+  border: 1px solid #073c53;
 }
 
 textarea {
@@ -55,20 +59,19 @@ textarea {
   border: 1px solid #073c53;
 }
 
-.text-center {
-  text-align: center;
-}
+/* ======== PASSWORD TOGGLE HIDE SHOW ============ */
 
 .toggle-password {
   background: none;
   border: none;
   font-size: 0.9rem;
-  color: #007bff;
+  font-weight: bold;
+  color: #011e3d;
   cursor: pointer;
   margin-left: 8px;
 }
 
-.toggle-intro-btn {
+.btn-toggle-intro {
   background: none;
   border: none;
   color: #04416b;

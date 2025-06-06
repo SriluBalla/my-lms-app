@@ -36,7 +36,6 @@
   background: linear-gradient(to top, #0b632b, #8be7ad);
 }
 
-
 .button.superadmin {
   display: none;
 }
@@ -56,13 +55,12 @@
   background: white;
 }
 
-.left-btn {
+.left {
   text-align: left;
 }
-.center-btn {
+.center {
   text-align: center;
 }
-
-.right-btn {
+.right {
   text-align: right;
 }

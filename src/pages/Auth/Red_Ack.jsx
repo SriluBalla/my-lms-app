@@ -28,7 +28,7 @@ const Red_Acknowledment = () => {
           </p>
         </section>
 
-        <section className="hero blue left flex">
+        <section className="hero blue left-hero flex">
           <h4>📛 First & Last Name</h4>{" "}
           <p>
             <i>
@@ -81,7 +81,7 @@ const Red_Acknowledment = () => {
           </p>
         </section>
         
-        <section className="hero lite-blue right flex">
+        <section className="hero lite-blue right-hero flex">
           <h4>📸 A profile image</h4>
           <p>
             <i>
@@ -155,7 +155,7 @@ const Red_Acknowledment = () => {
           </p>
 
 
-          <div className="center-btn">
+          <div className="center">
               <ButtonNav id="register" label="Accept and Continue" to="/register" />
           </div>
         </section>

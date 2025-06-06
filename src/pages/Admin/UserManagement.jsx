@@ -210,7 +210,7 @@ const AdminUserManager = () => {
               <thead>
                 <tr>
                   <th className="card user-profile">Profile Updated</th>
-                  <th className="btn-approve">Approve</th>
+                  <th data-testid="btn-approve">Approve</th>
                 </tr>
               </thead>
               <tbody className="table">
@@ -261,7 +261,7 @@ const AdminUserManager = () => {
                       />
                       <ConfirmMessage type={message.type} text={message.text} />
 
-                      <h3 className="text-center">Set Role</h3>
+                      <h3 className="center">Set Role</h3>
 
                       {Object.keys(ROLE_IDS).map((role) => (
                         <ButtonAction

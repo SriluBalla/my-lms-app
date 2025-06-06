@@ -1,3 +1,6 @@
+/* ====== Cards ======== */
+/* ====== Public Member Profile ======== */
+
 .member-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -23,4 +26,6 @@
   transform: scale(2);
 }
 
-
+.card.user-profile {
+  width: 50%;
+}
