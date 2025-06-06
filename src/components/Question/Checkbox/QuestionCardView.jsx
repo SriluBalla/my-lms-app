@@ -22,8 +22,8 @@ export default function QuestionCardView({
         .filter(Boolean); // remove nulls
 
   return (
-    <div className="card-qst">
-      <h3>{question.question_text}</h3>
+    <div className="card-qst bBlue-bgBlue">
+      <p className="qst-head">{question.question_text}</p>
       <ul className="bullet-no">
         {options.map((opt) => (
           <li key={opt.id}>
@@ -35,7 +35,7 @@ export default function QuestionCardView({
                 checked={opt.is_correct}
                 readOnly
               />
-              <h4 className="text-checkbox">{opt.option_text}</h4>
+              <p className="qst-opt">{opt.option_text}</p>
             </span>
           </li>
         ))}

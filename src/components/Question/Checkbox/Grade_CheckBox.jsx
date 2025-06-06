@@ -89,12 +89,14 @@ export default function GradeCheckBox({ chapterId }) {
   };
 
   return (
+
     <div className="grade-question-wrapper">
+      
       <Msg_in_Body type={message.type} text={message.text} />
 
       {questions.map((q) => (
-        <div key={q.id} className="card-qst">
-          <h3>{q.question_text}</h3>
+        <div key={q.id} className="card-qst bBlue-bgBlue">
+          <p className="qst-head">{q.question_text}</p>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -105,9 +107,9 @@ export default function GradeCheckBox({ chapterId }) {
             <ul className="bullet-no">
               {q.options.map((opt) => (
                 <li key={opt.id}>
-                  <span>
+                  <span >
                     <input
-                      className="check-grade"
+                      className="check-grade" 
                       type="checkbox"
                       disabled={submitted[q.id]}
                       checked={
@@ -117,7 +119,7 @@ export default function GradeCheckBox({ chapterId }) {
                       }
                       onChange={() => handleToggle(q.id, opt.id)}
                     />
-                    <h4 className="text-checkbox">{opt.option_text}</h4>
+                    <p className="qst-opt">{opt.option_text}</p>
                   </span>
                 </li>
               ))}

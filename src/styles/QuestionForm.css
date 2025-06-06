@@ -9,7 +9,7 @@
   padding-bottom: 25px;
 }
 
-.text-checkbox {
+.qst-opt {
   display: inline;
 }
 
@@ -17,6 +17,35 @@
   height: 20px;
   width: auto;
 }
+
+/* ====== Question Styling  
+Do not lose this code ====== */
+.card-qst {
+  border-radius: 20px;
+  border: 5px solid #2785ad;
+  flex-direction: column;
+  margin-bottom: 50px;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.check-grade {
+  width: 5%;
+  height: 25px;
+}
+
+.qst-head {
+ font-weight: bold;
+}
+
+.qst-option {
+  
+}
+
+
+/* ============= */
 
 .check-box:hover {
   background-color: #ccc;
@@ -36,21 +65,12 @@
   gap: 15px;
 }
 
-.card-qst {
-  border-radius: 20px;
-  border: 5px solid #2785ad;
-  flex-direction: column;
-  margin-bottom: 10px;
-  padding-bottom: 50px;
-  padding-left: 50px;
-}
-
 .check-box {
   width: 50%;
   height: 25px;
 }
 
 .ddl-chapter {
-  margin:25px;
+  margin: 25px;
   width: auto;
 }
