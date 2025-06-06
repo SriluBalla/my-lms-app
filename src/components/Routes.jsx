@@ -10,6 +10,7 @@ import Profile from "../pages/Profile.jsx";
 import MemberProfiles from "../pages/Public/MemberProfiles.jsx";
 import Red_Acknowledment from "../pages/Auth/Red_Ack.jsx";
 import PotManifesto from "../pages/Public/Pot-Manifesto.jsx";
+import SampleTest from "../pages/Public/SampleTest.jsx";
 import AdminUserManager from "../pages/Admin/UserManagement.jsx";
 import AddQuestions from "../pages/Admin/AddQuestions.jsx"
 import EditQuestions from "../pages/Admin/EditQuestions.jsx"
@@ -39,6 +40,10 @@ const routes = [
   {
     path: "/why/*",
     element: <Why />,
+  },
+  {
+    path: "/sample-test",
+    element: <SampleTest />,
   },
   {
     path: "/pot-manifesto",

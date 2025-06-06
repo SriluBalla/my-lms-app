@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseDB";
-import SelectInput from "../Input/Input_Select";
 import Msg_in_Body from "../Message/Msg_in_Body";
 
-export default function SelectChapter({ value, onChange }) {
+export default function DDL_SelectChapter({ value, onChange }) {
   const [chapters, setChapters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState({ type: "", text: "" });
@@ -35,13 +34,12 @@ export default function SelectChapter({ value, onChange }) {
   }, []);
 
   return (
-    <div className="form-group">
+    <div className="ddl-group">
       <Msg_in_Body type={message.type} text={message.text} />
-
       <select
         id="chapter"
         name="chapter"
-        className="ddl-select"
+        className="dropdown"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required

@@ -132,7 +132,10 @@ export default function GradeCheckBox({ chapterId }) {
               </div>
             )}
             {submitted[q.id] && (
-              <div className="result-msg">{results[q.id]}</div>
+              <Msg_in_Body
+                type={results[q.id]?.includes("Correct") ? "success" : "error"}
+                text={results[q.id]}
+                duration={-1} />
             )}
           </form>
         </div>

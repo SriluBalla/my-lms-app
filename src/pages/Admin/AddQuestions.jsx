@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../supabaseDB";
 import Layout from "../../components/Layout";
 import TabbedPanel from "../../components/UI/TabbedPanel";
-import SelectChapter from "../../components/SQL/DDL_SelectChapter";
+import DDL_SelectChapter from "../../components/SQL/DDL_SelectChapter";
 import AddCheckbox from "../../components/Question/Checkbox/Add_CheckBox";
 // import FormRadiobutton from "../../components/Question/Form_Radiobutton";
 // import FormTrueFalse from "../../components/Question/Form_TrueFalse";
@@ -57,7 +57,7 @@ export default function AddQuestions() {
         <div className="add-question-wrapper">
           <div className="ddl-group">
             <h1>Add a New Question for Chapter</h1>
-            <SelectChapter value={chapter} onChange={setChapter} />
+            <DDL_SelectChapter value={chapter} onChange={setChapter} />
           </div>
 
           <TabbedPanel tabs={TABS} defaultTab="checkbox">

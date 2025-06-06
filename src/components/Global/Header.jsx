@@ -115,8 +115,8 @@ const Header = () => {
         <NavLink id="why" className="nav__link" to="/why">
           Why
         </NavLink>
-        <NavLink id="pot" className="nav__link" to="/pot">
-          POT
+        <NavLink id="pot" className="nav__link" to="/sample-test">
+          Test
         </NavLink>
         {user && (
           <div ref={profileRef} className="profile-dropdown">
