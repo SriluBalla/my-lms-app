@@ -36,6 +36,14 @@ Do not lose this code ====== */
   height: 25px;
 }
 
+.check-grade:hover {
+    background-color: 5px solid #2785ad;
+}
+
+.card-qst:hover {
+  font-size: 1.5rem;
+}
+
 .qst-head {
  font-weight: bold;
 }
@@ -46,19 +54,6 @@ Do not lose this code ====== */
 
 
 /* ============= */
-
-.check-box:hover {
-  background-color: #ccc;
-}
-
-.question-card {
-  background: #fff;
-  padding: 16px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
 .option-row {
   display: flex;
   align-items: center;

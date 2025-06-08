@@ -101,6 +101,7 @@ header {
 
 .nav-button {
   background: linear-gradient(to top, #3091db, #2eeccd);
+    border: 2px solid #2eeccd;
   border: none;
   border-radius: 5px;
   cursor: pointer;

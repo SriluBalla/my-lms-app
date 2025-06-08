@@ -1,7 +1,7 @@
 .button {
   align-items: center;
   background: linear-gradient(to top, #3091db, #2eeccd);
-  border: none;
+  border: 2px solid #2eeccd;
   border-radius: 5px;
   cursor: pointer;
   display: inline-flex;
@@ -19,21 +19,26 @@
 
 .button.admin {
   background: linear-gradient(to top, #ce205a, #d06f8e);
+  border: 2px solid #d06f8e;
 }
 
 .button.approve {
   background: linear-gradient(to top, #08be54, #7fe9a4);
+  border: 2px solid #7fe9a4;
 }
 .button.flagged {
   background: linear-gradient(to top, #ea3c3c, #d06f8e);
+  border: 2px solid #d06f8e;
 }
 
 .button.leader {
   background: linear-gradient(to top, #ce20c8, #e48ae1);
+  border: 2px solid #e48ae1;
 }
 
 .button.member {
   background: linear-gradient(to top, #0b632b, #8be7ad);
+  border: 2px solid #8be7ad;
 }
 
 .button.superadmin {
@@ -42,13 +47,7 @@
 
 .button:hover {
   background: #0a8bb7;
-  font-weight: bold;
-  color: white;
-}
-
-#deleteQuestion {
-  background: linear-gradient(to top, #e11111, #d18010);
-  color: black;
+    color: white;
 }
 
 .save-button {
@@ -63,4 +62,15 @@
 }
 .right {
   text-align: right;
+}
+
+#submitAnswerCheckbox {
+  background: linear-gradient(to top, #3091db, #2eeccd);
+  border: 2px solid #2eeccd;
+}
+
+#submitAnswerCheckbox:hover {
+  background: #0e5c98;
+  font: white;
+  font-weight: bold;
 }

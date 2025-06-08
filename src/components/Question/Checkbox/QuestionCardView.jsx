@@ -43,6 +43,7 @@ export default function QuestionCardView({
 
       <div className="center">
         <ButtonAction
+          className="edit"
           data-testid="btn-edit"
           type="button"
           id={`edit-${question.id}`}
@@ -51,6 +52,7 @@ export default function QuestionCardView({
         />
 
         <ButtonAction
+          className="approve"
           data-testid="btn-approve"
           type="button"
           id={`approve-${question.id}`}
@@ -59,6 +61,7 @@ export default function QuestionCardView({
         />
 
         <ButtonAction
+          className="flagged"
           data-testid="btn-delete"
           type="button"
           id={`delete-${question.id}`}

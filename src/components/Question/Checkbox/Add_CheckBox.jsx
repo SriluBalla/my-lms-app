@@ -43,8 +43,8 @@ export default function AddCheckbox({ chapterId, user }) {
       payload[`is_correct_${index + 1}`] = opt.isCorrect;
     });
 
-    // Insert into checkbox_qa
-    const { error } = await supabase.from("checkbox_qa").insert(payload);
+    // Insert into qa_checkbox
+    const { error } = await supabase.from("qa_checkbox").insert(payload);
 
     if (error) {
       console.error("Error saving question:", error.message);

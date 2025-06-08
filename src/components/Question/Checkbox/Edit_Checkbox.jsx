@@ -19,7 +19,7 @@ export default function EditCheckBox({ chapterId, user }) {
     }
 
     const { data, error } = await supabase
-      .from("checkbox_qa")
+      .from("qa_checkbox")
       .select("*")
       .eq("chapter_id", chapterId)
       .eq("is_approved", false)
@@ -55,7 +55,7 @@ export default function EditCheckBox({ chapterId, user }) {
   }, [chapterId]);
 
   const handleDelete = async (id) => {
-    const { error } = await supabase.from("checkbox_qa").delete().eq("id", id);
+    const { error } = await supabase.from("qa_checkbox").delete().eq("id", id);
 
     if (error) {
       setMessage({ type: "error", text: "Failed to delete question." });
@@ -68,7 +68,7 @@ export default function EditCheckBox({ chapterId, user }) {
 
   const handleApprove = async (id) => {
     const { error } = await supabase
-      .from("checkbox_qa")
+      .from("qa_checkbox")
       .update({
         is_approved: true,
         approved_by: user?.id,
@@ -107,7 +107,7 @@ export default function EditCheckBox({ chapterId, user }) {
                 });
 
                 const { error } = await supabase
-                  .from("checkbox_qa")
+                  .from("qa_checkbox")
                   .update(payload)
                   .eq("id", updated.id);
 
@@ -145,6 +145,7 @@ export default function EditCheckBox({ chapterId, user }) {
                   <div className="center">
                     <ButtonAction
                       type="button"
+                      className="flagged"
                       onClick={() => handleDelete(q.id)}
                       data-testid="deleteQuestion"
                       id="deleteQuestion"

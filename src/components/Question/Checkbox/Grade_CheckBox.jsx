@@ -19,7 +19,7 @@ export default function GradeCheckBox({ chapterId }) {
       }
 
       const { data, error } = await supabase
-        .from("checkbox_qa")
+        .from("qa_checkbox")
         .select("*")
         .eq("chapter_id", chapterId)
         .eq("is_approved", true)
