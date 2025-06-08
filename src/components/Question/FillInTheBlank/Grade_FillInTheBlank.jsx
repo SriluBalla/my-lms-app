@@ -53,7 +53,7 @@ export default function GradeFillInTheBlank({ chapterId }) {
     setSubmitted((prev) => ({ ...prev, [questionId]: true }));
     setResults((prev) => ({
       ...prev,
-      [questionId]: isCorrect ? "Correct! 🎉" : "Incorrect. Try again.",
+      [questionId]: isCorrect ? "Correct! 🎉" : "Incorrect. ❌",
     }));
   };
 

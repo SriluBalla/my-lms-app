@@ -51,7 +51,7 @@ export default function GradeRadiobutton({ chapterId }) {
     setSubmitted((prev) => ({ ...prev, [questionId]: true }));
     setResults((prev) => ({
       ...prev,
-      [questionId]: isCorrect ? "Correct! ✨" : "Incorrect. ❌",
+      [questionId]: isCorrect ? "Correct!  🎉" : "Incorrect. ❌",
     }));
   };
 
