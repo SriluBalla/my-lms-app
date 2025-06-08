@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ButtonAction from "../../Button/ButtonAction";
-// import Msg_in_Body from "../../Message/Msg_in_Body";
 
 export default function EditRadiobutton({ question, onSave, onCancel }) {
   const [questionText, setQuestionText] = useState(question.question_text);
@@ -42,18 +41,16 @@ export default function EditRadiobutton({ question, onSave, onCancel }) {
 
   return (
     <form className="checkbox-form">
-      {/* <Msg_in_Body type={message.type} text={message.text} /> */}
-
-      <label className="text-checkbox">
+      <h4 className="text-checkbox">
         <b>Radio Button (Single Correct Answer)</b>
-      </label>
+      </h4>
 
       <textarea
         className="text-area"
         maxLength={1000}
         value={questionText}
         onChange={(e) => setQuestionText(e.target.value)}
-        placeholder="One question at a time please..."
+        placeholder="One Question at a time. Add 4 to 5 options. Check ON only ONE Answers that is correct"
       />
 
       <label>

@@ -110,7 +110,7 @@ export default function AddRadiobutton({ chapterId, user, colorClass }) {
       <div className="center">
         <ButtonSubmit
           data-testid="saveRadioQuestion"
-          label="Save Question and Options"
+          label="Save Radiobutton Question and Options"
         />
       </div>
     </form>

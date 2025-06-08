@@ -30,7 +30,7 @@ export default function EditCheckbox({ question, onSave, onCancel }) {
         maxLength={1000}
         value={questionText}
         onChange={(e) => setQuestionText(e.target.value)}
-        placeholder="Type away, Type away, Question. One Question at a time ...."
+        placeholder="One Question at a time. Add 4 to 5 options. Check ON the Answers that are correct"
       ></textarea>
 
       <label>

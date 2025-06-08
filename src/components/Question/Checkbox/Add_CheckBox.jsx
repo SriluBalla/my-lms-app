@@ -104,7 +104,7 @@ export default function AddCheckbox({ chapterId, user }) {
       <div className="center">
         <ButtonSubmit
           data-testid="saveCheckboxQuestion"
-          label="Save Question and Options"
+          label="Save Checkbox Question and Options"
         />
       </div>
     </form>
