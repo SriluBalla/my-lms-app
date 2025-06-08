@@ -1,169 +1,80 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../../supabaseDB";
-import QuestionCardView from "./QuestionCardView";
-import QuestionCardEdit from "./QuestionCardEdit";
+import { useState } from "react";
 import ButtonAction from "../../Button/ButtonAction";
-import Msg_in_Body from "../../Message/Msg_in_Body";
-import "../../../styles/main.css";
 
-export default function EditCheckBox({ chapterId, user }) {
-  const [questions, setQuestions] = useState([]);
-  const [message, setMessage] = useState({ type: "", text: "" });
-  const [editId, setEditId] = useState(null);
-  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+export default function EditCheckbox({ question, onSave, onCancel }) {
+  const [questionText, setQuestionText] = useState(question.question_text);
+  const [options, setOptions] = useState(question.checkbox_options);
 
-  const fetchQuestions = async () => {
-    if (!chapterId) {
-      setQuestions([]);
-      return;
-    }
-
-    const { data, error } = await supabase
-      .from("qa_checkbox")
-      .select("*")
-      .eq("chapter_id", chapterId)
-      .eq("is_approved", false)
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching questions:", error.message);
-      setMessage({ type: "error", text: "Failed to load questions." });
-      setQuestions([]);
-    } else {
-      const transformed = data.map((q) => {
-        const options = [1, 2, 3, 4, 5]
-          .map((i) => {
-            const text = q[`option_${i}`];
-            const correct = q[`is_correct_${i}`];
-            if (!text) return null;
-            return {
-              id: `opt_${q.id}_${i}`,
-              option_text: text,
-              is_correct: correct,
-            };
-          })
-          .filter(Boolean);
-        return { ...q, checkbox_options: options };
-      });
-      setQuestions(transformed);
-      setMessage({ type: "", text: "" });
-    }
+  const handleOptionChange = (index, field, value) => {
+    const updated = [...options];
+    updated[index] = { ...updated[index], [field]: value };
+    setOptions(updated);
   };
 
-  useEffect(() => {
-    fetchQuestions();
-  }, [chapterId]);
-
-  const handleDelete = async (id) => {
-    const { error } = await supabase.from("qa_checkbox").delete().eq("id", id);
-
-    if (error) {
-      setMessage({ type: "error", text: "Failed to delete question." });
-    } else {
-      setMessage({ type: "success", text: "Question deleted successfully." });
-      fetchQuestions();
-    }
-    setConfirmDeleteId(null);
-  };
-
-  const handleApprove = async (id) => {
-    const { error } = await supabase
-      .from("qa_checkbox")
-      .update({
-        is_approved: true,
-        approved_by: user?.id,
-        approved_at: new Date().toISOString(),
-      })
-      .eq("id", id);
-
-    if (error) {
-      setMessage({ type: "error", text: "Approval failed." });
-    } else {
-      await fetchQuestions();
-      setMessage({ type: "success", text: "Question approved!" });
-    }
+  const handleSave = () => {
+    onSave({
+      id: question.id,
+      question_text: questionText,
+      options,
+    });
   };
 
   return (
-    <div className="view-question-wrapper">
-      <Msg_in_Body type={message.type} text={message.text} />
+    <form className="card-qst">
+      <h4 className="text-checkbox">
+        <b>Checkbox (Multiple Correct Answers)</b>
+      </h4>
 
-      {questions.length === 0 ? (
-        <p>No checkbox questions found for this chapter.</p>
-      ) : (
-        questions.map((q) =>
-          editId === q.id ? (
-            <QuestionCardEdit
-              key={q.id}
-              question={q}
-              onSave={async (updated) => {
-                const payload = {
-                  question_text: updated.question_text,
-                  // updated_at: new Date().toISOString(),
-                };
-                updated.options.forEach((opt, index) => {
-                  payload[`option_${index + 1}`] = opt.option_text;
-                  payload[`is_correct_${index + 1}`] = opt.is_correct;
-                });
+      <textarea
+        className="text-area"
+        maxLength={1000}
+        value={questionText}
+        onChange={(e) => setQuestionText(e.target.value)}
+        placeholder="Type away, Type away, Question. One Question at a time ...."
+      ></textarea>
 
-                const { error } = await supabase
-                  .from("qa_checkbox")
-                  .update(payload)
-                  .eq("id", updated.id);
+      <label>
+        <strong>Options:</strong>
+      </label>
 
-                if (error) {
-                  console.error("Update Error Details:", error);
-                  setMessage({
-                    type: "error",
-                    text: "Failed to update question.",
-                  });
-                } else {
-                  setEditId(null);
-                  await fetchQuestions();
-                  setMessage({
-                    type: "success",
-                    text: "Question Updated successfully!",
-                  });
-                }
-              }}
-              onCancel={() => setEditId(null)}
+      {options.map((opt, index) => (
+        <div key={opt.id || index} className="option-row">
+          <input
+            type="text"
+            value={opt.option_text || opt[`option_${index + 1}`] || ""}
+            onChange={(e) =>
+              handleOptionChange(index, "option_text", e.target.value)
+            }
+            placeholder={`Option ${index + 1}`}
+          />
+          <label>
+            <input
+              className="check-box"
+              type="checkbox"
+              checked={
+                opt.is_correct || opt[`is_correct_${index + 1}`] || false
+              }
+              onChange={(e) =>
+                handleOptionChange(index, "is_correct", e.target.checked)
+              }
             />
-          ) : (
-            <div key={q.id}>
-              <QuestionCardView
-                question={q}
-                onEdit={() => setEditId(q.id)}
-                onDelete={() => setConfirmDeleteId(q.id)}
-                onApprove={handleApprove}
-              />
-              {confirmDeleteId === q.id && (
-                <div className="delete-confirm">
-                  <p className="warn">
-                    Are you sure you want to delete this question?
-                  </p>
+            Correct
+          </label>
+        </div>
+      ))}
 
-                  <div className="center">
-                    <ButtonAction
-                      type="button"
-                      className="flagged"
-                      onClick={() => handleDelete(q.id)}
-                      data-testid="deleteQuestion"
-                      id="deleteQuestion"
-                      label="Yes, Delete"
-                    />
-                    <ButtonAction
-                      type="button"
-                      onClick={() => setConfirmDeleteId(null)}
-                      data-testid="cancelDelete"
-                      label="Cancel"
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          )
-        )
-      )}
-    </div>
+      <div className="submit-row">
+        <ButtonAction
+          id={`save-${question.id}`}
+          label="Save Question"
+          onClick={handleSave}
+        />
+        <ButtonAction
+          id={`cancel-${question.id}`}
+          label="Cancel"
+          onClick={onCancel}
+        />
+      </div>
+    </form>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import ButtonAction from "../../Button/ButtonAction";
 import "../../../styles/main.css";
 
-export default function QuestionCardView({
+export default function ViewCheckbox({
   question,
   onEdit,
   onDelete,

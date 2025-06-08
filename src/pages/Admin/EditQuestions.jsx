@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import TabbedPanel from "../../components/UI/TabbedPanel";
 import SelectChapter from "../../components/SQL/DDL_SelectChapter";
-import ViewCheckBox from "../../components/Question/Checkbox/Edit_Checkbox"; // ✅ Your new component
+import DeleteCheckBox from "../../components/Question/Checkbox/Delete_Checkbox"; // ✅ Your new component
 import "../../styles/main.css";
 
 const TABS = [
@@ -47,7 +47,7 @@ export default function EditQuestions() {
 
           <TabbedPanel tabs={TABS} defaultTab="checkbox">
             {{
-              checkbox: <ViewCheckBox chapterId={chapter} />,
+              checkbox: <DeleteCheckBox chapterId={chapter} />,
               // radiobutton: <ViewRadiobutton chapterId={chapter} />,
               // truefalse: <ViewTrueFalse chapterId={chapter} />,
               // matchcolumn: <ViewMatchColumns chapterId={chapter} />,
