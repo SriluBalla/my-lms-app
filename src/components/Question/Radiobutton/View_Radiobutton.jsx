@@ -1,5 +1,6 @@
 import React from "react";
 import ButtonAction from "../../Button/ButtonAction";
+import Msg_in_Body from "../../Message/Msg_in_Body";
 import "../../../styles/main.css";
 
 export default function ViewRadioButton({
@@ -7,6 +8,8 @@ export default function ViewRadioButton({
   onEdit,
   onDelete,
   onApprove,
+  approvedMsg,
+  deletedMsg,
 }) {
   // Normalize options from flat format
   const options = ["a", "b", "c", "d", "e"]
@@ -21,6 +24,16 @@ export default function ViewRadioButton({
         : null;
     })
     .filter(Boolean);
+
+    if (approvedMsg || deletedMsg) {
+    return (
+      <Msg_in_Body
+        type={approvedMsg ? approvedMsg.type : deletedMsg.type}
+        text={approvedMsg ? approvedMsg.text : deletedMsg.text}
+        duration={-1}
+      />
+    );
+  }
 
   return (
     <div className="card-qst bPink-bgYellow">

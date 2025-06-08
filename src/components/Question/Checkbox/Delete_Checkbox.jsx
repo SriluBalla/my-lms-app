@@ -11,6 +11,8 @@ export default function DeleteCheckbox({ chapterId, user }) {
   const [message, setMessage] = useState({ type: "", text: "" });
   const [editId, setEditId] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [approvedIds, setApprovedIds] = useState([]);
+  const [deletedIds, setDeletedIds] = useState([]);
 
   const fetchQuestions = async () => {
     if (!chapterId) {
@@ -60,18 +62,22 @@ export default function DeleteCheckbox({ chapterId, user }) {
     if (error) {
       setMessage({ type: "error", text: "Failed to delete question." });
     } else {
-      setMessage({ type: "success", text: "Question deleted successfully." });
-      fetchQuestions();
+      setDeletedIds((prev) => [...prev, id]);
     }
     setConfirmDeleteId(null);
   };
 
   const handleApprove = async (id) => {
+    if (!user?.id) {
+      setMessage({ type: "error", text: "User ID missing. Cannot approve." });
+      return;
+    }
+
     const { error } = await supabase
       .from("qa_checkbox")
       .update({
         is_approved: true,
-        approved_by: user?.id,
+        approved_by: user.id,
         approved_at: new Date().toISOString(),
       })
       .eq("id", id);
@@ -79,8 +85,7 @@ export default function DeleteCheckbox({ chapterId, user }) {
     if (error) {
       setMessage({ type: "error", text: "Approval failed." });
     } else {
-      await fetchQuestions();
-      setMessage({ type: "success", text: "Question approved!" });
+      setApprovedIds((prev) => [...prev, id]);
     }
   };
 
@@ -91,15 +96,35 @@ export default function DeleteCheckbox({ chapterId, user }) {
       {questions.length === 0 ? (
         <p>No checkbox questions found for this chapter.</p>
       ) : (
-        questions.map((q) =>
-          editId === q.id ? (
+        questions.map((q) => {
+          if (approvedIds.includes(q.id)) {
+            return (
+              <Msg_in_Body
+                key={`approved-${q.id}`}
+                type="success"
+                text="✅ Checkbox Question approved successfully."
+                duration={-1}
+              />
+            );
+          }
+          if (deletedIds.includes(q.id)) {
+            return (
+              <Msg_in_Body
+                key={`deleted-${q.id}`}
+                type="success"
+                text="🗑️ Checkbox Question deleted successfully."
+                duration={-1}
+              />
+            );
+          }
+
+          return editId === q.id ? (
             <EditCheckbox
               key={q.id}
               question={q}
               onSave={async (updated) => {
                 const payload = {
                   question_text: updated.question_text,
-                  // updated_at: new Date().toISOString(),
                 };
                 updated.options.forEach((opt, index) => {
                   payload[`option_${index + 1}`] = opt.option_text;
@@ -161,8 +186,8 @@ export default function DeleteCheckbox({ chapterId, user }) {
                 </div>
               )}
             </div>
-          )
-        )
+          );
+        })
       )}
     </div>
   );

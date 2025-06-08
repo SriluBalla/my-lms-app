@@ -1,5 +1,6 @@
 import React from "react";
 import ButtonAction from "../../Button/ButtonAction";
+import Msg_in_Body from "../../Message/Msg_in_Body";
 import "../../../styles/main.css";
 
 export default function ViewCheckbox({
@@ -7,6 +8,8 @@ export default function ViewCheckbox({
   onEdit,
   onDelete,
   onApprove,
+  approvedMsg,
+  deletedMsg,
 }) {
   // Normalize options based on data shape
   const options = question.checkbox_options
@@ -20,6 +23,16 @@ export default function ViewCheckbox({
             : null;
         })
         .filter(Boolean); // remove nulls
+
+  if (approvedMsg || deletedMsg) {
+    return (
+      <Msg_in_Body
+        type={approvedMsg ? approvedMsg.type : deletedMsg.type}
+        text={approvedMsg ? approvedMsg.text : deletedMsg.text}
+        duration={-1}
+      />
+    );
+  }
 
   return (
     <div className="card-qst bBlue-bgBlue">

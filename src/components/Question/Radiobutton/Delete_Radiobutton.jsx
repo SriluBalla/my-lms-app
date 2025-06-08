@@ -11,6 +11,8 @@ export default function DeleteRadioButton({ chapterId, user }) {
   const [message, setMessage] = useState({ type: "", text: "" });
   const [editId, setEditId] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [approvedIds, setApprovedIds] = useState([]);
+  const [deletedIds, setDeletedIds] = useState([]);
 
   const fetchQuestions = async () => {
     if (!chapterId) {
@@ -45,18 +47,22 @@ export default function DeleteRadioButton({ chapterId, user }) {
     if (error) {
       setMessage({ type: "error", text: "Failed to delete question." });
     } else {
-      setMessage({ type: "success", text: "Question deleted successfully." });
-      fetchQuestions();
+      setDeletedIds((prev) => [...prev, id]);
     }
     setConfirmDeleteId(null);
   };
 
   const handleApprove = async (id) => {
+    if (!user?.id) {
+      setMessage({ type: "error", text: "User ID missing. Cannot approve." });
+      return;
+    }
+
     const { error } = await supabase
       .from("qa_radiobutton")
       .update({
         is_approved: true,
-        approved_by: user?.id,
+        approved_by: user.id,
         approved_at: new Date().toISOString(),
       })
       .eq("id", id);
@@ -64,8 +70,7 @@ export default function DeleteRadioButton({ chapterId, user }) {
     if (error) {
       setMessage({ type: "error", text: "Approval failed." });
     } else {
-      await fetchQuestions();
-      setMessage({ type: "success", text: "Question approved!" });
+      setApprovedIds((prev) => [...prev, id]);
     }
   };
 
@@ -76,8 +81,30 @@ export default function DeleteRadioButton({ chapterId, user }) {
       {questions.length === 0 ? (
         <p>No radio button questions found for this chapter.</p>
       ) : (
-        questions.map((q) =>
-          editId === q.id ? (
+        questions.map((q) => {
+          if (approvedIds.includes(q.id)) {
+            return (
+              <Msg_in_Body
+                key={`approved-${q.id}`}
+                type="success"
+                text="✅ Radiobutton Question approved successfully."
+                duration={-1}
+              />
+            );
+          }
+
+          if (deletedIds.includes(q.id)) {
+            return (
+              <Msg_in_Body
+                key={`deleted-${q.id}`}
+                type="success"
+                text="🗑️ Radiobutton Question deleted successfully."
+                duration={-1}
+              />
+            );
+          }
+
+          return editId === q.id ? (
             <EditRadiobutton
               key={q.id}
               question={q}
@@ -98,7 +125,6 @@ export default function DeleteRadioButton({ chapterId, user }) {
                   .eq("id", updated.id);
 
                 if (error) {
-                  console.error("Update Error Details:", error);
                   setMessage({
                     type: "error",
                     text: "Failed to update question.",
@@ -120,12 +146,12 @@ export default function DeleteRadioButton({ chapterId, user }) {
                 question={q}
                 onEdit={() => setEditId(q.id)}
                 onDelete={() => setConfirmDeleteId(q.id)}
-                onApprove={handleApprove}
+                onApprove={() => handleApprove(q.id)}
               />
+
               {confirmDeleteId === q.id && (
                 <div className="delete-confirm">
                   <p className="warn">Are you sure you want to delete this question?</p>
-
                   <div className="center">
                     <ButtonAction
                       type="button"
@@ -145,8 +171,8 @@ export default function DeleteRadioButton({ chapterId, user }) {
                 </div>
               )}
             </div>
-          )
-        )
+          );
+        })
       )}
     </div>
   );

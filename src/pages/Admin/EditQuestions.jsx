@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { supabase } from "../../supabaseDB";
 import Layout from "../../components/Layout";
 import TabbedPanel from "../../components/UI/TabbedPanel";
 import SelectChapter from "../../components/SQL/DDL_SelectChapter";
-import DeleteCheckbox from "../../components/Question/Checkbox/Delete_Checkbox"; 
-import DeleteRadiobutton from "../../components/Question/Radiobutton/Delete_Radiobutton"; 
+import DeleteCheckbox from "../../components/Question/Checkbox/Delete_Checkbox";
+import DeleteRadiobutton from "../../components/Question/Radiobutton/Delete_Radiobutton";
 import "../../styles/main.css";
 
 const TABS = [
@@ -33,6 +34,22 @@ const TABS = [
 
 export default function EditQuestions() {
   const [chapter, setChapter] = useState("");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const { data, error } = await supabase.auth.getUser();
+      if (error) {
+        console.log("✅ USER:", user);
+
+        console.error("Failed to fetch user:", error.message);
+      } else {
+        setUser(data?.user || null);
+      }
+    }
+
+    fetchUser();
+  }, []);
 
   return (
     <Layout
@@ -48,8 +65,10 @@ export default function EditQuestions() {
 
           <TabbedPanel tabs={TABS} defaultTab="checkbox">
             {{
-              checkbox: <DeleteCheckbox chapterId={chapter} />,
-              radiobutton: <DeleteRadiobutton chapterId={chapter} />,
+              checkbox: <DeleteCheckbox chapterId={chapter} user={user} />,
+              radiobutton: (
+                <DeleteRadiobutton chapterId={chapter} user={user} />
+              ),
               // truefalse: <ViewTrueFalse chapterId={chapter} />,
               // matchcolumn: <ViewMatchColumns chapterId={chapter} />,
               // fillintheblank: <ViewFillInTheBlank chapterId={chapter} />,
