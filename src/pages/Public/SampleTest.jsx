@@ -4,6 +4,8 @@ import { supabase } from "../../supabaseDB";
 import DDL_SelectChapter from "../../components/SQL/DDL_SelectChapter";
 import GradeCheckbox from "../../components/Question/Checkbox/Grade_Checkbox";
 import GradeRadiobutton from "../../components/Question/Radiobutton/Grade_Radiobutton";
+import GradeTrueFalse from "../../components/Question/TrueFalse/Grade_TrueFalse"; 
+import GradeFillInTheBlank from "../../components/Question/FillInTheBlank/Grade_FillInTheBlank";
 import "../../styles/main.css";
 
 const SampleTest = () => {
@@ -30,6 +32,8 @@ const SampleTest = () => {
           <>
             <GradeCheckbox chapterId={chapter} />
             <GradeRadiobutton chapterId={chapter} />
+            <GradeTrueFalse chapterId={chapter} />
+            <GradeFillInTheBlank chapterId={chapter} />
           </>
         )}
       </div>

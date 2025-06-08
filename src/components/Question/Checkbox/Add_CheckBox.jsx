@@ -68,7 +68,7 @@ export default function AddCheckbox({ chapterId, user }) {
         id="checkboxes"
         name="checkboxes"
         label="Checkbox (Multiple Correct Answers)"
-        placeholder="Type away, Type away, Question. One Question at a time ...."
+        placeholder="Type away the Question. Checkbox ON for all the correct options"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
         maxLength={1000}

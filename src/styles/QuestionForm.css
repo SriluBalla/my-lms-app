@@ -11,6 +11,7 @@
 
 .qst-opt {
   display: inline;
+  flex-direction: column;
 }
 
 .check-box {
@@ -47,8 +48,21 @@ Do not lose this code ====== */
   font-weight: bold;
 }
 
+.qst-false {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: red;
+}
+.qst-true {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: green;
+}
+.radio-button {
+  width: 10%;
+}
 .radio-row {
-  display: inline-flex;
+  display: flex;
 }
 
 /* ============= */

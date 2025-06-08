@@ -5,6 +5,9 @@ import TabbedPanel from "../../components/UI/TabbedPanel";
 import SelectChapter from "../../components/SQL/DDL_SelectChapter";
 import DeleteCheckbox from "../../components/Question/Checkbox/Delete_Checkbox";
 import DeleteRadiobutton from "../../components/Question/Radiobutton/Delete_Radiobutton";
+import DeleteTrueFalse from "../../components/Question/TrueFalse/Delete_TrueFalse";
+import DeleteFillInTheBlank from "../../components/Question/FillInTheBlank/Delete_FillInTheBlank";
+
 import "../../styles/main.css";
 
 const TABS = [
@@ -69,9 +72,9 @@ export default function EditQuestions() {
               radiobutton: (
                 <DeleteRadiobutton chapterId={chapter} user={user} />
               ),
-              // truefalse: <ViewTrueFalse chapterId={chapter} />,
+              truefalse: <DeleteTrueFalse chapterId={chapter} user={user} />,
               // matchcolumn: <ViewMatchColumns chapterId={chapter} />,
-              // fillintheblank: <ViewFillInTheBlank chapterId={chapter} />,
+              fillintheblank: <DeleteFillInTheBlank chapterId={chapter} user={user} />,
               // shortanswer: <ViewShortAnswer chapterId={chapter} />,
             }}
           </TabbedPanel>

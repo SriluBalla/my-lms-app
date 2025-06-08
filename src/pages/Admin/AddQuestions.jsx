@@ -5,10 +5,8 @@ import TabbedPanel from "../../components/UI/TabbedPanel";
 import DDL_SelectChapter from "../../components/SQL/DDL_SelectChapter";
 import AddCheckbox from "../../components/Question/Checkbox/Add_Checkbox.jsx"; 
 import AddRadiobutton from "../../components/Question/Radiobutton/Add_Radiobutton";
-// import FormTrueFalse from "../../components/Question/Form_TrueFalse";
-// import FormMatchColumns from "../../components/Question/Form_Match";
-// import FormFillInTheBlank from "../../components/Question/Form_FillInTheBlank";
-// import FormShortAnswer from "../../components/Question/Form_ShortAnswer";
+import AddTrueFalse from "../../components/Question/TrueFalse/Add_TrueFalse";
+import AddFillInTheBlank from "../../components/Question/FillInTheBlank/Add_FillInTheBlank";
 import "../../styles/main.css";
 
 const TABS = [
@@ -64,9 +62,9 @@ export default function AddQuestions() {
             {{
               checkbox: <AddCheckbox chapterId={chapter} user={user} />,
               radiobutton: <AddRadiobutton chapterId={chapter} user={user} />,
-              // truefalse: <FormTrueFalse chapterId={chapter} user={user} />,
+              truefalse: <AddTrueFalse chapterId={chapter} user={user} />,
               // matchcolumn: <FormMatchColumns chapterId={chapter} user={user} />,
-              // fillintheblank: <FormFillInTheBlank chapterId={chapter} user={user} />,
+              fillintheblank: <AddFillInTheBlank chapterId={chapter} user={user} />,
               // shortanswer: <FormShortAnswer chapterId={chapter} user={user} />,
             }}
           </TabbedPanel>

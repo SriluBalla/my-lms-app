@@ -77,7 +77,7 @@ export default function AddRadiobutton({ chapterId, user, colorClass }) {
         id="radio-question"
         name="radio-question"
         label="Radiobutton (One Correct Answer)"
-        placeholder="Type away, Type away, Question. One Question at a time ...."
+        placeholder="Type away the Question. Checkbox ON only one correct options"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
         maxLength={1000}
