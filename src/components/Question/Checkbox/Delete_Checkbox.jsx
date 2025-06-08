@@ -6,7 +6,7 @@ import ButtonAction from "../../Button/ButtonAction";
 import Msg_in_Body from "../../Message/Msg_in_Body";
 import "../../../styles/main.css";
 
-export default function DeleteCheckBox({ chapterId, user }) {
+export default function DeleteCheckbox({ chapterId, user }) {
   const [questions, setQuestions] = useState([]);
   const [message, setMessage] = useState({ type: "", text: "" });
   const [editId, setEditId] = useState(null);

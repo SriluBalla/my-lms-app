@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { supabase } from "../../supabaseDB";
 import DDL_SelectChapter from "../../components/SQL/DDL_SelectChapter";
-import GradeCheckBox from "../../components/Question/Checkbox/Grade_CheckBox";
+import GradeCheckbox from "../../components/Question/Checkbox/Grade_Checkbox";
 import "../../styles/main.css";
 
 const SampleTest = () => {
@@ -29,7 +29,7 @@ const SampleTest = () => {
 
         {/* Only show once a chapter is selected */}
         {chapter && (
-          <GradeCheckBox chapterId={chapter} />
+          <GradeCheckbox chapterId={chapter} />
         )}
       </div>
     </Layout>

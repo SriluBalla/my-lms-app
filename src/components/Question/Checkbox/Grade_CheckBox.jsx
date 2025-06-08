@@ -4,7 +4,7 @@ import Msg_in_Body from "../../Message/Msg_in_Body";
 import ButtonSubmit from "../../Button/ButtonSubmit";
 import "../../../styles/main.css";
 
-export default function GradeCheckBox({ chapterId }) {
+export default function GradeCheckbox({ chapterId }) {
   const [questions, setQuestions] = useState([]);
   const [message, setMessage] = useState({ type: "", text: "" });
   const [selectedAnswers, setSelectedAnswers] = useState({});
