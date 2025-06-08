@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import { supabase } from "../../supabaseDB";
 import DDL_SelectChapter from "../../components/SQL/DDL_SelectChapter";
 import GradeCheckbox from "../../components/Question/Checkbox/Grade_Checkbox";
+import GradeRadiobutton from "../../components/Question/Radiobutton/Grade_Radiobutton";
 import "../../styles/main.css";
 
 const SampleTest = () => {
@@ -18,10 +19,7 @@ const SampleTest = () => {
   }, []);
 
   return (
-    <Layout
-      title="Sample Test"
-      description="Sample Test, select by Chapter"
-    >
+    <Layout title="Sample Test" description="Sample Test, select by Chapter">
       <div className="body__outline">
         <div className="ddl-group">
           <DDL_SelectChapter value={chapter} onChange={setChapter} />
@@ -29,7 +27,10 @@ const SampleTest = () => {
 
         {/* Only show once a chapter is selected */}
         {chapter && (
-          <GradeCheckbox chapterId={chapter} />
+          <>
+            <GradeCheckbox chapterId={chapter} />
+            <GradeRadiobutton chapterId={chapter} />
+          </>
         )}
       </div>
     </Layout>

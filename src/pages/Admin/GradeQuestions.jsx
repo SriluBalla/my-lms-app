@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import TabbedPanel from "../../components/UI/TabbedPanel";
 import SelectChapter from "../../components/SQL/DDL_SelectChapter";
-import GradeCheckbox from "../../components/Question/Checkbox/Grade_Checkbox"; // ✅ Your new component
+import GradeCheckbox from "../../components/Question/Checkbox/Grade_Checkbox"; 
+import GradeRadiobutton from "../../components/Question/Radiobutton/Grade_Radiobutton"; 
 import "../../styles/main.css";
 
 const TABS = [
@@ -48,7 +49,7 @@ export default function GradeQuestions() {
           <TabbedPanel tabs={TABS} defaultTab="checkbox">
             {{
               checkbox: <GradeCheckbox chapterId={chapter} />,
-              // radiobutton: <ViewRadiobutton chapterId={chapter} />,
+              radiobutton: <GradeRadiobutton chapterId={chapter} />,
               // truefalse: <ViewTrueFalse chapterId={chapter} />,
               // matchcolumn: <ViewMatchColumns chapterId={chapter} />,
               // fillintheblank: <ViewFillInTheBlank chapterId={chapter} />,
