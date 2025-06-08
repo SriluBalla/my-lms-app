@@ -103,7 +103,6 @@ export default function DeleteCheckbox({ chapterId, user }) {
                 key={`approved-${q.id}`}
                 type="success"
                 text="✅ Checkbox Question approved successfully."
-                duration={-1}
               />
             );
           }
@@ -113,7 +112,6 @@ export default function DeleteCheckbox({ chapterId, user }) {
                 key={`deleted-${q.id}`}
                 type="success"
                 text="🗑️ Checkbox Question deleted successfully."
-                duration={-1}
               />
             );
           }

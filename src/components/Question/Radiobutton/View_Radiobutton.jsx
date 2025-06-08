@@ -30,7 +30,6 @@ export default function ViewRadioButton({
       <Msg_in_Body
         type={approvedMsg ? approvedMsg.type : deletedMsg.type}
         text={approvedMsg ? approvedMsg.text : deletedMsg.text}
-        duration={-1}
       />
     );
   }

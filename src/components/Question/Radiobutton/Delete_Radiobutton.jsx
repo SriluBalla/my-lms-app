@@ -88,7 +88,6 @@ export default function DeleteRadioButton({ chapterId, user }) {
                 key={`approved-${q.id}`}
                 type="success"
                 text="✅ Radiobutton Question approved successfully."
-                duration={-1}
               />
             );
           }
@@ -99,7 +98,6 @@ export default function DeleteRadioButton({ chapterId, user }) {
                 key={`deleted-${q.id}`}
                 type="success"
                 text="🗑️ Radiobutton Question deleted successfully."
-                duration={-1}
               />
             );
           }

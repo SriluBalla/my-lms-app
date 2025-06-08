@@ -135,9 +135,7 @@ export default function GradeCheckbox({ chapterId }) {
             )}
             {submitted[q.id] && (
               <Msg_in_Body
-                type={results[q.id]?.includes("Correct") ? "success" : "error"}
-                text={results[q.id]}
-                duration={-1} />
+                type={results[q.id]?.includes("Correct") ? "success" : "error"}/>
             )}
           </form>
         </div>

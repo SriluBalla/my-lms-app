@@ -108,7 +108,6 @@ export default function GradeRadiobutton({ chapterId }) {
               <Msg_in_Body
                 type={results[q.id].startsWith("Correct") ? "success" : "error"}
                 text={results[q.id]}
-                duration={-1}
               />
             )}
           </form>
