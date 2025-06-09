@@ -7,6 +7,7 @@ import DeleteCheckbox from "../../components/Question/Checkbox/Delete_Checkbox";
 import DeleteRadiobutton from "../../components/Question/Radiobutton/Delete_Radiobutton";
 import DeleteTrueFalse from "../../components/Question/TrueFalse/Delete_TrueFalse";
 import DeleteFillInTheBlank from "../../components/Question/FillInTheBlank/Delete_FillInTheBlank";
+import DeleteMatchColumn from "../../components/Question/MatchColumn/Delete_MatchColumn";
 
 import "../../styles/main.css";
 
@@ -73,7 +74,7 @@ export default function EditQuestions() {
                 <DeleteRadiobutton chapterId={chapter} user={user} />
               ),
               truefalse: <DeleteTrueFalse chapterId={chapter} user={user} />,
-              // matchcolumn: <ViewMatchColumns chapterId={chapter} />,
+              matchcolumn: <DeleteMatchColumn chapterId={chapter} user={(user) }/>,
               fillintheblank: <DeleteFillInTheBlank chapterId={chapter} user={user} />,
               // shortanswer: <ViewShortAnswer chapterId={chapter} />,
             }}

@@ -6,6 +6,7 @@ import GradeCheckbox from "../../components/Question/Checkbox/Grade_Checkbox";
 import GradeRadiobutton from "../../components/Question/Radiobutton/Grade_Radiobutton"; 
 import GradeTrueFalse from "../../components/Question/TrueFalse/Grade_TrueFalse"; 
 import GradeFillInTheBlank from "../../components/Question/FillInTheBlank/Grade_FillInTheBlank"; 
+import GradeMatchColumn from "../../components/Question/MatchColumn/Grade_MatchColumn";
 import "../../styles/main.css";
 
 const TABS = [
@@ -53,7 +54,7 @@ export default function GradeQuestions() {
               checkbox: <GradeCheckbox chapterId={chapter} />,
               radiobutton: <GradeRadiobutton chapterId={chapter} />,
               truefalse: <GradeTrueFalse chapterId={chapter} />,
-              // matchcolumn: <ViewMatchColumns chapterId={chapter} />,
+              matchcolumn: <GradeMatchColumn chapterId={chapter} />,
               fillintheblank: <GradeFillInTheBlank chapterId={chapter} />,
               // shortanswer: <ViewShortAnswer chapterId={chapter} />,
             }}

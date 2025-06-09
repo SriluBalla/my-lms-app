@@ -41,7 +41,7 @@ Do not lose this code ====== */
 }
 
 .card-qst:hover {
-  font-size: 1.5rem;
+  /* font-size: 1.2rem; */
 }
 
 .qst-head {
@@ -64,6 +64,11 @@ Do not lose this code ====== */
 .radio-row {
   display: flex;
 }
+.match-row {
+  display: flex;
+  padding-bottom: 2%;
+  gap: 2%;
+}
 
 /* ============= */
 .option-row {
@@ -80,4 +85,13 @@ Do not lose this code ====== */
 .ddl-chapter {
   margin: 25px;
   width: auto;
+}
+
+.table-match {
+  text-align: center;
+}
+
+.table-match th,
+.table-match td {
+  width: 50%;
 }
