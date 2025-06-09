@@ -36,7 +36,7 @@ const TextInput = ({
     />
 
     {/* ✅ Use ConfirmMessage if message exists */}
-    {message && <ConfirmMessage type={type} text={message} />}
+    {message && <Msg_in_Body type={type} text={message} />}
   </div>
 );
 
