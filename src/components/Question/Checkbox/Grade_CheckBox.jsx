@@ -77,6 +77,15 @@ export default function GradeCheckbox({ chapterId }) {
 
     const selected = selectedAnswers[questionId] || [];
 
+    // Show info message if no answer selected
+    if (selected.length === 0) {
+      setResults((prev) => ({
+        ...prev,
+        [questionId]: "ℹ️ Please answer the question",
+      }));
+      return;
+    }
+
     const isCorrect =
       selected.length === correctIds.length &&
       selected.every((id) => correctIds.includes(id));
@@ -89,9 +98,7 @@ export default function GradeCheckbox({ chapterId }) {
   };
 
   return (
-
     <div className="grade-question-wrapper">
-      
       <Msg_in_Body type={message.type} text={message.text} />
 
       {questions.map((q) => (
@@ -107,15 +114,13 @@ export default function GradeCheckbox({ chapterId }) {
             <ul className="bullet-no">
               {q.options.map((opt) => (
                 <li key={opt.id}>
-                  <span >
+                  <span>
                     <input
-                      className="check-grade" 
+                      className="check-grade"
                       type="checkbox"
                       disabled={submitted[q.id]}
                       checked={
-                        selectedAnswers[q.id]
-                          ? selectedAnswers[q.id].includes(opt.id)
-                          : false
+                        selectedAnswers[q.id]?.includes(opt.id) || false
                       }
                       onChange={() => handleToggle(q.id, opt.id)}
                     />
@@ -124,6 +129,7 @@ export default function GradeCheckbox({ chapterId }) {
                 </li>
               ))}
             </ul>
+
             {!submitted[q.id] && (
               <div className="center">
                 <ButtonSubmit
@@ -133,10 +139,18 @@ export default function GradeCheckbox({ chapterId }) {
                 />
               </div>
             )}
+
             {submitted[q.id] && (
               <Msg_in_Body
-                type={results[q.id]?.includes("Correct") ? "success" : "error"}/>
+                type={results[q.id]?.includes("Correct") ? "success" : "error"}
+                text={results[q.id]}
+              />
             )}
+
+            {!submitted[q.id] &&
+              results[q.id] === "ℹ️ Please answer the question" && (
+                <Msg_in_Body type="info" text={results[q.id]} />
+              )}
           </form>
         </div>
       ))}

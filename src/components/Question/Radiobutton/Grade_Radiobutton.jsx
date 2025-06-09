@@ -46,6 +46,15 @@ export default function GradeRadiobutton({ chapterId }) {
   const handleSubmit = (questionId) => {
     const question = questions.find((q) => q.id === questionId);
     const selected = selectedAnswers[questionId];
+
+    if (!selected) {
+      setResults((prev) => ({
+        ...prev,
+        [questionId]: "ℹ️ Please answer the question",
+      }));
+      return;
+    }
+
     const isCorrect = selected === question.is_correct;
 
     setSubmitted((prev) => ({ ...prev, [questionId]: true }));
@@ -88,7 +97,6 @@ export default function GradeRadiobutton({ chapterId }) {
                       }
                     />
                     <p className="qst-opt">{opt.text}</p>
-                    {opt.text}
                   </span>
                 </li>
               ))}
@@ -110,6 +118,11 @@ export default function GradeRadiobutton({ chapterId }) {
                 text={results[q.id]}
               />
             )}
+
+            {!submitted[q.id] &&
+              results[q.id] === "ℹ️ Please answer the question" && (
+                <Msg_in_Body type="info" text={results[q.id]} />
+              )}
           </form>
         </div>
       ))}

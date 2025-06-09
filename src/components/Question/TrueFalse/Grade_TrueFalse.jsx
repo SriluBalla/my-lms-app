@@ -33,9 +33,18 @@ export default function GradeTrueFalse({ chapterId }) {
   }, [chapterId]);
 
   const handleSubmit = (questionId) => {
+    const selected = selectedAnswers[questionId];
+
+    if (selected !== "true" && selected !== "false") {
+      setResults((prev) => ({
+        ...prev,
+        [questionId]: "ℹ️ Please answer the question",
+      }));
+      return;
+    }
+
     const question = questions.find((q) => q.id === questionId);
-    const selected = selectedAnswers[questionId] === "true";
-    const isCorrect = selected === question.is_correct;
+    const isCorrect = (selected === "true") === question.is_correct;
 
     setSubmitted((prev) => ({ ...prev, [questionId]: true }));
     setResults((prev) => ({
@@ -76,20 +85,27 @@ export default function GradeTrueFalse({ chapterId }) {
                         }))
                       }
                     />
-                    <p className="qst-opt">{value === "true" ? "✅ True" : "❌ False"}</p>
+                    <p className="qst-opt">
+                      {value === "true" ? "✅ True" : "❌ False"}
+                    </p>
                   </span>
                 </li>
               ))}
             </ul>
 
             {!submitted[q.id] && (
-              <div className="center">
-                <ButtonSubmit
-                  type="submit"
-                  data-testid="submitAnswer"
-                  label="Submit Answer"
-                />
-              </div>
+              <>
+                <div className="center">
+                  <ButtonSubmit
+                    type="submit"
+                    data-testid="submitAnswer"
+                    label="Submit Answer"
+                  />
+                </div>
+                {results[q.id] === "ℹ️ Please answer the question" && (
+                  <Msg_in_Body type="info" text={results[q.id]} />
+                )}
+              </>
             )}
 
             {submitted[q.id] && (

@@ -47,7 +47,18 @@ export default function GradeFillInTheBlank({ chapterId }) {
 
   const handleSubmit = (questionId) => {
     const question = questions.find((q) => q.id === questionId);
-    const answer = (answers[questionId] || "").trim().toLowerCase();
+    const rawInput = answers[questionId] || "";
+    const answer = rawInput.trim().toLowerCase();
+
+    // Check if input is empty
+    if (!answer) {
+      setResults((prev) => ({
+        ...prev,
+        [questionId]: "ℹ️ Please answer the question",
+      }));
+      return;
+    }
+
     const isCorrect = question.options.includes(answer);
 
     setSubmitted((prev) => ({ ...prev, [questionId]: true }));
@@ -97,6 +108,11 @@ export default function GradeFillInTheBlank({ chapterId }) {
                 text={results[q.id]}
               />
             )}
+
+            {!submitted[q.id] &&
+              results[q.id] === "ℹ️ Please answer the question" && (
+                <Msg_in_Body type="info" text={results[q.id]} />
+              )}
           </form>
         </div>
       ))}
