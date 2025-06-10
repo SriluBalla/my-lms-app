@@ -3,11 +3,12 @@ import { supabase } from "../../supabaseDB";
 import Layout from "../../components/Layout";
 import TabbedPanel from "../../components/UI/TabbedPanel";
 import DDL_SelectChapter from "../../components/SQL/DDL_SelectChapter";
-import AddCheckbox from "../../components/Question/Checkbox/Add_Checkbox.jsx"; 
+import AddCheckbox from "../../components/Question/Checkbox/Add_Checkbox.jsx";
 import AddRadiobutton from "../../components/Question/Radiobutton/Add_Radiobutton";
 import AddTrueFalse from "../../components/Question/TrueFalse/Add_TrueFalse";
 import AddFillInTheBlank from "../../components/Question/FillInTheBlank/Add_FillInTheBlank";
 import AddMatchColumn from "../../components/Question/MatchColumn/Add_MatchColumn.jsx";
+import AddShortAnswer from "../../components/Question/ShortAnswer/Add_ShortAnswer.jsx";
 import "../../styles/main.css";
 
 const TABS = [
@@ -65,8 +66,10 @@ export default function AddQuestions() {
               radiobutton: <AddRadiobutton chapterId={chapter} user={user} />,
               truefalse: <AddTrueFalse chapterId={chapter} user={user} />,
               matchcolumn: <AddMatchColumn chapterId={chapter} user={user} />,
-              fillintheblank: <AddFillInTheBlank chapterId={chapter} user={user} />,
-              // shortanswer: <FormShortAnswer chapterId={chapter} user={user} />,
+              fillintheblank: (
+                <AddFillInTheBlank chapterId={chapter} user={user} />
+              ),
+              shortanswer: <AddShortAnswer chapterId={chapter} user={user} />,
             }}
           </TabbedPanel>
         </div>

@@ -7,6 +7,7 @@ import GradeRadiobutton from "../../components/Question/Radiobutton/Grade_Radiob
 import GradeTrueFalse from "../../components/Question/TrueFalse/Grade_TrueFalse";
 import GradeFillInTheBlank from "../../components/Question/FillInTheBlank/Grade_FillInTheBlank";
 import GradeMatchColumn from "../../components/Question/MatchColumn/Grade_MatchColumn";
+import GradeShortAnswer from "../../components/Question/ShortAnswer/Grade_ShortAnswer";
 import "../../styles/main.css";
 
 const SampleTest = () => {
@@ -36,7 +37,7 @@ const SampleTest = () => {
             <GradeTrueFalse chapterId={chapter} />
             <GradeFillInTheBlank chapterId={chapter} />
             <GradeMatchColumn chapterId={chapter} />
-            {/* <GradeShortEssay chapterId={chapter} /> */}
+            <GradeShortAnswer chapterId={chapter} />
           </>
         )}
       </div>

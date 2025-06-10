@@ -8,6 +8,7 @@ import DeleteRadiobutton from "../../components/Question/Radiobutton/Delete_Radi
 import DeleteTrueFalse from "../../components/Question/TrueFalse/Delete_TrueFalse";
 import DeleteFillInTheBlank from "../../components/Question/FillInTheBlank/Delete_FillInTheBlank";
 import DeleteMatchColumn from "../../components/Question/MatchColumn/Delete_MatchColumn";
+import DeleteShortAnswer from "../../components/Question/ShortAnswer/Delete_ShortAnswer";
 
 import "../../styles/main.css";
 
@@ -74,9 +75,15 @@ export default function EditQuestions() {
                 <DeleteRadiobutton chapterId={chapter} user={user} />
               ),
               truefalse: <DeleteTrueFalse chapterId={chapter} user={user} />,
-              matchcolumn: <DeleteMatchColumn chapterId={chapter} user={(user) }/>,
-              fillintheblank: <DeleteFillInTheBlank chapterId={chapter} user={user} />,
-              // shortanswer: <ViewShortAnswer chapterId={chapter} />,
+              matchcolumn: (
+                <DeleteMatchColumn chapterId={chapter} user={user} />
+              ),
+              fillintheblank: (
+                <DeleteFillInTheBlank chapterId={chapter} user={user} />
+              ),
+              shortanswer: (
+                <DeleteShortAnswer chapterId={chapter} user={user} />
+              ),
             }}
           </TabbedPanel>
         </div>

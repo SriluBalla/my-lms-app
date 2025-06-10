@@ -7,6 +7,7 @@ import GradeRadiobutton from "../../components/Question/Radiobutton/Grade_Radiob
 import GradeTrueFalse from "../../components/Question/TrueFalse/Grade_TrueFalse"; 
 import GradeFillInTheBlank from "../../components/Question/FillInTheBlank/Grade_FillInTheBlank"; 
 import GradeMatchColumn from "../../components/Question/MatchColumn/Grade_MatchColumn";
+import GradeShortAnswer from "../../components/Question/ShortAnswer/Grade_ShortAnswer";
 import "../../styles/main.css";
 
 const TABS = [
@@ -56,7 +57,7 @@ export default function GradeQuestions() {
               truefalse: <GradeTrueFalse chapterId={chapter} />,
               matchcolumn: <GradeMatchColumn chapterId={chapter} />,
               fillintheblank: <GradeFillInTheBlank chapterId={chapter} />,
-              // shortanswer: <ViewShortAnswer chapterId={chapter} />,
+              shortanswer: <GradeShortAnswer chapterId={chapter} />,
             }}
           </TabbedPanel>
         </div>
