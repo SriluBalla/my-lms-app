@@ -125,7 +125,7 @@ const Header = () => {
               src={
                 profile?.profile_img_url
                   ? profile.profile_img_url
-                  : "/images/global/Profile-placeholder.png"
+                  : "/public/images/global/Profile-placeholder.png"
               }
               alt="Profile"
               className="profile-icon"

@@ -38,7 +38,7 @@ const SavedProfileCard = ({ profile }) => {
         src={
           profile_img_url
             ? profile_img_url
-            : "/images/global/Profile-placeholder.png"
+            : "/public/images/global/Profile-placeholder.png"
         }
         alt="Profile"
         title="Profile Picture"
