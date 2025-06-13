@@ -9,7 +9,7 @@ import SuccessPopup from "../components/Message/Msg_in_Popup";
 import ConfirmMessage from "../components/Message/Msg_in_Body";
 import SavedProfileCard from "../components/SQL/Card_Profile";
 import UserRole from "../components/SQL/SQL_get_Roles";
-import ProfileImageUploader from "../components/SQL/Upload_Helper";
+import ImageUploader from "../components/SQL/Upload_Helper";
 import AdminNote from "../components/SQL/Admin_Notes";
 import ButtonSubmit from "../components/Button/ButtonSubmit";
 import "../styles/main.css";
@@ -247,7 +247,7 @@ const Profile = () => {
           <UserRole />
 
           {user && user.id && (
-            <ProfileImageUploader
+            <ImageUploader
               userId={user.id}
               onUpload={(url) => setProfileImageUrl(url)}
             />

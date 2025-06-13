@@ -42,3 +42,18 @@
     background: #0a8bb7;
     font-weight: bold;
   }
+
+  .nav__link {
+  color: #040327;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav__link:hover {
+  background: #0a8bb7;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  padding: 6px 10px;
+}

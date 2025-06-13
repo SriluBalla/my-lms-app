@@ -10,7 +10,8 @@ import Profile from "../pages/Profile.jsx";
 import MemberProfiles from "../pages/Public/MemberProfiles.jsx";
 import Red_Acknowledment from "../pages/Auth/Red_Ack.jsx";
 import PotManifesto from "../pages/Public/Pot-Manifesto.jsx";
-import SampleTest from "../pages/Public/SampleTest.jsx";
+import ChapterCheck from "../pages/Public/ChapterCheck.jsx";
+import IssueTest from "../pages/Public/IssueTest.jsx";
 import AdminUserManager from "../pages/Admin/UserManagement.jsx";
 import AddQuestions from "../pages/Admin/AddQuestions.jsx"
 import EditQuestions from "../pages/Admin/EditQuestions.jsx"
@@ -42,9 +43,17 @@ const routes = [
     element: <Why />,
   },
   {
-    path: "/sample-test",
-    element: <SampleTest />,
+    path: "/sample-chapter-check",
+    element: <ChapterCheck />,
   },
+   {
+    path: "/sample-issue-test",
+    element: <IssueTest />,
+  },
+  //  {
+  //   path: "/sample-checkcase-test",
+  //   element: <ChckCaseTest />,
+  // },
   {
     path: "/pot-manifesto",
     element: <PotManifesto />,

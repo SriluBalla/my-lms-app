@@ -1,49 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../../../supabaseDB";
-// import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
+import SavedProfileCard from "../../SQL/Card_Profile";
+import RichTextEditor from "../../Input/Input_RichTextEditor";
+import ButtonSubmit from "../../Button/ButtonSubmit";
+import TextInput from "../../Input/Input_TextField";
 import Msg_in_Body from "../../Message/Msg_in_Body";
+import ImageUploader from "../../SQL/Upload_Helper";
+import SelectInput from "../../Input/Input_Select";
 
 const Add_Issue = () => {
   const [title, setTitle] = useState("");
-  const [explain, setExplain] = useState("");
-  const [steps, setSteps] = useState([""]);
+  const [description, setDescription] = useState("");
+  const [actualResult, setActualResult] = useState("");
+  const [expectedResult, setExpectedResult] = useState("");
+  const [severity, setSeverity] = useState("");
+  const [status, setStatus] = useState("");
+  const [environment, setEnvironment] = useState("");
+  const [browser, setBrowser] = useState("");
+  const [os, setOS] = useState("");
+  const [assignedTo, setAssignedTo] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [message, setMessage] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [message, setMessage] = useState({ type: "", text: "" });
+  const [user, setUser] = useState(null);
+  const [fullName, setFullName] = useState("");
 
-  const handleStepChange = (index, value) => {
-    const updated = [...steps];
-    updated[index] = value;
-    setSteps(updated);
-  };
+  useEffect(() => {
+    async function fetchUserAndProfile() {
+      const { data: authData } = await supabase.auth.getUser();
+      const currentUser = authData?.user;
+      if (!currentUser) return;
 
-  const addStepField = () => setSteps([...steps, ""]);
-  const removeStepField = (index) => {
-    const updated = [...steps];
-    updated.splice(index, 1);
-    setSteps(updated);
-  };
+      setUser(currentUser);
 
-  const handleImageChange = (e) => setImageFile(e.target.files[0]);
+      const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("first_name, last_name")
+        .eq("id", currentUser.id)
+        .single();
+
+      if (!error && profile) {
+        setFullName(`${profile.first_name} ${profile.last_name}`);
+      }
+    }
+
+    fetchUserAndProfile();
+  }, []);
+
+  const handleImageChange = (file) => setImageFile(file);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(null);
-    setStatus(null);
+    setMessage({ type: "", text: "" });
 
     try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
       if (!user) {
-        setMessage("You must be logged in to submit.");
-        setStatus("error");
+        setMessage({ type: "info", text: "You must be logged in to submit." });
         return;
       }
 
-      // Upload image if provided
-      let image_url = null;
+      let issue_image_url = null;
       if (imageFile) {
         const fileExt = imageFile.name.split(".").pop();
         const fileName = `${uuidv4()}.${fileExt}`;
@@ -54,8 +70,7 @@ const Add_Issue = () => {
           .upload(filePath, imageFile);
 
         if (uploadError) {
-          setMessage("Image upload failed.");
-          setStatus("error");
+          setMessage({ type: "error", text: "Image upload failed." });
           return;
         }
 
@@ -63,124 +78,201 @@ const Add_Issue = () => {
           .from("uploads")
           .getPublicUrl(filePath);
 
-        image_url = publicUrlData.publicUrl;
+        issue_image_url = publicUrlData.publicUrl;
       }
 
-      // Insert issue
-      const { data: issueData, error: issueError } = await supabase
-        .from("qa_issues")
-        .insert([
-          {
-            title,
-            explain,
-            image_url,
-            created_by: user.id,
-          },
-        ])
-        .select()
-        .single();
+      const { error: issueError } = await supabase.from("qa_issues").insert([
+        {
+          title,
+          description,
+          actual_result: actualResult,
+          expected_result: expectedResult,
+          severity,
+          status,
+          environment,
+          browser,
+          os,
+          assigned_to: assignedTo,
+          created_by: user.id,
+          issue_image_url,
+        },
+      ]);
 
-      if (issueError) {
-        throw issueError;
-      }
+      if (issueError) throw issueError;
 
-      // Insert steps
-      const stepInserts = steps
-        .filter((step) => step.trim() !== "")
-        .map((step, index) => ({
-          issue_id: issueData.id,
-          step_order: index + 1,
-          step_text: step,
-        }));
+      setMessage({
+        type: "success",
+        text: "Issue successfully submitted! Someone will get back to you with feedback",
+      });
 
-      const { error: stepError } = await supabase
-        .from("qa_issue_steps")
-        .insert(stepInserts);
-
-      if (stepError) throw stepError;
-
-      setMessage("Issue successfully submitted!");
-      setStatus("success");
       setTitle("");
-      setExplain("");
-      setSteps([""]);
+      setDescription("");
+      setActualResult("");
+      setExpectedResult("");
+      setSeverity("");
+      setStatus("");
+      setEnvironment("");
+      setBrowser("");
+      setOS("");
+      setAssignedTo("");
       setImageFile(null);
     } catch (err) {
       console.error(err);
-      setMessage("An error occurred while submitting.");
-      setStatus("error");
+      setMessage({
+        type: "error",
+        text: "An error occurred while submitting.",
+      });
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Log New Issue</h2>
+    <div className="checkbox-form bRed-bgRed">
+      <h2 className="text-2xl font-semibold mb-4">Log an Issue</h2>
+
+      {fullName && (
+        <p className="mb-4 text-sm text-gray-700">
+          <strong>Logged in as:</strong> {fullName}
+        </p>
+      )}
+
       <form onSubmit={handleSubmit}>
-        <label className="block mb-2">Title</label>
-        <input
-          type="text"
+        <TextInput
+          id="issueTitle"
+          name="issueTitle"
+          label="Issue Title"
+          placeholder="Product: Component: Issue"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          maxLength={100}
           required
-          className="w-full border p-2 mb-4"
         />
 
-        <label className="block mb-2">Explain</label>
-        <textarea
-          value={explain}
-          onChange={(e) => setExplain(e.target.value)}
-          rows={4}
-          className="w-full border p-2 mb-4"
+        <RichTextEditor
+          label="Description"
+          p={`Explain the issue in as much detail as you feel is necessary, including:\n• Database or API details\n• SQL queries\n• Screens or flows affected\n• Repro steps or patterns observed`}
+          value={description}
+          onChange={setDescription}
+          maxLength={1500}
+          height={200}
+          width="600px"
+          placeholder="Describe the issue in detail"
+          required
         />
 
-        <label className="block mb-2">Steps to Reproduce</label>
-        {steps.map((step, index) => (
-          <div key={index} className="flex mb-2 gap-2">
-            <input
-              type="text"
-              value={step}
-              onChange={(e) => handleStepChange(index, e.target.value)}
-              className="w-full border p-2"
-              placeholder={`Step ${index + 1}`}
-            />
-            {steps.length > 1 && (
-              <button
-                type="button"
-                onClick={() => removeStepField(index)}
-                className="text-red-500"
-              >
-                ✕
-              </button>
-            )}
-          </div>
-        ))}
-        <button
-          type="button"
-          onClick={addStepField}
-          className="mb-4 text-blue-600"
-        >
-          + Add Step
-        </button>
-
-        <label className="block mb-2">Optional Screenshot</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="mb-4"
+        <TextInput
+          id="actualResult"
+          name="actualResult"
+          label="Actual Result"
+          placeholder="What actually happened?"
+          value={actualResult}
+          onChange={(e) => setActualResult(e.target.value)}
+          required
         />
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Submit Issue
-        </button>
+        <TextInput
+          id="expectedResult"
+          name="expectedResult"
+          label="Expected Result"
+          placeholder="What should have happened?"
+          value={expectedResult}
+          onChange={(e) => setExpectedResult(e.target.value)}
+          required
+        />
+
+        <ImageUploader
+          userId={user?.id}
+          onUpload={(file) => handleImageChange(file)}
+        />
+
+        <span className="ddl-group">
+          <SelectInput
+            id="severity"
+            name="severity"
+            label="Severity"
+            value={severity}
+            onChange={(e) => setSeverity(e.target.value)}
+            options={["Blocker", "Critical", "Major", "Minor", "Trivial"]}
+            placeholder="Severity"
+          />
+
+          <SelectInput
+            id="status"
+            name="status"
+            label="Status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            options={[
+              "Open",
+              "In Progress",
+              "Ready for Re-Check",
+              "In Checking",
+              "Ready for Prod",
+              "In Prod",
+              "Won't Fix",
+              "Cannot Reproduce",
+              "Closed",
+            ]}
+            placeholder="----- Status -----"
+          />
+
+          <SelectInput
+            id="environment"
+            name="environment"
+            label="Environment"
+            value={environment}
+            onChange={(e) => setEnvironment(e.target.value)}
+            options={["Dev", "Prod", "Stage", "Test", "UAT"]}
+            placeholder="Environment"
+          />
+        </span>
+
+        <span className="ddl-group">
+          <TextInput
+            id="os"
+            name="os"
+            label="Operating System"
+            placeholder="Device, operating system, etc."
+            value={os}
+            onChange={(e) => setOS(e.target.value)}
+          />
+          <TextInput
+            id="browser"
+            name="browser"
+            label="Browser / App"
+            placeholder="Browser, App name"
+            value={browser}
+            onChange={(e) => setBrowser(e.target.value)}
+          />
+        </span>
+
+        <div className="ddl-group">
+          {fullName && (
+            <div>
+              <label>Reported by :</label>
+              <p>{fullName} </p>
+            </div>
+          )}
+
+          <SelectInput
+            id="assignedTo"
+            name="assignedTo"
+            label="Assign To"
+            value={assignedTo}
+            onChange={(e) => setAssignedTo(e.target.value)}
+            options={[
+              "Product Owner",
+              "Particular Dev",
+              "Dev Lead",
+              "Default",
+            ]}
+            placeholder="-- Select Assignee Role --"
+          />
+        </div>
+
+        <ButtonSubmit data-testid="submitIssue" label="Submit Issue" />
       </form>
 
-      {message && (
-        <Msg_in_Body type={status} message={message} className="mt-4" />
-      )}
+      {message?.text && <Msg_in_Body type={message.type} text={message.text} />}
     </div>
   );
 };

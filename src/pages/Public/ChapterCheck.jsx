@@ -8,9 +8,10 @@ import GradeTrueFalse from "../../components/Question/TrueFalse/Grade_TrueFalse"
 import GradeFillInTheBlank from "../../components/Question/FillInTheBlank/Grade_FillInTheBlank";
 import GradeMatchColumn from "../../components/Question/MatchColumn/Grade_MatchColumn";
 import GradeShortAnswer from "../../components/Question/ShortAnswer/Grade_ShortAnswer";
+import Add_Issue from "../../components/Question/Issue/Add_Issue";
 import "../../styles/main.css";
 
-const SampleTest = () => {
+const ChapterCheck = () => {
   const [chapter, setChapter] = useState("");
   const [user, setUser] = useState(null);
 
@@ -26,23 +27,27 @@ const SampleTest = () => {
     <Layout title="Sample Test" description="Sample Test, select by Chapter">
       <div className="body__outline">
         <div className="ddl-group">
+          <h1>Practice Tests</h1>
           <DDL_SelectChapter value={chapter} onChange={setChapter} />
         </div>
+        <p>Select a chapter from the drop down list to view the question to practice. To practice Issues and checkcases please log in.</p>
 
-        {/* Only show once a chapter is selected */}
-        {chapter && (
-          <>
-            <GradeCheckbox chapterId={chapter} />
-            <GradeRadiobutton chapterId={chapter} />
-            <GradeTrueFalse chapterId={chapter} />
-            <GradeFillInTheBlank chapterId={chapter} />
-            <GradeMatchColumn chapterId={chapter} />
-            <GradeShortAnswer chapterId={chapter} />
-          </>
-        )}
+        <div className="add-question-wrapper">
+          {/* Only show once a chapter is selected */}
+          {chapter && (
+            <>
+              <GradeCheckbox chapterId={chapter} />
+              <GradeRadiobutton chapterId={chapter} />
+              <GradeTrueFalse chapterId={chapter} />
+              <GradeFillInTheBlank chapterId={chapter} />
+              <GradeMatchColumn chapterId={chapter} />
+              <GradeShortAnswer chapterId={chapter} />
+            </>
+          )}
+        </div>
       </div>
     </Layout>
   );
 };
 
-export default SampleTest;
+export default ChapterCheck;

@@ -17,6 +17,10 @@
   white-space: nowrap;
 }
 
+.button.logIssue {
+  font-size: 1rem;
+}
+
 .button.admin {
   background: linear-gradient(to top, #ce205a, #d06f8e);
   border: 2px solid #d06f8e;

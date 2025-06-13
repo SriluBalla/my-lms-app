@@ -4,7 +4,7 @@ import { supabase } from "../../supabaseDB";
 import ButtonAction from "../Button/ButtonAction";
 import ConfirmMessage from "../Message/Msg_in_Body";
 
-const ProfileImageUploader = ({ userId, onUpload }) => {
+const ImageUploader = ({ userId, onUpload }) => {
   const [profileImage, setProfileImage] = useState(null);
   const [uploadMessage, setUploadMessage] = useState("");
   const [uploadStatus, setUploadStatus] = useState(""); // added
@@ -141,4 +141,4 @@ const ProfileImageUploader = ({ userId, onUpload }) => {
   );
 };
 
-export default ProfileImageUploader;
+export default ImageUploader;

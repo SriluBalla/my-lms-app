@@ -19,6 +19,7 @@
   width: auto;
 }
 
+
 /* ====== Question Styling  
 Do not lose this code ====== */
 .card-qst {
@@ -75,11 +76,6 @@ Do not lose this code ====== */
   display: flex;
   align-items: center;
   gap: 15px;
-}
-
-.check-box {
-  width: 50%;
-  height: 25px;
 }
 
 .ddl-chapter {
