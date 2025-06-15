@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../supabaseDB";
-import TextAreaInput from "../../Input/Input_TextArea";
+import RichTextEditor from "../../Input/Input_RichTextEditor";
 import ButtonSubmit from "../../Button/ButtonSubmit";
 import Msg_in_Body from "../../Message/Msg_in_Body";
 import "../../../styles/main.css";
@@ -50,7 +50,7 @@ export default function AddTrueFalse({ chapterId, user, colorClass }) {
     >
       <Msg_in_Body type={message.type} text={message.text} />
 
-      <TextAreaInput
+      <RichTextEditor
         id="tf-question"
         name="tf-question"
         label="True / False Question"

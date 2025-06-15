@@ -30,13 +30,13 @@
 .left-hero {
   float: left;
   flex: 1;
-  width: 50%;
+  /* width: 50%; */
 }
 
 .right-hero {
   float: right;
   flex: 1;
-  width: 50%;
+  /* width: 50%; */
 }
 
 /* ------- MOBILE STYLES  -------*/

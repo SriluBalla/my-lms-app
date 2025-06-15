@@ -14,6 +14,7 @@ import ChapterCheck from "../pages/Public/ChapterCheck.jsx";
 import IssueTest from "../pages/Public/IssueTest.jsx";
 import AdminUserManager from "../pages/Admin/UserManagement.jsx";
 import AddQuestions from "../pages/Admin/AddQuestions.jsx"
+import GradeIssue from "../pages/Admin/GradeIssues.jsx";
 import EditQuestions from "../pages/Admin/EditQuestions.jsx"
 import GradeQuestions from "../pages/Admin/GradeQuestions.jsx"
 
@@ -49,6 +50,10 @@ const routes = [
    {
     path: "/sample-issue-test",
     element: <IssueTest />,
+  },
+   {
+    path: "/admin-grade-issues",
+    element: <GradeIssue />,
   },
   //  {
   //   path: "/sample-checkcase-test",

@@ -4,7 +4,7 @@ import { supabase } from "../../supabaseDB";
 import Add_Issue from "../../components/Question/Issue/Add_Issue";
 import "../../styles/main.css";
 
-const IssueTest = () => {
+const CheckCaseTest = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -18,22 +18,21 @@ const IssueTest = () => {
   return (
     <Layout title="Sample Test" description="Sample Test, select by Chapter">
       <div className="body__outline">
-        <section className="hero heading">
-          <h2>Welcome to Issue Logging practice</h2>
-          <p>
-            <strong>
-             Tell your story of how you found the issue. Explain how you would like to see it fixed
-            </strong>
-          </p>
-        </section>
+        <div className="ddl-group">
+          <h1>Practice Logging an ISSUE</h1>
+        </div>
+        <p>Select a chapter from the drop down list to view the question to practice. To practice Issues and checkcases please log in.</p>
 
-        {/* Only show once a chapter is selected */}
-        <>
-          <Add_Issue />
-        </>
+        <div className="add-question-wrapper">
+          {/* Only show once a chapter is selected */}
+            <>
+              <Add_Issue  />
+            </>
+
+        </div>
       </div>
     </Layout>
   );
 };
 
-export default IssueTest;
+export default CheckCaseTest;

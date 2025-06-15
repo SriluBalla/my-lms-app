@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { supabase } from "../../supabaseDB";
-import Add_Issue from "../../components/Question/Issue/Add_Issue";
+import View_Issues from "../../components/Question/Issue/View_Issues";
 import "../../styles/main.css";
 
-const IssueTest = () => {
+const GradeIssue = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -29,11 +29,11 @@ const IssueTest = () => {
 
         {/* Only show once a chapter is selected */}
         <>
-          <Add_Issue />
+          <View_Issues />
         </>
       </div>
     </Layout>
   );
 };
 
-export default IssueTest;
+export default GradeIssue;

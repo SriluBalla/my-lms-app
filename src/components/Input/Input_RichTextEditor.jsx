@@ -43,7 +43,7 @@ const RichTextEditor = ({
           placeholder={placeholder}
           style={{
             height: `${height}px`,
-            width: width || "100%",
+            width: width || "80%",
             marginBottom: "1rem",
             backgroundColor: "white",
             border: "1px solid black",

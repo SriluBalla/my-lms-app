@@ -162,6 +162,14 @@ const Header = () => {
                   userRole={userRole}
                 />
                 <MenuItem
+                  id="grade-issues"
+                  data-testid="grade-issues"
+                  label="Grade Issues"
+                  to="/admin-grade-issues"
+                  roles={["user", "member", "admin", "superadmin"]}
+                  userRole={userRole}
+                />
+                <MenuItem
                   id="profile"
                   testId="profile"
                   label="Profile"

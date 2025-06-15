@@ -8,6 +8,7 @@ import TextInput from "../../Input/Input_TextField";
 import Msg_in_Body from "../../Message/Msg_in_Body";
 import ImageUploader from "../../SQL/Upload_Helper";
 import SelectInput from "../../Input/Input_Select";
+import "../../../styles/main.css";
 
 const Add_Issue = () => {
   const [title, setTitle] = useState("");
@@ -126,153 +127,146 @@ const Add_Issue = () => {
   };
 
   return (
-    <div className="checkbox-form bRed-bgRed">
-      <h2 className="text-2xl font-semibold mb-4">Log an Issue</h2>
-
-      {fullName && (
-        <p className="mb-4 text-sm text-gray-700">
-          <strong>Logged in as:</strong> {fullName}
-        </p>
-      )}
-
-      <form onSubmit={handleSubmit}>
-        <TextInput
-          id="issueTitle"
-          name="issueTitle"
-          label="Issue Title"
-          placeholder="Product: Component: Issue"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          maxLength={100}
-          required
-        />
-
-        <RichTextEditor
-          label="Description"
-          p={`Explain the issue in as much detail as you feel is necessary, including:\n• Database or API details\n• SQL queries\n• Screens or flows affected\n• Repro steps or patterns observed`}
-          value={description}
-          onChange={setDescription}
-          maxLength={1500}
-          height={200}
-          width="600px"
-          placeholder="Describe the issue in detail"
-          required
-        />
-
-        <TextInput
-          id="actualResult"
-          name="actualResult"
-          label="Actual Result"
-          placeholder="What actually happened?"
-          value={actualResult}
-          onChange={(e) => setActualResult(e.target.value)}
-          required
-        />
-
-        <TextInput
-          id="expectedResult"
-          name="expectedResult"
-          label="Expected Result"
-          placeholder="What should have happened?"
-          value={expectedResult}
-          onChange={(e) => setExpectedResult(e.target.value)}
-          required
-        />
-
-        <ImageUploader
-          userId={user?.id}
-          onUpload={(file) => handleImageChange(file)}
-        />
-
-        <span className="ddl-group">
-          <SelectInput
-            id="severity"
-            name="severity"
-            label="Severity"
-            value={severity}
-            onChange={(e) => setSeverity(e.target.value)}
-            options={["Blocker", "Critical", "Major", "Minor", "Trivial"]}
-            placeholder="Severity"
-          />
-
-          <SelectInput
-            id="status"
-            name="status"
-            label="Status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            options={[
-              "Open",
-              "In Progress",
-              "Ready for Re-Check",
-              "In Checking",
-              "Ready for Prod",
-              "In Prod",
-              "Won't Fix",
-              "Cannot Reproduce",
-              "Closed",
-            ]}
-            placeholder="----- Status -----"
-          />
-
-          <SelectInput
-            id="environment"
-            name="environment"
-            label="Environment"
-            value={environment}
-            onChange={(e) => setEnvironment(e.target.value)}
-            options={["Dev", "Prod", "Stage", "Test", "UAT"]}
-            placeholder="Environment"
-          />
-        </span>
-
-        <span className="ddl-group">
+    <div>
+      <section className="hero bRed-bgRed left-hero">
+        <form onSubmit={handleSubmit}>
           <TextInput
-            id="os"
-            name="os"
-            label="Operating System"
-            placeholder="Device, operating system, etc."
-            value={os}
-            onChange={(e) => setOS(e.target.value)}
+            id="issueTitle"
+            name="issueTitle"
+            label="Issue Title"
+            placeholder="Product: Component: Issue"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            maxLength={100}
+            required
           />
+
+          <RichTextEditor
+            label="Description"
+            p={`Explain the issue in as much detail as you feel is necessary, including:
+             Database or API details, SQL queries, Screens or flows affected
+             Repro steps or patterns observed`}
+            value={description}
+            onChange={setDescription}
+            maxLength={1500}
+            height={200}
+            width="auto"
+            placeholder="Describe the issue in detail"
+            required
+          />
+
           <TextInput
-            id="browser"
-            name="browser"
-            label="Browser / App"
-            placeholder="Browser, App name"
-            value={browser}
-            onChange={(e) => setBrowser(e.target.value)}
+            id="actualResult"
+            name="actualResult"
+            label="Actual Result"
+            placeholder="What actually happened?"
+            value={actualResult}
+            onChange={(e) => setActualResult(e.target.value)}
+            required
           />
-        </span>
 
-        <div className="ddl-group">
-          {fullName && (
-            <div>
-              <label>Reported by :</label>
-              <p>{fullName} </p>
-            </div>
-          )}
-
-          <SelectInput
-            id="assignedTo"
-            name="assignedTo"
-            label="Assign To"
-            value={assignedTo}
-            onChange={(e) => setAssignedTo(e.target.value)}
-            options={[
-              "Product Owner",
-              "Particular Dev",
-              "Dev Lead",
-              "Default",
-            ]}
-            placeholder="-- Select Assignee Role --"
+          <TextInput
+            id="expectedResult"
+            name="expectedResult"
+            label="Expected Result"
+            placeholder="What should have happened?"
+            value={expectedResult}
+            onChange={(e) => setExpectedResult(e.target.value)}
+            required
           />
-        </div>
 
-        <ButtonSubmit data-testid="submitIssue" label="Submit Issue" />
-      </form>
+          <ImageUploader
+            userId={user?.id}
+            onUpload={(file) => handleImageChange(file)}
+          />
+        </form>
+      </section>
 
-      {message?.text && <Msg_in_Body type={message.type} text={message.text} />}
+      <div className="hero bRed-bgRed right-hero">
+        <h2>Extra Details</h2>
+
+        {fullName && (
+          <div>
+            <label>Reported by :</label>
+            <p>{fullName} </p>
+          </div>
+        )}
+
+        <SelectInput
+          id="assignedTo"
+          name="assignedTo"
+          label="Assign To"
+          value={assignedTo}
+          onChange={(e) => setAssignedTo(e.target.value)}
+          options={["Product Owner", "Particular Dev", "Dev Lead", "Default"]}
+          placeholder="Select Assignee Role"
+        />
+
+        <SelectInput
+          id="severity"
+          name="severity"
+          label="Severity"
+          value={severity}
+          onChange={(e) => setSeverity(e.target.value)}
+          options={["Blocker", "Critical", "Major", "Minor", "Trivial"]}
+          placeholder="Severity"
+        />
+
+        <SelectInput
+          id="status"
+          name="status"
+          label="Status"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          options={[
+            "Open",
+            "In Progress",
+            "Ready for Re-Check",
+            "In Checking",
+            "Ready for Prod",
+            "In Prod",
+            "Won't Fix",
+            "Cannot Reproduce",
+            "Closed",
+          ]}
+          placeholder="----- Status -----"
+        />
+
+        <SelectInput
+          id="environment"
+          name="environment"
+          label="Environment"
+          value={environment}
+          onChange={(e) => setEnvironment(e.target.value)}
+          options={["Dev", "Prod", "Stage", "Test", "UAT"]}
+          placeholder="Environment"
+        />
+
+        <TextInput
+          id="os"
+          name="os"
+          label="Operating System"
+          placeholder="Device, operating system, etc."
+          value={os}
+          onChange={(e) => setOS(e.target.value)}
+        />
+        <TextInput
+          id="browser"
+          name="browser"
+          label="Browser / App"
+          placeholder="Browser, App name"
+          value={browser}
+          onChange={(e) => setBrowser(e.target.value)}
+        />
+
+        <ButtonSubmit className="button flagged" data-testid="submitIssue" label="Submit Issue" />
+      </div>
+
+      <div>
+        {message?.text && (
+          <Msg_in_Body type={message.type} text={message.text} />
+        )}
+      </div>
     </div>
   );
 };

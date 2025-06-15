@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import TextInput from "../components/Input/Input_TextField";
 import NumberInput from "../components/Input/Input_Number";
 import TextAreaInput from "../components/Input/Input_TextArea";
+import RichTextEditor from "../components/Input/Input_RichTextEditor";
 import SelectInput from "../components/Input/Input_Select";
 import SuccessPopup from "../components/Message/Msg_in_Popup";
 import ConfirmMessage from "../components/Message/Msg_in_Body";
@@ -308,19 +309,22 @@ const Profile = () => {
             />
             <em>(as Dev, QA, SDET, DevOps, etc.)</em>
 
-            <TextAreaInput
+            <RichTextEditor
               id="selfIntro"
               name="selfIntro"
               label="Self Introduction"
               placeholder="What would like for your community to know about you...."
               value={formData.selfIntro}
-              onChange={handleChange}
+              onChange={(value) =>
+                setFormData((prev) => ({ ...prev, selfIntro: value }))
+              }
               maxLength={1000}
               required={false}
-              message={errors.selfIntro}
-              type="error"
               className="text-area"
             />
+            {errors.selfIntro && (
+              <div className="error-message">{errors.selfIntro}</div>
+            )}
 
             <label>Date of Birth and Month</label>
             <span className="ddl-group">
@@ -425,8 +429,9 @@ const Profile = () => {
               type="warn"
             />
 
-            <ButtonSubmit data-testid="saveProfile" label="Save Profile" />
-            
+            <div className="center">
+              <ButtonSubmit data-testid="saveProfile" label="Save Profile" />
+            </div>
           </form>
         </div>
       </div>

@@ -1,7 +1,7 @@
 /* ====== Colors and borders ======== */
 .lite-blue {
   background: #e3f3fa;
-  border-right: 4px solid #0986bc;
+  border-left: 4px solid #0986bc;
   padding-bottom: 15px;
   padding-top: 15px;
 }

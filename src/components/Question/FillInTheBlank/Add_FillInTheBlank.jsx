@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../supabaseDB";
-import TextAreaInput from "../../Input/Input_TextArea";
+import RichTextEditor from "../../Input/Input_RichTextEditor";
 import ButtonSubmit from "../../Button/ButtonSubmit";
 import Msg_in_Body from "../../Message/Msg_in_Body";
 import "../../../styles/main.css";
@@ -59,7 +59,7 @@ export default function AddFillInTheBlank({ chapterId, user, colorClass }) {
     <form className="checkbox-form bNavy-bgBlue" onSubmit={handleSubmit}>
       <Msg_in_Body type={message.type} text={message.text} />
 
-      <TextAreaInput
+      <RichTextEditor
         id="fib-question"
         name="fib-question"
         label="Fill in the Blank"
