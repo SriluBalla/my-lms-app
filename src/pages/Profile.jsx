@@ -3,7 +3,6 @@ import { supabase } from "../supabaseDB";
 import Layout from "../components/Layout";
 import TextInput from "../components/Input/Input_TextField";
 import NumberInput from "../components/Input/Input_Number";
-import TextAreaInput from "../components/Input/Input_TextArea";
 import RichTextEditor from "../components/Input/Input_RichTextEditor";
 import SelectInput from "../components/Input/Input_Select";
 import SuccessPopup from "../components/Message/Msg_in_Popup";

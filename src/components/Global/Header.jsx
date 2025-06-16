@@ -178,6 +178,14 @@ const Header = () => {
                   userRole={userRole}
                 />
                 <MenuItem
+                  id="review-user"
+                  data-testid="review-user"
+                  label="Review User Profile"
+                  to="/admin-review-user-page"
+                  roles={["user", "member", "admin", "superadmin"]}
+                  userRole={userRole}
+                />
+                <MenuItem
                   id="profile"
                   testId="profile"
                   label="Profile"

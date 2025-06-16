@@ -42,7 +42,7 @@ const MemberProfiles = () => {
         </section>
         <section className="member-grid">
           {members.map((profile) => (
-            <div className="member-card-public" key={profile.user_id}>
+            <div className="member-card public" key={profile.user_id}>
               <SavedProfileCard profile={profile} />
             </div>
           ))}

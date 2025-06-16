@@ -1,6 +1,6 @@
-// components/ReviewNote.jsx
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseDB";
+import DOMPurify from "dompurify";
 import "../../styles/main.css";
 
 const AdminNote = () => {
@@ -25,7 +25,7 @@ const AdminNote = () => {
 
       if (profileError || !profile || profile.profile_status !== "flagged") {
         setStatus(profile?.profile_status || "unknown");
-        return; // Don't fetch note if not flagged
+        return;
       }
 
       setStatus("flagged");
@@ -50,11 +50,19 @@ const AdminNote = () => {
   if (status !== "flagged" || !note) return null;
 
   return (
-    <div className="review-note msg-info">
-      <p>To display this publicly in the Member Profiles section, please address the following issues:</p>
-      
-      <p><strong>⚠️ Flagged:</strong>  {note} </p>
-    </div>
+    <div className="review-note msg-warn">
+      <p>
+        To display your profile publicly in the Member Profiles page, please address
+        the following issues:
+      </p>
+
+        <div
+          className="flagged-text"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(note),
+          }}
+        />
+      </div>
   );
 };
 

@@ -4,7 +4,7 @@ import { supabase } from "../../supabaseDB";
 import Layout from "../../components/Layout";
 import TextInput from "../../components/Input/Input_TextField";
 import PasswordInput from "../../components/Input/Input_Password";
-import ConfirmMessage from "../../components/Message/Msg_in_Body";
+import Msg_in_Body from "../../components/Message/Msg_in_Body";
 import "../../styles/main.css";
 
 const Login = () => {
@@ -112,7 +112,7 @@ const Login = () => {
             </div>
           </form>
 
-          <ConfirmMessage type={message.type} text={message.text} />
+          <Msg_in_Body type={message.type} text={message.text} />
           {/* <ConsoleLog title="Login Debug Log" logs={logs} /> */}
         </div>
       </section>

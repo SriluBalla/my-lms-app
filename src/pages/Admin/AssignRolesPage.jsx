@@ -40,11 +40,20 @@ const AssignRolesPage = () => {
   const updateUserRole = async (userId, roleKey) => {
     const roleId = ROLE_IDS[roleKey];
 
-    const { error } = await supabase
-      .from("user_role_assignments")
-      .upsert([{ user_id: userId, role_id: roleId }], {
-        onConflict: ["user_id"],
-      });
+    const { data: authData, error: authError } = await supabase.auth.getUser();
+    const currentAdmin = authData?.user;
+
+    const { error } = await supabase.from("user_role_assignments").upsert(
+      [
+        {
+          user_id: userId,
+          role_id: roleId,
+          role: roleKey,
+          assigned_by: currentAdmin?.id || null,
+        },
+      ],
+      { onConflict: ["user_id"] }
+    );
 
     if (error) {
       setMessage({
@@ -82,7 +91,7 @@ const AssignRolesPage = () => {
           <p>Loading...</p>
         ) : (
           users.map((u) => (
-            <div key={u.user_id} className="member-card">
+            <div key={u.user_id} className="member-card assign">
               <SavedProfileCard profile={u} />
               <div>
                 {Object.entries(ROLE_IDS).map(([role, _id]) => (

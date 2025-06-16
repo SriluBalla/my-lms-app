@@ -26,7 +26,6 @@ const RichTextEditor = ({
     <div>
       <div className="richTextEditor">
         <label htmlFor={id}>{label}</label>
-        {/* <p htmlFor={id}>{p}</p> */}
         {p && (
           <pre >
             {p}
@@ -44,9 +43,8 @@ const RichTextEditor = ({
           style={{
             height: `${height}px`,
             width: width || "80%",
-            marginBottom: "1rem",
+            marginBottom: "none",
             backgroundColor: "white",
-            // border: "1px solid black",
           }}
           className={error ? "error" : ""}
         />

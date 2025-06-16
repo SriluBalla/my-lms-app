@@ -18,6 +18,7 @@ import GradeIssue from "../pages/Admin/GradeIssues.jsx";
 import EditQuestions from "../pages/Admin/EditQuestions.jsx"
 import GradeQuestions from "../pages/Admin/GradeQuestions.jsx"
 import AssignRolesPage from "../pages/Admin/AssignRolesPage.jsx"
+import ReviewUserPage from "../pages/Admin/ReviewUserPage.jsx";
 
 const routes = [
   {
@@ -59,6 +60,10 @@ const routes = [
    {
     path: "/admin-assign-user-role",
     element: <AssignRolesPage />,
+  },
+  {
+    path: "/admin-review-user-page",
+    element: <ReviewUserPage />,
   },
   {
     path: "/pot-manifesto",
