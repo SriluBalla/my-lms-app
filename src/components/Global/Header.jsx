@@ -83,13 +83,15 @@ const MainHeader = () => {
   ];
   const memberLinks = [{ label: "Certificates", to: "/certificates" }];
   const leaderLinks = [
-    { label: "Grade Questions", to: "/grade/questions" },
-    { label: "Grade Issues", to: "/grade/issues" },
-    { label: "Grade Check Cases", to: "/grade/check-cases" },
+    { label: "Grade Questions", to: "/admin-grade-questions" },
+    { label: "Grade Issues", to: "/admin-grade-issues" },
+    { label: "Grade Check Cases", to: "/admin-grade-checkcases" },
   ];
   const adminLinks = [
-    { label: "Add Questions", to: "/add/questions" },
-    { label: "Edit Questions", to: "/edit/questions" },
+    { label: "Add Questions", to: "/admin-add-questions" },
+    { label: "Edit Questions", to: "/admin-edit-questions" },
+    { label: "Assign User Role", to: "/admin-assign-user-role" },
+    { label: "Approve User Profile", to: "/admin-review-user-page" },
   ];
 
   const allRoles = {

@@ -1,9 +1,8 @@
-/* ===== GLOBAL STYLES ===== */
+/* ===== HEADER WRAPPER ===== */
 * {
   font-family: Tahoma, Verdana, sans-serif;
 }
 
-/* ===== HEADER WRAPPER ===== */
 header {
   align-items: center;
   background: #b7eff7;
@@ -13,7 +12,7 @@ header {
   height: 80px;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 1100px;
+  max-width: 1200px;
   padding: 0 1rem;
   position: relative;
   top: 0;
