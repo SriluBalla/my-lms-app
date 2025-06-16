@@ -1,9 +1,9 @@
-/*=====  Header ============*/
-
+/* ===== GLOBAL STYLES ===== */
 * {
   font-family: Tahoma, Verdana, sans-serif;
 }
 
+/* ===== HEADER WRAPPER ===== */
 header {
   align-items: center;
   background: #b7eff7;
@@ -12,42 +12,25 @@ header {
   display: flex;
   height: 80px;
   justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 0 1rem;
   position: relative;
   top: 0;
-  width: 100%;
+  width: auto;
   z-index: 100;
 }
 
-.nav {
-  align-items: center;
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 1rem;
-  margin-left: auto;
-}
-
-.navbar__container {
-  align-items: center;
-  display: flex;
-  float: left;
-  gap: 0.75rem;
-}
-
-.nav-menu {
-  align-items: center;
-  display: flex;
-  gap: 1.5rem;
-}
-
+/* ===== LOGO SECTION ===== */
 .logo {
   align-items: center;
   background: linear-gradient(to top, #3091db, #1e9f8a);
   background-clip: text;
-  -webkit-background-clip: text;
   color: transparent;
   display: flex;
   font-weight: bold;
   text-decoration: none;
+  -webkit-background-clip: text;
 }
 
 .logo img {
@@ -66,12 +49,12 @@ header {
 #logoText {
   background: linear-gradient(to top, #3091db, #1e9f8a);
   background-clip: text;
-  -webkit-background-clip: text;
   color: transparent;
   font-size: 1.8rem;
   font-weight: bold;
-  white-space: nowrap;
   text-decoration: none;
+  white-space: nowrap;
+  -webkit-background-clip: text;
 }
 
 #logoText:hover {
@@ -82,16 +65,25 @@ header {
   padding: 6px 10px;
 }
 
-.nav__link,
-.profile-link {
+/* ===== MENU TOGGLE (MOBILE) ===== */
+.menu-toggle {
+  background: none;
+  border: none;
   color: #040327;
-  font-size: 1.1rem;
+  cursor: pointer;
+  display: none;
+  font-size: 2rem;
+}
+
+/* ===== NAVBAR CONTENT ===== */
+.nav__link {
+  color: #040327;
+  font-size: 1rem;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
-.nav__link:hover,
-.profile-link:hover {
+.nav__link:hover {
   background: #0a8bb7;
   border-radius: 5px;
   color: white;
@@ -101,8 +93,7 @@ header {
 
 .nav-button {
   background: linear-gradient(to top, #3091db, #2eeccd);
-    border: 2px solid #2eeccd;
-  border: none;
+  border: 2px solid #2eeccd;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
@@ -115,16 +106,23 @@ header {
   color: white;
 }
 
+.navbar__container {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+/* ===== PROFILE DROPDOWN ===== */
 .profile-dropdown {
-  position: relative;
   display: inline-block;
+  position: relative;
 }
 
 .profile-icon {
+  cursor: pointer;
   height: 50px;
   margin-right: 20px;
   width: auto;
-  cursor: pointer;
 }
 
 .profile-menu {
@@ -146,79 +144,17 @@ header {
   color: white;
 }
 
-.profile-icon {
-  height: 50px;
-  margin-right: 20px;
-  width: auto;
+.role-tag {
+font-weight: bold;
 }
 
-.menu-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #040327;
-  display: none;
-  font-size: 2rem;
-}
-
-/* ------- MOBILE STYLES  -------*/
+/* ===== MOBILE STYLES ===== */
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-    cursor: pointer;
-    height: 50px;
-    margin-right: 20px;
-    padding: 10px;
-    text-align: center;
-    width: auto;
-  }
-
-  .profile-icon {
-    display: inline-block;
-  }
-
   .logo img {
     display: none;
   }
 
-  .nav-menu {
-    align-items: self-end;
-    background: #b7eff7;
-    display: block;
-    flex-direction: column;
-    right: 0;
-    opacity: 0;
-    padding: 1rem;
-    pointer-events: none;
-    position: absolute;
-    transition: all 0.3s ease-in-out;
-    width: 30%;
-  }
-
-  .nav-menu.active {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
-    top: 100%;
-    z-index: 10;
-  }
-
-  .nav-button {
+  .profile-icon {
     display: inline-block;
-    text-align: center;
-    width: 50%;
-  }
-
-  /* Optional: if you're using hamburger bars inside .menu-toggle */
-  .menu-toggle.active .bar:nth-child(2) {
-    opacity: 0;
-  }
-
-  .menu-toggle.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-
-  .menu-toggle.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
   }
 }

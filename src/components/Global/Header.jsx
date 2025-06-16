@@ -1,19 +1,17 @@
-import React from "react";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseDB";
-import MenuItem from "../SQL/Menu_by_Role";
 import ButtonNav from "../Button/ButtonNav";
 import "../../styles/Perm/Header.css";
 
-const Header = () => {
+const MainHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false); // ✅ Moved to top level
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-  const [userRole, setUserRole] = useState("user");
   const [profile, setProfile] = useState(null);
+  const [userRole, setUserRole] = useState("user");
 
+  const navigate = useNavigate();
   const menuRef = useRef();
   const profileRef = useRef();
 
@@ -22,22 +20,39 @@ const Header = () => {
       const { data } = await supabase.auth.getSession();
       setUser(data?.session?.user || null);
     };
+
     fetchSession();
 
     const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user || null);
-      }
+      (_event, session) => setUser(session?.user || null)
     );
 
     return () => listener?.subscription?.unsubscribe();
   }, []);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    navigate("/");
-  };
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("profile_img_url")
+        .eq("id", user.id)
+        .single();
+
+      if (!error && data) setProfile(data);
+
+      const { data: roleData } = await supabase
+        .from("user_role_assignments")
+        .select("role")
+        .eq("user_id", user.id)
+        .single();
+
+      if (roleData?.role) setUserRole(roleData.role.toLowerCase());
+    };
+
+    fetchUserProfile();
+  }, [user]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -53,38 +68,45 @@ const Header = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(() => {
-  const fetchProfileImage = async () => {
-    if (!user) return;
-
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("profile_img_url")
-      .eq("id", user.id)
-      .single();
-
-    if (!error && data) {
-      setProfile(data);
-    }
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    navigate("/");
   };
 
-  fetchProfileImage();
-}, [user]);
+  const commonLinks = [
+    { label: "Profile", to: "/profile" },
+    { label: "Member Profiles", to: "/member-profiles" },
+  ];
+  const memberLinks = [{ label: "Certificates", to: "/certificates" }];
+  const leaderLinks = [
+    { label: "Grade Questions", to: "/grade/questions" },
+    { label: "Grade Issues", to: "/grade/issues" },
+    { label: "Grade Check Cases", to: "/grade/check-cases" },
+  ];
+  const adminLinks = [
+    { label: "Add Questions", to: "/add/questions" },
+    { label: "Edit Questions", to: "/edit/questions" },
+  ];
 
+  const allRoles = {
+    user: commonLinks,
+    member: [...memberLinks, ...commonLinks],
+    leader: [...memberLinks, ...commonLinks, ...leaderLinks],
+    admin: [...memberLinks, ...commonLinks, ...adminLinks, ...leaderLinks],
+    superadmin: [...memberLinks, ...commonLinks, ...adminLinks, ...leaderLinks],
+  };
+
+  const roleLinks = allRoles[userRole] || commonLinks;
 
   return (
     <header className="header">
       <div className="navbar__container">
         <Link to="/" id="logoImg" className="logo">
           <img
-          // src="/images/global/Logo.png"
-
             src={`${import.meta.env.BASE_URL}images/global/Logo.png`}
             alt="Product Owner in Test Logo"
           />
@@ -93,141 +115,49 @@ const Header = () => {
         <Link to="/" id="logoText">
           Product Owner in Test™
         </Link>
-
-        <button
-          id="menuToggle"
-          className="menu-toggle"
-          onClick={() => {
-            setMenuOpen((prev) => {
-              const next = !prev;
-              if (next) setDropdownOpen(false); // Close profile menu if opening
-              return next;
-            });
-          }}
-        >
-          ☰
-        </button>
       </div>
+
       <nav ref={menuRef} className={`nav-menu ${menuOpen ? "active" : ""}`}>
-        <NavLink id="qaToPot" className="nav__link" to="/qa-to-pot">
-          QA to POT
-        </NavLink>
-        <NavLink id="why" className="nav__link" to="/why">
-          Why
-        </NavLink>
-        <NavLink id="pot" className="nav__link" to="/sample-test">
-          Chapter Test
-        </NavLink>
-        {user && (
+        {user ? (
           <div ref={profileRef} className="profile-dropdown">
-           
             <img
               src={
-                profile?.profile_img_url
-                  ? profile.profile_img_url
-                  : "/public/images/global/Profile-placeholder.png"
+                profile?.profile_img_url ||
+                `${import.meta.env.BASE_URL}images/global/Profile-placeholder.png`
               }
               alt="Profile"
               className="profile-icon"
               onClick={() => {
                 setDropdownOpen((prev) => !prev);
-                if (!dropdownOpen) setMenuOpen(false);
+                setMenuOpen(false);
               }}
             />
 
             {dropdownOpen && (
               <div className="profile-menu">
-                <MenuItem
-                  id="add-questions"
-                  data-testid="add-questions"
-                  label="Add Questions"
-                  to="/admin-add-questions"
-                  roles={["user", "member", "admin", "superadmin"]}
-                  userRole={userRole}
+                <p className="role-tag">{userRole.toUpperCase()}</p>
+                {roleLinks.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    className="nav__link"
+                    to={link.to}
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+                <ButtonNav
+                  id="signOut"
+                  label="Sign Out"
+                  onClick={handleLogout}
                 />
-                <MenuItem
-                  id="edit-questions"
-                  data-testid="edit-questions"
-                  label="Edit Questions"
-                  to="/admin-edit-questions"
-                  roles={["user", "member", "admin", "superadmin"]}
-                  userRole={userRole}
-                />
-                <MenuItem
-                  id="grade-questions"
-                  data-testid="grade-questions"
-                  label="Grade Questions"
-                  to="/admin-grade-questions"
-                  roles={["user", "member", "admin", "superadmin"]}
-                  userRole={userRole}
-                />
-                <MenuItem
-                  id="grade-issues"
-                  data-testid="grade-issues"
-                  label="Grade Issues"
-                  to="/admin-grade-issues"
-                  roles={["user", "member", "admin", "superadmin"]}
-                  userRole={userRole}
-                />
-                <MenuItem
-                  id="assign-role"
-                  data-testid="assign-role"
-                  label="Assign Role"
-                  to="/admin-assign-user-role"
-                  roles={["user", "member", "admin", "superadmin"]}
-                  userRole={userRole}
-                />
-                <MenuItem
-                  id="review-user"
-                  data-testid="review-user"
-                  label="Review User Profile"
-                  to="/admin-review-user-page"
-                  roles={["user", "member", "admin", "superadmin"]}
-                  userRole={userRole}
-                />
-                <MenuItem
-                  id="profile"
-                  testId="profile"
-                  label="Profile"
-                  to="/profile"
-                  roles={["user", "member", "admin", "superadmin"]}
-                  userRole={userRole}
-                />
-                <MenuItem
-                  id="memberProfile"
-                  testId="memberProfile"
-                  label="Member Profiles"
-                  to="/member-profiles"
-                  roles={["user", "member", "admin", "superadmin"]}
-                  userRole={userRole}
-                />
-
-                <MenuItem
-                  id="userManager"
-                  testId="userManager"
-                  label="User Management"
-                  to="/admin-user-manager"
-                  roles={["admin", "superadmin", "user"]}
-                  userRole={userRole}
-                />
-                <MenuItem
-                  id="dashboard"
-                  label="Dashboard"
-                  to="/dashboard"
-                  roles={["superadmin"]}
-                  userRole={userRole}
-                />
-                <ButtonNav id="signOut" label="Sign Out" action="signOut" />
-
               </div>
             )}
           </div>
-        )}
-        {!user && (
+        ) : (
           <>
-          <ButtonNav id="signIn" label="Sign In" to="/login" />
-          <ButtonNav id="red-ack" label="Register" to="/register1" />
-
+            <ButtonNav id="signIn" label="Sign In" to="/login" />
+            <ButtonNav id="red-ack" label="Sign Up" to="/register1" />
           </>
         )}
       </nav>
@@ -235,4 +165,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default MainHeader;
