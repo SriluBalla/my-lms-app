@@ -8,6 +8,15 @@
   padding: 2rem;
 }
 
+.member-card-public {
+  background: #b7eff7;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
 .member-card {
   background: #b7eff7;
   border-radius: 1rem;
@@ -17,11 +26,15 @@
   transition: transform 0.2s ease;
 }
 
+.profile-card {
+  word-wrap: break-word;
+}
+
 .member-card:hover {
   transform: translateY(-5px);
 }
 
-.member-card img:hover {
+.member-card-public img:hover {
   background: none;
   transform: scale(2);
 }

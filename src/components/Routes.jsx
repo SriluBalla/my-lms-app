@@ -17,6 +17,7 @@ import AddQuestions from "../pages/Admin/AddQuestions.jsx"
 import GradeIssue from "../pages/Admin/GradeIssues.jsx";
 import EditQuestions from "../pages/Admin/EditQuestions.jsx"
 import GradeQuestions from "../pages/Admin/GradeQuestions.jsx"
+import AssignRolesPage from "../pages/Admin/AssignRolesPage.jsx"
 
 const routes = [
   {
@@ -55,10 +56,10 @@ const routes = [
     path: "/admin-grade-issues",
     element: <GradeIssue />,
   },
-  //  {
-  //   path: "/sample-checkcase-test",
-  //   element: <ChckCaseTest />,
-  // },
+   {
+    path: "/admin-assign-user-role",
+    element: <AssignRolesPage />,
+  },
   {
     path: "/pot-manifesto",
     element: <PotManifesto />,

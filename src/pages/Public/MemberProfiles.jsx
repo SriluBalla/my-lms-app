@@ -23,8 +23,8 @@ const MemberProfiles = () => {
 
   return (
     <Layout
-      title="Temp"
-      description="Learn the differences between traditional Quality Assurance to becoming a Product Owner in Test"
+      title="Member Profiles"
+      description="Product Owner in Test, Member Profiles"
       keywords={[
         "Quality Assurance",
         "Product Owner in Test",
@@ -42,7 +42,7 @@ const MemberProfiles = () => {
         </section>
         <section className="member-grid">
           {members.map((profile) => (
-            <div className="member-card" key={profile.user_id}>
+            <div className="member-card-public" key={profile.user_id}>
               <SavedProfileCard profile={profile} />
             </div>
           ))}

@@ -314,13 +314,13 @@ const Profile = () => {
               name="selfIntro"
               label="Self Introduction"
               placeholder="What would like for your community to know about you...."
+              width="auto"
               value={formData.selfIntro}
               onChange={(value) =>
                 setFormData((prev) => ({ ...prev, selfIntro: value }))
               }
               maxLength={1000}
-              required={false}
-              className="text-area"
+              required
             />
             {errors.selfIntro && (
               <div className="error-message">{errors.selfIntro}</div>

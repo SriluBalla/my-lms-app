@@ -46,7 +46,7 @@ const RichTextEditor = ({
             width: width || "80%",
             marginBottom: "1rem",
             backgroundColor: "white",
-            border: "1px solid black",
+            // border: "1px solid black",
           }}
           className={error ? "error" : ""}
         />
