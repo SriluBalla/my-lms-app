@@ -19,6 +19,10 @@
   transform: scale(2);
 }
 
+.member-card.preview {
+  background: #57e475;
+}
+
 .member-card.assign {
   background: #e9c4b6;
 }

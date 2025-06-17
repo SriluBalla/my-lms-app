@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../../supabaseDB";
 import { v4 as uuidv4 } from "uuid";
-import SavedProfileCard from "../../SQL/Card_Profile";
 import RichTextEditor from "../../Input/Input_RichTextEditor";
 import ButtonSubmit from "../../Button/ButtonSubmit";
 import TextInput from "../../Input/Input_TextField";
@@ -60,23 +59,26 @@ const Add_Issue = () => {
         return;
       }
 
+      const BUCKET_NAME = "qa-issue-images";
+
       let issue_image_url = null;
       if (imageFile) {
         const fileExt = imageFile.name.split(".").pop();
         const fileName = `${uuidv4()}.${fileExt}`;
-        const filePath = `issue_images/${fileName}`;
+        const filePath = `${fileName}`;
 
         const { error: uploadError } = await supabase.storage
-          .from("uploads")
+          .from(BUCKET_NAME)
           .upload(filePath, imageFile);
 
         if (uploadError) {
+          console.error("Upload error:", uploadError);
           setMessage({ type: "error", text: "Image upload failed." });
           return;
         }
 
         const { data: publicUrlData } = supabase.storage
-          .from("uploads")
+          .from(BUCKET_NAME)
           .getPublicUrl(filePath);
 
         issue_image_url = publicUrlData.publicUrl;
@@ -128,8 +130,8 @@ const Add_Issue = () => {
 
   return (
     <div>
-      <section className="hero bRed-bgRed left-hero">
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="issue-form">
+        <section className="hero bRed-bgRed left-hero">
           <TextInput
             id="issueTitle"
             name="issueTitle"
@@ -177,96 +179,100 @@ const Add_Issue = () => {
 
           <ImageUploader
             userId={user?.id}
+            bucketName="qa-issue-images"
             onUpload={(file) => handleImageChange(file)}
           />
-        </form>
-      </section>
+        </section>
 
-      <div className="hero bRed-bgRed right-hero">
-        <h2>Extra Details</h2>
+        <section className="hero bRed-bgRed right-hero">
+          <h2>Extra Details</h2>
 
-        {fullName && (
-          <div>
-            <label>Reported by :</label>
-            <p>{fullName} </p>
-          </div>
-        )}
+          {fullName && (
+            <div>
+              <label>Reported by :</label>
+              <p>{fullName} </p>
+            </div>
+          )}
 
-        <SelectInput
-          id="assignedTo"
-          name="assignedTo"
-          label="Assign To"
-          value={assignedTo}
-          onChange={(e) => setAssignedTo(e.target.value)}
-          options={["Product Owner", "Particular Dev", "Dev Lead", "Default"]}
-          placeholder="Select Assignee Role"
-        />
+          <SelectInput
+            id="assignedTo"
+            name="assignedTo"
+            label="Assign To"
+            value={assignedTo}
+            onChange={(e) => setAssignedTo(e.target.value)}
+            options={["Product Owner", "Particular Dev", "Dev Lead", "Default"]}
+            placeholder="Select Assignee Role"
+          />
 
-        <SelectInput
-          id="severity"
-          name="severity"
-          label="Severity"
-          value={severity}
-          onChange={(e) => setSeverity(e.target.value)}
-          options={["Blocker", "Critical", "Major", "Minor", "Trivial"]}
-          placeholder="Severity"
-        />
+          <SelectInput
+            id="severity"
+            name="severity"
+            label="Severity"
+            value={severity}
+            onChange={(e) => setSeverity(e.target.value)}
+            options={["Blocker", "Critical", "Major", "Minor", "Trivial"]}
+            placeholder="Severity"
+          />
 
-        <SelectInput
-          id="status"
-          name="status"
-          label="Status"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          options={[
-            "Open",
-            "In Progress",
-            "Ready for Re-Check",
-            "In Checking",
-            "Ready for Prod",
-            "In Prod",
-            "Won't Fix",
-            "Cannot Reproduce",
-            "Closed",
-          ]}
-          placeholder="----- Status -----"
-        />
+          <SelectInput
+            id="status"
+            name="status"
+            label="Status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            options={[
+              "Open",
+              "In Progress",
+              "Ready for Re-Check",
+              "In Checking",
+              "Ready for Prod",
+              "In Prod",
+              "Cannot Reproduce",
+              "Closed",
+            ]}
+            placeholder="----- Status -----"
+          />
 
-        <SelectInput
-          id="environment"
-          name="environment"
-          label="Environment"
-          value={environment}
-          onChange={(e) => setEnvironment(e.target.value)}
-          options={["Dev", "Prod", "Stage", "Test", "UAT"]}
-          placeholder="Environment"
-        />
+          <SelectInput
+            id="environment"
+            name="environment"
+            label="Environment"
+            value={environment}
+            onChange={(e) => setEnvironment(e.target.value)}
+            options={["Dev", "Prod", "Stage", "Test", "UAT"]}
+            placeholder="Environment"
+          />
 
-        <TextInput
-          id="os"
-          name="os"
-          label="Operating System"
-          placeholder="Device, operating system, etc."
-          value={os}
-          onChange={(e) => setOS(e.target.value)}
-        />
-        <TextInput
-          id="browser"
-          name="browser"
-          label="Browser / App"
-          placeholder="Browser, App name"
-          value={browser}
-          onChange={(e) => setBrowser(e.target.value)}
-        />
+          <TextInput
+            id="os"
+            name="os"
+            label="Operating System"
+            placeholder="Device, operating system, etc."
+            value={os}
+            onChange={(e) => setOS(e.target.value)}
+          />
+          <TextInput
+            id="browser"
+            name="browser"
+            label="Browser / App"
+            placeholder="Browser, App name"
+            value={browser}
+            onChange={(e) => setBrowser(e.target.value)}
+          />
 
-        <ButtonSubmit className="button flagged" data-testid="submitIssue" label="Submit Issue" />
-      </div>
+          <ButtonSubmit
+            className="flagged"
+            data-testid="submitIssue"
+            label="Submit Issue"
+          />
+        </section>
 
-      <div>
-        {message?.text && (
-          <Msg_in_Body type={message.type} text={message.text} />
-        )}
-      </div>
+        <div>
+          {message?.text && (
+            <Msg_in_Body type={message.type} text={message.text} />
+          )}
+        </div>
+      </form>
     </div>
   );
 };

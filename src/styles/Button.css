@@ -58,16 +58,6 @@
   background: white;
 }
 
-.left {
-  text-align: left;
-}
-.center {
-  text-align: center;
-}
-.right {
-  text-align: right;
-}
-
 #submitAnswerCheckbox {
   background: linear-gradient(to top, #3091db, #2eeccd);
   border: 2px solid #2eeccd;
