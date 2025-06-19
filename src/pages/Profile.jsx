@@ -187,7 +187,7 @@ const Profile = () => {
           <section className="left">
             {" "}
             {savedProfile && (
-              <div className="member-card public">
+              <div className="member-card">
                 <SavedProfileCard profile={savedProfile} />
               </div>
             )}

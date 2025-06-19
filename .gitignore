@@ -27,6 +27,8 @@ git init
 echo "node_modules\n.env\n.env.local\ndist" > .gitignore
 
 #Files
-src/pages/temp.jsx
+src/pages/Admin/Exp_Page.jsx
+src/components/Question/Issue/Exp_Component.jsx
+src/components/styles/Exp_Style.css
 src/SQL/*
 src/components/__tests__/sample.test.jsx

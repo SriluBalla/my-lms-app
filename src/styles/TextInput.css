@@ -74,3 +74,18 @@ input {
   padding: 0;
   margin-left: 4px;
 }
+
+/* ========= Rich Text Editor ======== */
+.ql-container {
+  overflow: auto !important;
+  z-index: 0 !important;
+}
+
+.ql-toolbar {
+  z-index: 1;
+}
+
+.ql-editor {
+  z-index: 0;
+  position: relative;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DOMPurify from "dompurify";
 
 const SavedProfileCard = ({ profile }) => {
   const [showFullIntro, setShowFullIntro] = useState(false);
@@ -57,10 +58,13 @@ const SavedProfileCard = ({ profile }) => {
           {first_name} {last_name}
         </li>
         <li>
-          Country of Residence:  <strong>{country}</strong>
+          Country of Residence: <strong>{country}</strong>
         </li>
         <li>
-          Birthday: <strong>{birth_day} {birth_month}</strong> 
+          Birthday:{" "}
+          <strong>
+            {birth_day} {birth_month}
+          </strong>
         </li>
         {years_experience && (
           <li>
@@ -69,34 +73,45 @@ const SavedProfileCard = ({ profile }) => {
         )}
         {linkedin && (
           <li>
-            🔗 <a href={linkedin} target="_blank" rel="noopener noreferrer">{linkedin}</a>
+            🔗{" "}
+            <a href={linkedin} target="_blank" rel="noopener noreferrer">
+              {linkedin}
+            </a>
           </li>
         )}
         {github && (
           <li>
-            💻 <a href={github} target="_blank" rel="noopener noreferrer">{github}</a>
+            💻{" "}
+            <a href={github} target="_blank" rel="noopener noreferrer">
+              {github}
+            </a>
           </li>
         )}
         {blog && (
           <li>
-            📰 <a href={blog} target="_blank" rel="noopener noreferrer">{blog}</a>
+            📰{" "}
+            <a href={blog} target="_blank" rel="noopener noreferrer">
+              {blog}
+            </a>
           </li>
         )}
       </ul>
 
       {intro && (
         <p>
-          📝 {introPreview}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(introPreview),
+            }}
+          />
           {intro.length > maxLength && (
-            <>
-              <button
-                onClick={toggleIntro}
-                className="btn-toggle-intro"
-                aria-label="Toggle full self intro"
-              >
-                {showFullIntro ? "Show less" : "Read more"}
-              </button>
-            </>
+            <button
+              onClick={toggleIntro}
+              className="btn-toggle-intro"
+              aria-label="Toggle full self intro"
+            >
+              {showFullIntro ? "Show less" : "Read more"}
+            </button>
           )}
         </p>
       )}

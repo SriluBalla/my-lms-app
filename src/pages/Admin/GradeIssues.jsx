@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { supabase } from "../../supabaseDB";
-import View_Issues from "../../components/Question/Issue/View_Issues";
+// import View_Issues from "../../components/Question/Issue/View_Issues";
 import "../../styles/main.css";
 
 const GradeIssue = () => {

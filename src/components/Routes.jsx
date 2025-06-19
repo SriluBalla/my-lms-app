@@ -27,6 +27,7 @@ import EditQuestions from "../pages/Admin/EditQuestions.jsx";
 import GradeIssue from "../pages/Admin/GradeIssues.jsx";
 import GradeQuestions from "../pages/Admin/GradeQuestions.jsx";
 import ReviewUserPage from "../pages/Admin/ReviewUserPage.jsx";
+import ExpPage from "../pages/Admin/Exp_Page.jsx";
 
 const routes = [
   // Public Routes
@@ -42,6 +43,14 @@ const routes = [
   { path: "/*", element: <NotFound /> },
 
   // Protected Routes (Any logged-in user)
+  {
+    path: "/exp",
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "superadmin", "user", "member", "lead"]}>
+        <ExpPage />
+      </ProtectedRoute>
+    ),
+  },
   {
     path: "/profile",
     element: (
