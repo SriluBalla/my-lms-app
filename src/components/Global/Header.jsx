@@ -4,7 +4,7 @@ import { supabase } from "../../supabaseDB";
 import ButtonNav from "../Button/ButtonNav";
 import "../../styles/Perm/Header.css";
 
-const MainHeader = () => {
+const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [user, setUser] = useState(null);
@@ -24,9 +24,8 @@ const MainHeader = () => {
     // Subscribe to auth changes
     const { data: listener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        console.log("🔁 Auth Change Event:", event, session);
+        // console.log("🔁 Auth Change Event:", event, session);
         setUser(session?.user || null);
-        if (!session) navigate("/", { replace: true });
       }
     );
 
@@ -156,4 +155,4 @@ const MainHeader = () => {
   );
 };
 
-export default MainHeader;
+export default Header;
