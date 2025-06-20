@@ -7,8 +7,7 @@ import NotFound from "../pages/Public/NotFound.jsx";
 import QAtoPot from "../pages/Public/QAtoPot.jsx";
 import Why from "../pages/Public/Why.jsx";
 import ChapterCheck from "../pages/Public/ChapterCheck.jsx";
-import IssueTest from "../pages/Public/IssueTest.jsx";
-import MemberProfiles from "../pages/Public/MemberProfiles.jsx";
+import IssueTest from "../pages/Public/IssueCheck.jsx";
 import PotManifesto from "../pages/Public/Pot-Manifesto.jsx";
 
 // Auth Pages
@@ -17,7 +16,9 @@ import Register from "../pages/Auth/Register.jsx";
 import Red_Acknowledment from "../pages/Auth/Red_Ack.jsx";
 
 // User Pages
-import Profile from "../pages/Profile.jsx";
+import Profile from "../pages/User/Profile.jsx";
+import MemberProfiles from "../pages/User/MemberProfiles.jsx";
+import ApprovedIssues from "../pages/User/ApprovedIssues.jsx";
 
 // Admin/Protected Pages
 import AddQuestions from "../pages/Admin/AddQuestions.jsx";
@@ -64,6 +65,14 @@ const routes = [
     element: (
       <ProtectedRoute allowedRoles={["admin", "superadmin", "user", "member", "lead"]}>
         <MemberProfiles />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/approved-issues",
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "superadmin", "user", "member", "lead"]}>
+        <ApprovedIssues />
       </ProtectedRoute>
     ),
   },

@@ -8,15 +8,19 @@ const ButtonNav = ({ id, label, to, action }) => {
 
   const handleClick = async () => {
     if (action === "signOut") {
-      await supabase.auth.signOut();
-      navigate("/");
+      const { error } = await supabase.auth.signOut();
+      if (!error) {
+        console.log("✅ Signed out");
+        navigate("/", { replace: true }); // ⬅️ navigate instead of window.location
+      }
     } else if (to) {
-      navigate(to);
+      console.log("➡️ Navigating to:", to);
+      navigate(to); // ✅ This now works if you're inside <BrowserRouter>
     }
   };
 
   return (
-    <button id={id} data-testid={id} className="button" onClick={handleClick}>
+    <button id={id} className="button" onClick={handleClick}>
       {label}
     </button>
   );
@@ -26,7 +30,7 @@ ButtonNav.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   to: PropTypes.string,
-  action: PropTypes.string, // e.g., "signOut"
+  action: PropTypes.string,
 };
 
 export default ButtonNav;

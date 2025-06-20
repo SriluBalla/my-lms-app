@@ -16,65 +16,63 @@ const MainHeader = () => {
   const profileRef = useRef();
 
   useEffect(() => {
-    const fetchSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      setUser(data?.session?.user || null);
-    };
+    // Get current session/user on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user || null);
+    });
 
-    fetchSession();
-
+    // Subscribe to auth changes
     const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => setUser(session?.user || null)
+      (event, session) => {
+        console.log("🔁 Auth Change Event:", event, session);
+        setUser(session?.user || null);
+        if (!session) navigate("/", { replace: true });
+      }
     );
 
-    return () => listener?.subscription?.unsubscribe();
-  }, []);
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, [navigate]);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (!user) return;
+    // Load user-specific profile and role data
+    if (!user) return setProfile(null);
+    supabase
+      .from("profiles")
+      .select("profile_img_url")
+      .eq("id", user.id)
+      .single()
+      .then(({ data, error }) => !error && setProfile(data));
 
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("profile_img_url")
-        .eq("id", user.id)
-        .single();
-
-      if (!error && data) setProfile(data);
-
-      const { data: roleData } = await supabase
-        .from("user_role_assignments")
-        .select("role")
-        .eq("user_id", user.id)
-        .single();
-
-      if (roleData?.role) setUserRole(roleData.role.toLowerCase());
-    };
-
-    fetchUserProfile();
+    supabase
+      .from("user_role_assignments")
+      .select("role")
+      .eq("user_id", user.id)
+      .single()
+      .then(({ data }) => data?.role && setUserRole(data.role.toLowerCase()));
   }, [user]);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleOutside = (e) => {
       if (
         menuRef.current &&
-        !menuRef.current.contains(event.target) &&
+        !menuRef.current.contains(e.target) &&
         profileRef.current &&
-        !profileRef.current.contains(event.target)
+        !profileRef.current.contains(e.target)
       ) {
         setMenuOpen(false);
         setDropdownOpen(false);
       }
     };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleOutside);
+    return () => document.removeEventListener("mousedown", handleOutside);
   }, []);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    navigate("/");
+    console.log("🔓 handleLogout triggered");
+    const { error } = await supabase.auth.signOut();
+    console.log("✅ signOut result:", error ? error.message : "No error");
   };
 
   const commonLinks = [
@@ -96,10 +94,10 @@ const MainHeader = () => {
 
   const allRoles = {
     user: commonLinks,
-    member: [...memberLinks, ...commonLinks],
-    leader: [...memberLinks, ...commonLinks, ...leaderLinks],
-    admin: [...memberLinks, ...commonLinks, ...adminLinks, ...leaderLinks],
-    superadmin: [...memberLinks, ...commonLinks, ...adminLinks, ...leaderLinks],
+    member: [...commonLinks, ...memberLinks],
+    leader: [...commonLinks, ...memberLinks, ...leaderLinks],
+    admin: [...commonLinks, ...memberLinks, ...leaderLinks, ...adminLinks],
+    superadmin: [...commonLinks, ...memberLinks, ...leaderLinks, ...adminLinks],
   };
 
   const roleLinks = allRoles[userRole] || commonLinks;
@@ -108,12 +106,8 @@ const MainHeader = () => {
     <header className="header">
       <div className="navbar__container">
         <Link to="/" id="logoImg" className="logo">
-          <img
-            src={`${import.meta.env.BASE_URL}images/global/Logo.png`}
-            alt="Product Owner in Test Logo"
-          />
+          <img src="/images/global/Logo.png" alt="Logo" />
         </Link>
-
         <Link to="/" id="logoText">
           Product Owner in Test™
         </Link>
@@ -125,16 +119,15 @@ const MainHeader = () => {
             <img
               src={
                 profile?.profile_img_url ||
-                `${import.meta.env.BASE_URL}images/global/Profile-placeholder.png`
+                "/images/global/Profile-placeholder.png"
               }
               alt="Profile"
               className="profile-icon"
               onClick={() => {
-                setDropdownOpen((prev) => !prev);
+                setDropdownOpen((o) => !o);
                 setMenuOpen(false);
               }}
             />
-
             {dropdownOpen && (
               <div className="profile-menu">
                 <p className="role-tag">{userRole.toUpperCase()}</p>
@@ -148,18 +141,14 @@ const MainHeader = () => {
                     {link.label}
                   </NavLink>
                 ))}
-                <ButtonNav
-                  id="signOut"
-                  label="Sign Out"
-                  onClick={handleLogout}
-                />
+                <ButtonNav id="signOut" label="Sign Out" action="signOut" />
               </div>
             )}
           </div>
         ) : (
           <>
             <ButtonNav id="signIn" label="Sign In" to="/login" />
-            <ButtonNav id="red-ack" label="Sign Up" to="/register1" />
+            <ButtonNav id="signUp" label="Sign Up" to="/register1" />
           </>
         )}
       </nav>

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../supabaseDB";
+import { supabase } from "../../supabaseDB";
 import { v4 as uuidv4 } from "uuid";
-import Layout from "../components/Layout";
-import TextInput from "../components/Input/Input_TextField";
-import NumberInput from "../components/Input/Input_Number";
-import RichTextEditor from "../components/Input/Input_RichTextEditor";
-import SelectInput from "../components/Input/Input_Select";
-import SuccessPopup from "../components/Message/Msg_in_Popup";
-import ConfirmMessage from "../components/Message/Msg_in_Body";
-import SavedProfileCard from "../components/SQL/Card_Profile";
-import UserRole from "../components/SQL/SQL_get_Roles";
-import ImageUploader from "../components/SQL/Upload_Helper";
-import AdminNote from "../components/SQL/Admin_Notes";
-import ButtonSubmit from "../components/Button/ButtonSubmit";
-import "../styles/main.css";
+import Layout from "../../components/Layout";
+import TextInput from "../../components/Input/Input_TextField";
+import NumberInput from "../../components/Input/Input_Number";
+import RichTextEditor from "../../components/Input/Input_RichTextEditor";
+import SelectInput from "../../components/Input/Input_Select";
+import SuccessPopup from "../../components/Message/Msg_in_Popup";
+import ConfirmMessage from "../../components/Message/Msg_in_Body";
+import SavedProfileCard from "../../components/SQL/Card_Profile";
+import UserRole from "../../components/SQL/SQL_get_Roles";
+import ImageUploader from "../../components/SQL/Upload_Helper";
+import AdminNote from "../../components/SQL/Admin_Notes";
+import ButtonSubmit from "../../components/Button/ButtonSubmit";
+import "../../styles/main.css";
 
 const BUCKET = "profile-pictures";
 

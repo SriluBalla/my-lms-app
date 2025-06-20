@@ -1,39 +1,104 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../../components/Layout";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabaseDB";
-// import View_Issues from "../../components/Question/Issue/View_Issues";
-import "../../styles/main.css";
+import IssueCard from "../../components/Question/Issue/Comp_Issue";
+import Msg_in_Body from "../../components/Message/Msg_in_Body";
 
-const GradeIssue = () => {
-  const [user, setUser] = useState(null);
+
+const Grade_Issue = () => {
+  const [issues, setIssues] = useState([]);
+  const [profilesMap, setProfilesMap] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    async function getUser() {
-      const { data } = await supabase.auth.getUser();
-      setUser(data?.user || null);
-    }
-    getUser();
+    const loadData = async () => {
+      const { data: authData } = await supabase.auth.getUser();
+      if (!authData?.user) return setLoading(false);
+
+      // Fetch only unapproved issues
+      const { data: issuesRaw, error: issueError } = await supabase
+        .from("qa_issues")
+        .select("*")
+        .or("approved.is.null,approved.eq.false")
+        .order("created_at", { ascending: false });
+
+      if (issueError) {
+        console.error("❌ Error loading issues:", issueError.message);
+        setLoading(false);
+        return;
+      }
+
+      const creatorIds = issuesRaw.map((i) => i.created_by);
+      const { data: creators } = await supabase
+        .from("profiles")
+        .select("id, first_name, last_name")
+        .in("id", creatorIds);
+
+      const map = {};
+      creators.forEach((c) => (map[c.id] = `${c.first_name} ${c.last_name}`));
+
+      setProfilesMap(map);
+      setIssues(issuesRaw);
+      setLoading(false);
+    };
+
+    loadData();
   }, []);
 
-  return (
-    <Layout title="Sample Test" description="Sample Test, select by Chapter">
-      <div className="body__outline">
-        <section className="hero heading">
-          <h2>Welcome to Issue Logging practice</h2>
-          <p>
-            <strong>
-             Tell your story of how you found the issue. Explain how you would like to see it fixed
-            </strong>
-          </p>
-        </section>
+  const handleReview = async (issueId, status, noteText) => {
+    const { data: authData } = await supabase.auth.getUser();
+    const reviewer = authData?.user;
+    if (!reviewer) return;
 
-        {/* Only show once a chapter is selected */}
-        <>
-          <View_Issues />
-        </>
-      </div>
-    </Layout>
+    if (status === "approved") {
+      await supabase
+        .from("qa_issues")
+        .update({
+          approved: true,
+          approved_by: reviewer.id,
+          approved_at: new Date().toISOString(),
+        })
+        .eq("id", issueId);
+    }
+
+    if (status === "declined") {
+      await supabase.from("qa_issues_review_notes").insert([
+        {
+          issue_id: issueId,
+          notes_text: noteText,
+          created_by: reviewer.id,
+          reviewed_by: reviewer.id,
+          created_at: new Date().toISOString(),
+        },
+      ]);
+
+      await supabase
+        .from("qa_issues")
+        .update({ approved: false })
+        .eq("id", issueId);
+    }
+
+    setMessage({ type: "success", text: `✅ Issue ${status}` });
+
+    setIssues((prev) => prev.filter((i) => i.id !== issueId));
+  };
+
+  if (loading) return <p>Loading reviewable issues…</p>;
+
+  return (
+    <>
+      {issues.map((issue) => (
+        <IssueCard
+          key={issue.id}
+          issue={issue}
+          profilesMap={profilesMap}
+          mode="grade"
+          onReview={handleReview}
+        />
+      ))}
+      {message && <Msg_in_Body type={message.type} text={message.text} />}
+    </>
   );
 };
 
-export default GradeIssue;
+export default Grade_Issue;

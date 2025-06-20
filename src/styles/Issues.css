@@ -1,0 +1,93 @@
+/* ====== ISSUE ========== */
+
+.issue-card {
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "description issue-img"
+    "expected-result actual-result"
+    "env review"
+    "issue-msg issue-msg";
+  grid-template-columns: 2fr 2fr;
+  gap: 3px;
+  margin-bottom: 70px;
+}
+
+/* Grid areas */
+.title {
+  grid-area: title;
+  padding-left: 3rem;
+}
+.description {
+  grid-area: description;
+  padding: 2rem;
+}
+.env {
+  grid-area: env;
+  padding-left: 2rem;
+}
+.issue-img {
+  grid-area: issue-img;
+  padding: 2rem;
+}
+.review {
+  grid-area: review;
+  padding-left: 2rem;
+}
+.actual-result {
+  grid-area: actual-result;
+  padding-left: 2rem;
+}
+.expected-result {
+  grid-area: expected-result;
+  padding-left: 2rem;
+}
+.issue-img img {
+  height: auto;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Issue row inside env */
+.issue-row {
+  display: grid;
+  grid-template-areas: "issue-label issue-value";
+  grid-template-columns: 0.5fr 1fr;
+}
+
+.issue-value {
+  font-weight: bold;
+}
+
+/* ✅ Responsive adjustment */
+@media (max-width: 768px) {
+  .issue-card {
+    grid-template-areas:
+      "title"
+      "description"
+      "issue-img"
+      "expected-result"
+      "actual-result"
+      "env"
+      "review"
+      "issue-msg";
+    grid-template-columns: 1fr;
+  }
+
+  .title,
+  .description,
+  .issue-img,
+  .expected-result,
+  .actual-result,
+  .env,
+  .review,
+  .issue-msg {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .issue-img img {
+    width: 100%;
+    height: auto;
+  }
+}
