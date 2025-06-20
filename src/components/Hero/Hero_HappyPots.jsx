@@ -13,9 +13,9 @@ export default function HeroHappyPots() {
           mentoring, consulting, and ongoing community experiences.
           </p>
           <ButtonNav
-            id="tbd"
+            id="qa-pot"
             label="QA to POT"
-            to="/pot-qatopot"
+            to="/qa-to-pot/"
           />
         
       </div>
