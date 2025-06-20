@@ -186,7 +186,7 @@ const AdminUserManager = () => {
     <Layout title="User Management" description="Manage user roles">
       <div className="body__outline">
 
-        <section className="hero heading">
+        <section className="heading">
           <h2>View and Edit Users</h2>
           <p>
             Profiles newly created and updated (image, name, Bio) show up in

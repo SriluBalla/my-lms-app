@@ -53,7 +53,7 @@ const MyIssues = () => {
   return (
     <Layout title="Approved Issues" description="Approved practice Issues">
       <div className="body__outline">
-        <section className="hero heading">
+        <section className="heading">
           <h2>Approved issues for reference</h2>
         </section>
         <div className="approved-issues">

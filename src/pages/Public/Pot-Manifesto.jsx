@@ -17,7 +17,7 @@ const PotManifesto = () => {
       keywords={["lms", "courses", "dashboard"]}
     >
       <div className="body__outline">
-        <section className="hero heading">
+        <section className="heading">
           <div className="hero-text">
             <h1>Manifesto</h1>
 

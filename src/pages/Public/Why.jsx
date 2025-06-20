@@ -67,7 +67,7 @@ const Why = () => {
         </section>
 
         {/* Core Challenges */}
-        <section className="hero heading">
+        <section className="heading">
           <h1>
             🚧 <u>The Core Challenges </u>
           </h1>

@@ -18,7 +18,7 @@ const IssueTest = () => {
   return (
     <Layout title="Sample Test" description="Sample Test, select by Chapter">
       <div className="body__outline">
-        <section className="hero heading">
+        <section className="heading">
           <h2>Welcome to Issue Logging practice</h2>
           <p>
             <strong>

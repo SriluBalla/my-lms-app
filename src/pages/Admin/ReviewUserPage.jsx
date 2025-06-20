@@ -127,7 +127,7 @@ const ReviewUserPage = () => {
     <Layout title="Profile Review" description="Review pending profiles">
       <Msg_in_Body {...message} />
 
-      <section className="hero heading">
+      <section className="heading">
         <h2>Approve or Flag - Member Profiles</h2>
         <p>
           <strong>

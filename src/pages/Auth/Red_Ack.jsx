@@ -11,7 +11,7 @@ const Red_Acknowledment = () => {
       
       <div className="body__outline">
       
-        <section className="hero heading">
+        <section className="heading">
           <h2>Welcome to Registration</h2>
           <p>
             {" "}

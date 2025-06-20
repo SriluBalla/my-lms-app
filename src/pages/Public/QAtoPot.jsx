@@ -14,7 +14,7 @@ const QAtoPOT = () => {
     >
       <div className="body__outline">
 
-        <section className="hero heading">
+        <section className="heading">
           <h2>
             Quality Assurance vs.Product Owner in Test™: What’s the Difference?
           </h2>
@@ -100,7 +100,7 @@ const QAtoPOT = () => {
           </table>
         </section>
 
-        <section className="hero heading">
+        <section className="heading">
           <h2>Quality Assurance vs.Product Owner in Test™</h2>
           <p>
             A side-by-side comparison of how the Product Owner in Test™ (POT)

@@ -77,7 +77,7 @@ const AssignRolesPage = () => {
     <Layout title="Assign Roles" description="Assign roles to all users">
       <Msg_in_Body {...message} />
 
-      <section className="hero heading">
+      <section className="heading">
         <h2>Assign Role to Members</h2>
         <p>
           <strong>

@@ -34,7 +34,7 @@ const MemberProfiles = () => {
     >
       <div className="body__outline">
         
-        <section className="hero heading">
+        <section className="heading">
           <h2>Member Profiles</h2>
           <p>
             <strong>Sort and filter by Name, Role - User, Member, Leader, Admin, Date joined, Country, No. of years in IT</strong>
