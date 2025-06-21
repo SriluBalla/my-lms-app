@@ -118,10 +118,12 @@ const Header = () => {
       <nav ref={menuRef} className={`nav-menu ${menuOpen ? "active" : ""}`}>
         {user ? (
           <div ref={profileRef} className="profile-dropdown">
-            <img
+            {/* <img
               src={
                 profile?.profile_img_url ||
-                "/images/global/Profile-placeholder.png"
+                `${
+                  import.meta.env.BASE_URL
+                }/images/global/Profile-placeholder.png`
               }
               alt="Profile"
               className="profile-icon"
@@ -129,7 +131,30 @@ const Header = () => {
                 setDropdownOpen((o) => !o);
                 setMenuOpen(false);
               }}
+            /> */}
+
+            <img
+              src={
+                profile?.profile_img_url?.startsWith("http")
+                  ? profile.profile_img_url
+                  : `${
+                      import.meta.env.BASE_URL
+                    }images/global/Profile-placeholder.png`
+              }
+              alt="Profile"
+              className="profile-icon"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = `${
+                  import.meta.env.BASE_URL
+                }images/global/Profile-placeholder.png`;
+              }}
+              onClick={() => {
+                setDropdownOpen((o) => !o);
+                setMenuOpen(false);
+              }}
             />
+
             {dropdownOpen && (
               <div className="profile-menu">
                 <p className="role-tag">{userRole.toUpperCase()}</p>

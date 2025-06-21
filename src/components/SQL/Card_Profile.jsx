@@ -34,15 +34,32 @@ const SavedProfileCard = ({ profile }) => {
 
   return (
     <div className="profile-card">
-      <img
+      {/* <img
         className="profile-image"
         src={
           profile_img_url
             ? profile_img_url
-            : "/public/images/global/Profile-placeholder.png"
+            : `${import.meta.env.BASE_URL}/public/images/global/Profile-placeholder.png`
         }
         alt="Profile"
         title="Profile Picture"
+      /> */}
+
+      <img
+        className="profile-image"
+        src={
+          profile_img_url?.startsWith("http")
+            ? profile_img_url
+            : `${import.meta.env.BASE_URL}images/global/Profile-placeholder.png`
+        }
+        alt="Profile"
+        title="Profile Picture"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = `${
+            import.meta.env.BASE_URL
+          }images/global/Profile-placeholder.png`;
+        }}
       />
 
       <h2 className="center">{preferred_name}</h2>

@@ -50,7 +50,7 @@ const IssueCard = ({
         </div>
         <div className="issue-img blue">
           <img
-            src={imageUrl || "/images/issues/img-not-uploaded.png"}
+            src={imageUrl || `${import.meta.env.BASE_URL}/images/issues/img-not-uploaded.png`}
             onError={(e) =>
               (e.target.src = "/images/issues/bad-img-upload.png")
             }
