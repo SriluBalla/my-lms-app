@@ -54,52 +54,7 @@ const Register = () => {
     setFormErrors(errors);
     return true;
   };
-
-  // const handleRegister = async (e) => {
-  //   e.preventDefault();
-  //   if (loading) return;
-
-  //   setMessage({ type: "", text: "" });
-
-  //   if (!validateForm()) return;
-
-  //   setLoading(true);
-
-  //   const normalizedEmail = formData.email.trim().toLowerCase();
-
-  //   const { error } = await supabase.auth.signUp({
-  //     email: normalizedEmail,
-  //     password: formData.password,
-  //     options: {
-  //       emailRedirectTo: "https://sriluballa.github.io/my-lms-app/",
-  //     },
-  //   });
-
-  //   if (error) {
-  //     const msg =
-  //       error.message === "User already registered"
-  //         ? "This email is already registered. Please log in instead."
-  //         : error.message;
-
-  //     setMessage({ type: "error", text: msg });
-
-  //     if (error.message === "User already registered") {
-  //       setTimeout(() => navigate("/login"), 2000);
-  //     }
-
-  //     setLoading(false);
-  //     return;
-  //   }
-
-  //   setMessage({
-  //     type: "success",
-  //     text: "Check your email to confirm your account 📬",
-  //   });
-  //   setTimeout(() => navigate("/profile"), 1500);
-  //   setLoading(false);
-  // };
-
-  // Inside your Register.jsx component's handleRegister function:
+  
   const handleRegister = async (e) => {
     e.preventDefault(); // Ensure this is present
     // ... (your validation logic) ...

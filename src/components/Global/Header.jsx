@@ -105,7 +105,10 @@ const Header = () => {
     <header className="header">
       <div className="navbar__container">
         <Link to="/" id="logoImg" className="logo">
-          <img src="/images/global/Logo.png" alt="Logo" />
+          <img
+            src={`${import.meta.env.BASE_URL}images/global/Logo.png`}
+            alt="Logo"
+          />
         </Link>
         <Link to="/" id="logoText">
           Product Owner in Test™
